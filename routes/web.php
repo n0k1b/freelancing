@@ -18,3 +18,4 @@ Route::get('/', function () {
 });
 
 Route::post("submit_gig","GigController@gig_post");
+Route::view('blog', 'blog');
