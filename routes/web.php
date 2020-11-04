@@ -16,3 +16,5 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('create_gig');
 });
+
+Route::post("submit_gig","GigController@gig_post");

@@ -201,6 +201,7 @@
 	<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
   <script type="text/javascript">
+
   	
   	function gig_post()
   	{
@@ -212,7 +213,7 @@
 	var gig_description = $("#gig_description").val();
 	var duration = $("#duration").val();
     
-    
+    alert(gig_title+" "+city+" "+base_price_min+" "+gig_category+" "+duration);
 	
      var formData= new FormData();
     formData.append('gig_title',gig_title);
@@ -229,7 +230,7 @@
     $.ajax({
       processData: false,
       contentType: false,
-      url:"backend/register.php",
+      url:"submit_gig",
       type:"POST",
       data:formData,
       success:function(data,status){
@@ -259,6 +260,18 @@
 @include('layout.page_js');
 	<!-- Snackbar // documentation: https://www.polonel.com/snackbar/ -->
 	<script>
+	$(function()
+	{
+		$.ajaxSetup({
+
+        headers: {
+
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+
+        }
+
+    });
+	});
 // Snackbar for user status switcher
 $('#snackbar-user-status label').click(function() { 
 	Snackbar.show({
