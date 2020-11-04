@@ -18,3 +18,4 @@ Route::get('/', function () {
 });
 
 Route::view('blog', 'blog');
+Route::post('create-blog-post','blogController@createBlogPost')->name('createBlogPost');
