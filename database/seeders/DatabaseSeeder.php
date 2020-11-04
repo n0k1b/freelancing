@@ -23,5 +23,15 @@ class DatabaseSeeder extends Seeder
         DB::table('blog_categories')->insert(['name'=>'Career and education']);
         DB::table('blog_categories')->insert(['name'=>'Cooking and recipes']);
         DB::table('blog_categories')->insert(['name'=>'Parenting and babycare']);
+
+        DB::table('gig_categories')->insert(['name'=>'Makeup artist']);
+        DB::table('gig_categories')->insert(['name'=>'Graphic and design']);
+        DB::table('gig_categories')->insert(['name'=>'Photography']);
+        DB::table('gig_categories')->insert(['name'=>'Food']);
+        DB::table('gig_categories')->insert(['name'=>'Handcraft']);
+        DB::table('gig_categories')->insert(['name'=>'Clothing']);
+        DB::table('gig_categories')->insert(['name'=>'Accessories']);
+        DB::table('gig_categories')->insert(['name'=>'Programming and tech']);
+        DB::table('gig_categories')->insert(['name'=>'Video and animation']);
     }
 }

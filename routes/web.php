@@ -16,3 +16,5 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('create_gig');
 });
+
+Route::view('blog', 'blog');
