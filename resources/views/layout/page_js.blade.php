@@ -1,0 +1,13 @@
+<script src="{{asset('assets')}}/js/jquery-3.3.1.min.js"></script>
+<script src="{{asset('assets')}}/js/jquery-migrate-3.0.0.min.js"></script>
+<script src="{{asset('assets')}}/js/mmenu.min.js"></script>
+<script src="{{asset('assets')}}/js/tippy.all.min.js"></script>
+<script src="{{asset('assets')}}/js/simplebar.min.js"></script>
+<script src="{{asset('assets')}}/js/bootstrap-slider.min.js"></script>
+<script src="{{asset('assets')}}/js/bootstrap-select.min.js"></script>
+<script src="{{asset('assets')}}/js/snackbar.js"></script>
+<script src="{{asset('assets')}}/js/clipboard.min.js"></script>
+<script src="{{asset('assets')}}/js/counterup.min.js"></script>
+<script src="{{asset('assets')}}/js/magnific-popup.min.js"></script>
+<script src="{{asset('assets')}}/js/slick.min.js"></script>
+<script src="{{asset('assets')}}/sjs/custom.js"></script>
