@@ -222,7 +222,7 @@
     formData.append("gig_category",gig_category);
     formData.append("gig_description",gig_description);
         formData.append("duration",duration);
-       formData.append("user_id",<?php echo $user_id ?>);
+       formData.append("user_id",1);
     formData.append("gig_post","gig_post");
        formData.append('file',$('#upload')[0].files[0]);
      
@@ -253,23 +253,10 @@
 
     });
   	}
+
   </script>
 
-	<script src="js/jquery-3.3.1.min.js"></script>
-	<script src="js/jquery-migrate-3.0.0.min.js"></script>
-	<script src="js/mmenu.min.js"></script>
-	<script src="js/tippy.all.min.js"></script>
-	<script src="js/simplebar.min.js"></script>
-	<script src="js/bootstrap-slider.min.js"></script>
-	<script src="js/bootstrap-select.min.js"></script>
-	<script src="js/snackbar.js"></script>
-	<script src="js/clipboard.min.js"></script>
-	<script src="js/counterup.min.js"></script>
-	<script src="js/magnific-popup.min.js"></script>
-	<script src="js/slick.min.js"></script>
-	<script src="js/custom.js"></script>
-	
-
+@include('layout.page_js');
 	<!-- Snackbar // documentation: https://www.polonel.com/snackbar/ -->
 	<script>
 // Snackbar for user status switcher
