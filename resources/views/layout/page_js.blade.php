@@ -10,4 +10,4 @@
 <script src="{{asset('assets')}}/js/counterup.min.js"></script>
 <script src="{{asset('assets')}}/js/magnific-popup.min.js"></script>
 <script src="{{asset('assets')}}/js/slick.min.js"></script>
-<script src="{{asset('assets')}}/sjs/custom.js"></script>
+<script src="{{asset('assets')}}/js/custom.js"></script>
