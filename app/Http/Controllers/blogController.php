@@ -37,7 +37,7 @@ class blogController extends Controller
                     </div>
                     <div class="card-footer">
                         <form id="add_comment_<?php echo $value->id ?>">
-                            <input type="text" name="postId" value="<?php echo $value->id ?>">
+                            <input type="hidden" name="postId" value="<?php echo $value->id ?>">
                             <textarea style="" name="commentContent"  placeholder="Comment"></textarea>
                         <!-- Button -->
                         <button class="button button-sliding-icon ripple-effect " type="submit">Add Comment <i class="icon-material-outline-arrow-right-alt"></i></button>
