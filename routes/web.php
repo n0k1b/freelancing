@@ -17,8 +17,15 @@ Route::get('/', function () {
     return view('create_gig');
 });
 
-Route::view('login', 'login');
+Route::view('login', 'login')->name('login');
 Route::view('registration', 'register');
+
+Route::view('otp/{id}','otp')->name('otp');
+Route::post('sending-otp','AuthController@sendingOtp')->name('sending-otp');
+Route::get('resend_otp/{id}','AuthController@process_otp')->name('resendOtp');
+
+Route::post('registration', 'AuthController@registration')->name('registration');
+Route::post('login', 'AuthController@process_login')->name('process_login');
 
 Route::post("submit_gig","GigController@gig_post");
 Route::view('blog', 'blog');

@@ -20,7 +20,7 @@ class CreateUsersTable extends Migration
             $table->string('mobile')->unique();
             $table->string('address');
             $table->string('district');
-            $table->string('nid');
+            $table->string('nid')->unique();
             $table->string('role');
             $table->string('status');
             $table->timestamp('email_verified_at')->nullable();
