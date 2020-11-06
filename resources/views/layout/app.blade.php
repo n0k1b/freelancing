@@ -40,7 +40,7 @@ $user_id = $_SESSION['user_id'];
 <meta name="csrf-token" content="{{ csrf_token() }}">
 <!-- CSS
 ================================================== -->
-<link rel="stylesheet" href="{{asset('assets')}}/css/style.css">
+<link rel="stylesheet" href="{{asset('assets')}}/css/style.css?{{time()}}">
 <link rel="stylesheet" href="{{asset('assets')}}/css/colors/blue.css">
 
 </head>

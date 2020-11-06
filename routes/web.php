@@ -13,9 +13,12 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('create_gig');
-});
+// Route::get('/', function () {
+//     return view('create_gig');
+// });
+
+Route::get('/','GigController@view_all_gig');
 
 Route::post("submit_gig","GigController@gig_post");
 Route::view('blog', 'blog');
+Route::get('get_category',"GigController@get_category");

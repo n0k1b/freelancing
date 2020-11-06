@@ -1,38 +1,38 @@
-{{--<?php
-  include ("connection.php");
+<?php
+//   include ("connection.php");
   
-  $location = $_REQUEST['location'];
-  $category = $_REQUEST['category'];
-    //file_put_contents("text.txt", $location." ".$category);
+//   $location = $_REQUEST['location'];
+//   $category = $_REQUEST['category'];
+//     //file_put_contents("text.txt", $location." ".$category);
 
 
-  if($location === "all" and $category === "all")
-  {
-  $sql = "SELECT * from gig";
-  }
-  else if ($location =="all" and $category !="all"){
-         $sql = "SELECT * from gig where gig_category = '$category'";
-  }
-  else if($location!="all" and $category == 'all')
-  {
-  	   $sql = "SELECT * from gig where city = '$location'";
-  }
-  else 
-  {
-  	 $sql = "SELECT * from gig where city = '$location' and job_category = '$category'";
-  }
+//   if($location === "all" and $category === "all")
+//   {
+//   $sql = "SELECT * from gig";
+//   }
+//   else if ($location =="all" and $category !="all"){
+//          $sql = "SELECT * from gig where gig_category = '$category'";
+//   }
+//   else if($location!="all" and $category == 'all')
+//   {
+//   	   $sql = "SELECT * from gig where city = '$location'";
+//   }
+//   else 
+//   {
+//   	 $sql = "SELECT * from gig where city = '$location' and job_category = '$category'";
+//   }
  
 
 
- $res = mysqli_query($conn,$sql);
-  $num_rows = mysqli_num_rows($res);
-
-
-include("page_content/header.php");
+//  $res = mysqli_query($conn,$sql);
+//   $num_rows = mysqli_num_rows($res);
 
 
 
-?>--}}
+
+
+
+?>
 
 @include('layout.app')
 <div class="clearfix"></div>
@@ -75,16 +75,8 @@ include("page_content/header.php");
 				<!-- Category -->
 				<div class="sidebar-widget">
 					<h3>Category</h3>
-					<select id="category"  class="selectpicker default"  data-selected-text-format="count" data-size="7" title="All Categories" >
-						<option>Textile</option>
-							<option>Home Food</option>
-							<option>Antique Jewelery</option>
-							<option>Papercraft</option>
-							<option>Custom Portrait</option>
-							<option>Scrapbook</option>
-							<option>Cross Stitch</option>
-							<option>Embroiderer</option>
-							<option>Scented Candle</option>
+					<select id="gig_category"  class="selectpicker default"  data-selected-text-format="count" data-size="7" title="All Categories" >
+						
 					</select>
 				</div>
 				
@@ -117,45 +109,27 @@ include("page_content/header.php");
 			
 
 			<div class="listings-container grid-layout margin-top-35">
-				    
-                    <?php 
-                    $num_rows =0;
-                    if($num_rows == 0)
-				      {
-                       ?>
-                  <h1> No Search matches</h1>
-                       <?php 
-      
-				       }
-				       
-
-				       else{ 
-                            while($row = mysqli_fetch_array($res))
-                            {
-
-                            	$user_id = $row['user_id'];
-                            	$gig_id = $row['id'];
-
-                            	$sql2 ="SELECT * from user where id = $user_id";
-                            	$res2 = mysqli_query($conn,$sql2);
-                            	$row2 = mysqli_fetch_array($res2);
-                            	$name = $row2['name']
-
-				     ?>
-				<!-- Job Listing -->
-				<a href="gig_details.php?gig_id=<?php echo $gig_id ?>" class="job-listing">
+			        @if(sizeof($gig_lists)==0)
+					
+						<h1> No Search matches</h1>
+					
+					@else
+					
+						@foreach($gig_lists as $gig_list)
+						
+						<a href="gig_details.php?gig_id=1" class="job-listing">
 
 					<!-- Job Listing Details -->
 					<div class="job-listing-details">
 						<!-- Logo -->
 						<div class="job-listing-company-logo">
-							<img src="<?php echo $row['gig_file'] ?>" alt="">
+							<img src="Gig Image/{{$gig_list->image}}" alt="image">
 						</div>
 
 						<!-- Details -->
 						<div class="job-listing-description">
-							<h4 class="job-listing-company"><?php echo $name ?> <span  data-tippy-placement="top"></span></h4>
-							<h3 class="job-listing-title"><?php echo $row['gig_title'] ?></h3>
+							<h4 class="job-listing-company">Hello <span  data-tippy-placement="top"></span></h4>
+							<h3 class="job-listing-title">{{$gig_list->title}}</h3>
 						</div>
 					</div>
 
@@ -163,18 +137,17 @@ include("page_content/header.php");
 					<div class="job-listing-footer">
 						<span class="bookmark-icon"></span>
 						<ul>
-							<li><i class="icon-material-outline-location-on"></i> <?php echo $row['city'] ?></li>
+							<li><i class="icon-material-outline-location-on"></i> {{$gig_list->city}}</li>
 						
-							<li><i class="icon-material-outline-account-balance-wallet"></i> <?php echo $row['base_price_min']?>-<?php echo $row['base_price_max'] ?></li>
+							<li><i class="icon-material-outline-account-balance-wallet"></i> {{$gig_list->min_price}}-{{$gig_list->max_price}}</li>
 						
 						</ul>
 					</div>
-				</a>	
-				<?php 
-			}
-                      }
-
-				?>
+				</a>
+						@endforeach
+					
+					@endif
+				  
 
 			
 
@@ -231,7 +204,19 @@ include("page_content/header.php");
 
 
 ================================================== -->
-@include('layout.page_js');
+<script src="js/jquery-3.3.1.min.js"></script>
+<script src="js/jquery-migrate-3.0.0.min.js"></script>
+<script src="js/mmenu.min.js"></script>
+<script src="js/tippy.all.min.js"></script>
+<script src="js/simplebar.min.js"></script>
+<script src="js/bootstrap-slider.min.js"></script>
+<script src="js/bootstrap-select.min.js"></script>
+<script src="js/snackbar.js"></script>
+<script src="js/clipboard.min.js"></script>
+<script src="js/counterup.min.js"></script>
+<script src="js/magnific-popup.min.js"></script>
+<script src="js/slick.min.js"></script>
+<script src="js/custom.js"></script>
 
 <script type="text/javascript">
 
@@ -273,7 +258,19 @@ $('#snackbar-user-status label').click(function() {
 </script>
 
 <script type="text/javascript">
-	
+	function get_category()
+	  {
+		$.ajax({
+        processData:false,
+        contentType:false,
+        type:'GET',
+        url:"get_category",
+        success:function(data){
+			//alert(data);
+			$("#gig_category").html(data);
+        }
+   		 })
+	  }
   function fetch_data()
   {
           
@@ -282,6 +279,19 @@ $('#snackbar-user-status label').click(function() {
 
 <!-- Google Autocomplete -->
 <script>
+
+$(function()
+	{
+		$.ajaxSetup({
+
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+       		 }
+    	});
+
+		get_category();
+
+	});
 	function initAutocomplete() {
 		 var options = {
 		  types: ['(cities)'],
