@@ -17,6 +17,9 @@ Route::get('/', function () {
     return view('create_gig');
 });
 
+Route::view('login', 'login');
+Route::view('registration', 'register');
+
 Route::post("submit_gig","GigController@gig_post");
 Route::view('blog', 'blog');
 Route::post('create-blog-post','blogController@createBlogPost')->name('createBlogPost');
