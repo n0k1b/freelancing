@@ -13,9 +13,11 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('create_gig');
-});
+// Route::get('/', function () {
+//     return view('create_gig');
+// });
+
+Route::get('/','GigController@view_all_gig');
 
 Route::view('login', 'login')->name('login');
 Route::view('registration', 'register');
@@ -29,6 +31,7 @@ Route::post('login', 'AuthController@process_login')->name('process_login');
 
 Route::post("submit_gig","GigController@gig_post");
 Route::view('blog', 'blog');
+Route::get('get_category',"GigController@get_category");
 Route::post('create-blog-post','blogController@createBlogPost')->name('createBlogPost');
 Route::get('read-blog-post/{skip}/{take}','blogController@readBlogPost')->name('readBlogPost');
 Route::post('create-blog-comment','blogController@createBlogComment')->name('createBlogComment');

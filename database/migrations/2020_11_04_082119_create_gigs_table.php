@@ -18,6 +18,7 @@ class CreateGigsTable extends Migration
             $table->bigInteger('user_id')->unsigned();
             $table->bigInteger('category_id')->unsigned();
             $table->string('title')->nullable();
+            $table->string('city')->nullable();
             $table->string('description')->nullable();
             $table->string('image')->nullable();
             $table->string('min_price')->nullable();

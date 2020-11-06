@@ -53,15 +53,7 @@
 										<div class="submit-field">
 											<h5>Category</h5>
 											<select  id = "gig_category" class="selectpicker with-border" data-size="7" title="Select Category">
-												<option>Textile</option>
-												<option>Home Food</option>
-												<option>Antique Jewelery</option>
-												<option>Papercraft</option>
-												<option>Custom Portrait</option>
-												<option>Scrapbook</option>
-												<option>Cross Stitch</option>
-												<option>Embroiderer</option>
-												<option>Scented Candle</option>
+												
 											</select>
 										</div>
 									</div>
@@ -202,7 +194,20 @@
 
   <script type="text/javascript">
 
-  	
+  	function get_category()
+	  {
+		$.ajax({
+        processData:false,
+        contentType:false,
+        type:'GET',
+        url:"get_category",
+        success:function(data){
+			//alert(data);
+			$("#gig_category").html(data);
+        }
+   		 })
+	  }
+
   	function gig_post()
   	{
     var gig_title = $("#gig_title").val();
@@ -213,8 +218,7 @@
 	var gig_description = $("#gig_description").val();
 	var duration = $("#duration").val();
     
-    alert(gig_title+" "+city+" "+base_price_min+" "+gig_category+" "+duration);
-	
+    	
      var formData= new FormData();
     formData.append('gig_title',gig_title);
     formData.append("city",city);
@@ -265,12 +269,12 @@
 		$.ajaxSetup({
 
         headers: {
-
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+       		 }
+    	});
 
-        }
+		get_category();
 
-    });
 	});
 // Snackbar for user status switcher
 $('#snackbar-user-status label').click(function() { 
