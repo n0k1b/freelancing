@@ -5,19 +5,26 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\blog_post;
 use App\Models\blog_comment;
+use App\Models\User;
 
-class blogController extends Controller
+class UserController extends Controller
 {
+    public function deleteBlogPost(Request $Request)
+    {
+        blog_post::where('id',$Request->id)->delete();
+    }
+
     public function createBlogPost(Request $Request)
     {
         $fileName = time().'.'.$Request->upload->extension();
         $Request->upload->move(public_path('../images'), $fileName);
-        blog_post::create(['user_id'=>1,'category_id'=>1,'post'=>$Request->text,'image'=>$fileName,'status'=>1]);
+        blog_post::create(['user_id'=>auth()->user()->id,'category_id'=>1,'post'=>$Request->text,'image'=>$fileName,'status'=>1]);
     }
 
     public function readBlogPost(Request $Request)
     {
-        $variable = blog_post::skip($Request->skip)->take($Request->take)->get();
+        $id = auth()->check()?auth()->user()->id:1;
+        $variable = blog_post::where('user_id',$id)->skip($Request->skip)->take($Request->take)->get();
 
         foreach ($variable as $value) {
             ?>
@@ -26,7 +33,11 @@ class blogController extends Controller
                 <div class="card">
                     <div class="card-header pt-4 d-flex align-item-center justify-content-between">
                         <h2 class="card-title"><?php echo $value->user->name ?></h2>
-                        <p><?php echo $value->created_at!=''?$value->created_at:'unknow' ?></p>
+                        <p>
+                        <?php echo $value->created_at!=''?$value->created_at:'unknow' ?>
+                        <a href="javascript:void(0)" onclick="edit_post(<?php echo $value->id ?>)" class="mx-2"><i class="icon-feather-edit"></i></a>
+                        <a href="javascript:void(0)" onclick="delete_post(<?php echo $value->id ?>)" class="mx-2"><i class="icon-feather-delete"></i></a>
+                        </p>
                     </div>
                     <img src="<?php echo asset('images') ?>/<?php echo $value->image ?>" class="card-img-top" alt="" height="200px">
                     <div class="card-body">

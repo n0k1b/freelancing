@@ -13,6 +13,10 @@ class blog_post extends Model
     {
         return $this->belongsTo('App\Models\User');
     }
+    public function category()
+    {
+        return $this->belongsTo('App\Models\blog_category');
+    }
     public function comments()
     {
         return $this->hasMany('App\Models\blog_comment', 'post_id', 'id');

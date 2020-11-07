@@ -8,4 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 class blog_category extends Model
 {
     use HasFactory;
+    public function posts()
+    {
+        return $this->hasMany('App\Models\blog_post', 'post_id', 'id');
+    }
 }
