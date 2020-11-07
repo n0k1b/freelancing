@@ -11,3 +11,4 @@
 <script src="{{asset('assets')}}/js/magnific-popup.min.js"></script>
 <script src="{{asset('assets')}}/js/slick.min.js"></script>
 <script src="{{asset('assets')}}/js/custom.js"></script>
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>

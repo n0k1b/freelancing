@@ -1,4 +1,4 @@
-<!-- <?php
+{{--<?php
    include("connection.php");
    include("page_content/header.php");
   $gig_id = $_REQUEST['gig_id'];
@@ -39,7 +39,9 @@
 
 
 
-?> -->
+?> --}}
+
+@include('layout.app')
 
 <div class="clearfix"></div>
 <!-- Header Container / End -->
@@ -54,13 +56,13 @@
 			<div class="col-md-12">
 				<div class="single-page-header-inner">
 					<div class="left-side">
-						<div class="header-image"><a href="single-company-profile.html"><img src="<?php echo $gig_file ?>" alt=""></a></div>
+						<div class="header-image"><a href="single-company-profile.html"><img src="../Gig Image/{{$gig->image}}" alt=""></a></div>
 						<div class="header-details">
-							<h3><?php echo $gig_title ?></h3>
-							<h5><?php echo $name ?></h5>
+							<h3>{{$gig->title}}</h3>
+							<h5>{{$gig->name}}</h5>
 							<ul>
 								
-								<li><div class="star-rating" data-rating="<?php echo $rating ?>"></div></li>
+								<li><div class="star-rating" data-rating="1"></div></li>
 								
 							</ul>
 						</div>
@@ -68,7 +70,7 @@
 					<div class="right-side">
 						<div class="salary-box">
 							<div class="salary-type">Base Price</div>
-							<div class="salary-amount"><?php echo $base_price_min ?> tk - <?php echo $base_price_max ?> tk</div>
+							<div class="salary-amount">{{$gig->min_price}} tk - {{$gig->max_price}} tk</div>
 						</div>
 					</div>
 				</div>
@@ -89,7 +91,7 @@
 			<!-- Description -->
 			<div class="single-page-section">
 				<h3 class="margin-bottom-25">Project Description</h3>
-				<p><?php echo $gig_description ?></p>
+				<p>{{$gig->description}}</p>
 
 				
 			</div>
@@ -102,8 +104,8 @@
 
 												<div class="destination-box-image">
 													<figure>
-														<a data-fancybox="gallery" href="<?php echo $gig_file ?>">
-															<img src="<?php echo $gig_file ?>" class="img-responsive listing-box-img" alt="" />
+														<a data-fancybox="gallery" href="../Gig Image/{{$gig->image}}">
+															<img src="../Gig Image/{{$gig->image}}" class="img-responsive listing-box-img" alt="" />
 															<div class="list-overlay"></div>
 														</a>
 
@@ -116,6 +118,78 @@
 
 											</article>
 										</div>
+
+			</div>
+
+			<div class="boxed-list margin-bottom-60">
+				<div class="boxed-list-headline">
+					<h3><i class="icon-material-outline-thumb-up"></i> Work History and Feedback</h3>
+				</div>
+				<ul class="boxed-list-ul">
+					<li>
+						<div class="boxed-list-item">
+							<!-- Content -->
+							<div class="item-content">
+								<h4>Web, Database and API Developer <span>Rated as Freelancer</span></h4>
+								<div class="item-details margin-top-10">
+									<div class="star-rating" data-rating="5.0"></div>
+									<div class="detail-item"><i class="icon-material-outline-date-range"></i> August 2019</div>
+								</div>
+								<div class="item-description">
+									<p>Excellent programmer - fully carried out my project in a very professional manner. </p>
+								</div>
+							</div>
+						</div>
+					</li>
+					<li>
+						<div class="boxed-list-item">
+							<!-- Content -->
+							<div class="item-content">
+								<h4>WordPress Theme Installation <span>Rated as Freelancer</span></h4>
+								<div class="item-details margin-top-10">
+									<div class="star-rating" data-rating="5.0"></div>
+									<div class="detail-item"><i class="icon-material-outline-date-range"></i> June 2019</div>
+								</div>
+							</div>
+						</div>
+					</li>
+					<li>
+						<div class="boxed-list-item">
+							<!-- Content -->
+							<div class="item-content">
+								<h4>Fix Python Selenium Code <span>Rated as Employer</span></h4>
+								<div class="item-details margin-top-10">
+									<div class="star-rating" data-rating="5.0"></div>
+									<div class="detail-item"><i class="icon-material-outline-date-range"></i> May 2019</div>
+								</div>
+								<div class="item-description">
+									<p>I was extremely impressed with the quality of work AND how quickly he got it done. He then offered to help with another side part of the project that we didn't even think about originally.</p>
+								</div>
+							</div>
+						</div>
+					</li>
+					<li>
+						<div class="boxed-list-item">
+							<!-- Content -->
+							<div class="item-content">
+								<h4>PHP Core Website Fixes <span>Rated as Freelancer</span></h4>
+								<div class="item-details margin-top-10">
+									<div class="star-rating" data-rating="5.0"></div>
+									<div class="detail-item"><i class="icon-material-outline-date-range"></i> May 2019</div>
+								</div>
+								<div class="item-description">
+									<p>Awesome work, definitely will rehire. Poject was completed not only with the requirements, but on time, within our small budget.</p>
+								</div>
+							</div>
+						</div>
+					</li>
+				</ul>
+
+				<!-- Pagination -->
+				<div class="clearfix"></div>
+				
+			
+				<!-- Pagination / End -->
 
 			</div>
 
@@ -133,7 +207,7 @@
 		<div class="col-xl-4 col-lg-4">
 			<div class="sidebar-container">
 
-				<div class="countdown green margin-bottom-35">Min <?php echo $remaining_day ?> days need</div>
+				<div class="countdown green margin-bottom-35">Min {{$gig->minimum_duration}} days need</div>
 
 				<div class="sidebar-widget">
 					<div class="bidding-widget">
@@ -145,7 +219,7 @@
 
 							<!-- Price Slider -->
 							<div class="bidding-value">BDT<span id="biddingVal"></span></div>
-							<input class="bidding-slider" id ="rate" type="text" value="" data-slider-handle="custom" data-slider-currency="$" data-slider-min='<?php echo $base_price_min ?>' data-slider-max='<?php echo $base_price_max ?>' data-slider-value="auto" data-slider-step="50" data-slider-tooltip="hide" />
+							<input class="bidding-slider" id ="rate" type="text" value="" data-slider-handle="custom" data-slider-currency="$" data-slider-min='{{$gig->min_price}}' data-slider-max='{{$gig->max_price}}' data-slider-value="auto" data-slider-step="50" data-slider-tooltip="hide" />
 							
 							<!-- Headline -->
 							<span class="bidding-detail margin-top-30">Set your <strong>wanted delivery time</strong></span>
@@ -171,7 +245,9 @@
 							<!-- Button -->
 							<br>
 							<br>
-							<?php if($previously_bid == 0)
+							<?php
+							
+							if($gig->previously_bid== 0)
                                {
 							 ?>
 							<a href="#small-dialog" class="apply-now-button popup-with-zoom-anim margin-bottom-50">Confirm <i class="icon-material-outline-arrow-right-alt"></i></a>
@@ -382,7 +458,7 @@
 		<div class="container">
 			<div class="row">
 				<div class="col-xl-12">
-					© 2019 <strong>Hireo</strong>. All Rights Reserved.
+				
 				</div>
 			</div>
 		</div>
@@ -442,20 +518,7 @@
 
 <!-- Scripts
 ================================================== -->
-<script src="js/jquery-3.3.1.min.js"></script>
-<script src="js/jquery-migrate-3.0.0.min.js"></script>
-<script src="js/mmenu.min.js"></script>
-<script src="js/tippy.all.min.js"></script>
-<script src="js/simplebar.min.js"></script>
-<script src="js/bootstrap-slider.min.js"></script>
-<script src="js/bootstrap-select.min.js"></script>
-<script src="js/snackbar.js"></script>
-<script src="js/clipboard.min.js"></script>
-<script src="js/counterup.min.js"></script>
-<script src="js/magnific-popup.min.js"></script>
-<script src="js/slick.min.js"></script>
-<script src="js/custom.js"></script>
-<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+@include('layout.page_js')
 
 
 <script type="text/javascript">
@@ -468,9 +531,8 @@
     formData.append('proposed_rate',bid_rate);
     formData.append("proposed_duration",bid_duration);
     formData.append("bid_message",bid_message);
-    formData.append("user_id",<?php echo $user_id ?>);
-    formData.append("gig_given_id",<?php echo $gig_given_id ?>);
-   formData.append("gig_id",<?php echo $gig_id ?>);
+    formData.append("hire_to",{{$gig->user_id}});
+   formData.append("gig_id",{{$gig->id}});
  
     formData.append("apply_gig","apply_gig");
       
@@ -478,10 +540,12 @@
     $.ajax({
       processData: false,
       contentType: false,
-      url:"backend/job_details.php",
-      type:"POST",
+      type:"post",
+	  url:"{{route('hire_entrepreneur')}}",
       data:formData,
       success:function(data,status){
+	 
+		
 
          swal({
   title: "Your request has been successfully placed",
@@ -509,6 +573,14 @@
 
 <!-- Snackbar // documentation: https://www.polonel.com/snackbar/ -->
 <script>
+$(function(){
+	$.ajaxSetup({
+
+headers: {
+	'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+		}
+});
+})
 // Snackbar for user status switcher
 $('#snackbar-user-status label').click(function() { 
 	Snackbar.show({

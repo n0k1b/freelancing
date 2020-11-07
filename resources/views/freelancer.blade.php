@@ -117,7 +117,7 @@
 					
 						@foreach($gig_lists as $gig_list)
 						
-						<a href="gig_details.php?gig_id=1" class="job-listing">
+						<a href="{{url('get_gig_details/'."$gig_list->id")}}" class="job-listing">
 
 					<!-- Job Listing Details -->
 					<div class="job-listing-details">
@@ -128,7 +128,7 @@
 
 						<!-- Details -->
 						<div class="job-listing-description">
-							<h4 class="job-listing-company">Hello <span  data-tippy-placement="top"></span></h4>
+							<h4 class="job-listing-company">{{$gig_list->name}} <span  data-tippy-placement="top"></span></h4>
 							<h3 class="job-listing-title">{{$gig_list->title}}</h3>
 						</div>
 					</div>

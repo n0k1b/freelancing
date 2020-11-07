@@ -18,6 +18,8 @@ use Illuminate\Support\Facades\Route;
 // });
 
 Route::get('/','GigController@view_all_gig');
+Route::get('get_gig_details/{gig_id}','GigController@get_gig_details')->name('gig_details');
+Route::view('login', 'login');
 
 Route::prefix('user')->group(function(){
     Route::view('dashboard','dashboard');
@@ -48,3 +50,4 @@ Route::post('create-blog-post','blogController@createBlogPost')->name('createBlo
 Route::get('read-blog-post/{skip}/{take}','blogController@readBlogPost')->name('readBlogPost');
 Route::post('create-blog-comment','blogController@createBlogComment')->name('createBlogComment');
 Route::get('read-blog-comment/{id}','blogController@readBlogComment')->name('readBlogComment');
+Route::post("hire_entrepreneur","GigController@hire_entrepreneur")->name('hire_entrepreneur');
