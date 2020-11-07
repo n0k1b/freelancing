@@ -1,20 +1,22 @@
 @extends('layout.bootstrap')
 
 @section('body')
-   <!-- Titlebar
+<!-- Page Content
+================================================== -->
+<!-- Titlebar
 ================================================== -->
 <div id="titlebar" class="gradient">
 	<div class="container">
 		<div class="row">
 			<div class="col-md-12">
 
-				<h2>Log In</h2>
+				<h2>Otp</h2>
 
 				<!-- Breadcrumbs -->
 				<nav id="breadcrumbs" class="dark">
 					<ul>
 						<li><a href="#">Home</a></li>
-						<li>Log In</li>
+						<li>Otp</li>
 					</ul>
 				</nav>
 
@@ -26,49 +28,41 @@
 
 <!-- Page Content
 ================================================== -->
-<div class="container">
+<div class="container mb-5">
 	<div class="row">
 		<div class="col-xl-5 offset-xl-3">
 
-
 			<div class="login-register-page">
 				<!-- Welcome Text -->
+				<div class="welcome-text">
+					<h3 style="font-size: 26px;">Last step to create account!</h3>
+                <span id="resend_otp_function" style="display: none">Did'nt get an otp? <a href="{{ url('/resend_otp/'.Request::route('id')) }}">Resend!</a></span>
+                </div>
+
                 @if (session('message'))
                 <div class="alert alert-info">
                     {{ session('message') }}
                 </div>
-                @else
-
-                <div class="welcome-text">
-					<h3>We're glad to see you again!</h3>
-					<span>Don't have an account? <a href="{{ url('/registration') }}">Sign Up!</a></span>
-                </div>
-
                 @endif
 
-				<!-- Form -->
-                <form method="post" action="{{route('process_login')}}">
-                    @csrf
+                <!-- Form -->
+            <form method="post" action="{{ route('sending-otp') }}" id="register-account-form">
+                @csrf
+            <input type="hidden" name="user" value="{{ Request::route('id') }}">
 					<div class="input-with-icon-left">
-						<i class="icon-material-outline-credit-card"></i>
-						<input type="number" class="input-text with-border" name="mobile" id="emailaddress" placeholder="Mobile number" required/>
+						<i class="icon-material-baseline-mail-outline"></i>
+						<input type="number" class="input-text with-border" name="otp" id="otp" placeholder="Otp" required/>
 					</div>
-
-					<div class="input-with-icon-left">
-						<i class="icon-material-outline-lock"></i>
-						<input type="password" class="input-text with-border" name="password" id="password" placeholder="Password" required/>
-					</div>
-					{{-- <a href="#" class="forgot-password">Forgot Password?</a> --}}
-
+				</form>
 
 				<!-- Button -->
-				<button class="button full-width button-sliding-icon ripple-effect margin-top-10" type="submit">Log In <i class="icon-material-outline-arrow-right-alt"></i></button>
-            </form>
+				<button class="button full-width button-sliding-icon ripple-effect margin-top-10" type="submit" form="register-account-form">Register <i class="icon-material-outline-arrow-right-alt"></i></button>
+
 				<!-- Social Login -->
 				{{-- <div class="social-login-separator"><span>or</span></div>
 				<div class="social-login-buttons">
-					<button class="facebook-login ripple-effect"><i class="icon-brand-facebook-f"></i> Log In via Facebook</button>
-					<button class="google-login ripple-effect"><i class="icon-brand-google-plus-g"></i> Log In via Google+</button>
+					<button class="facebook-login ripple-effect"><i class="icon-brand-facebook-f"></i> Register via Facebook</button>
+					<button class="google-login ripple-effect"><i class="icon-brand-google-plus-g"></i> Register via Google+</button>
 				</div> --}}
 			</div>
 
@@ -79,15 +73,17 @@
 
 @section('page-js')
 <script>
-// $(function() {
-//     $.ajaxSetup({
-//         headers: {
-//             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-//         }
-//     });
-//     console.log("Jquery running!");
-//     readPost(0,2);
-// })
+$(function() {
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    });
+    console.log("Jquery running!");
+    setTimeout(() => {
+        $("#resend_otp_function").show();
+    }, 5000);
+})
 // var scroll = 0;
 // var total = 0
 // $(window).scroll(function() {
