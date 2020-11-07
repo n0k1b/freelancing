@@ -21,6 +21,17 @@ Route::get('/','GigController@view_all_gig');
 Route::get('get_gig_details/{gig_id}','GigController@get_gig_details')->name('gig_details');
 Route::view('login', 'login');
 
+Route::prefix('user')->group(function(){
+    Route::view('dashboard','dashboard');
+    // Route::get('get_category',"GigController@get_category");
+    Route::post('create-blog-post','UserController@createBlogPost')->name('createBlogPost');
+    Route::get('read-blog-post/{skip}/{take}','UserController@readBlogPost')->name('readBlogPost');
+    Route::post('create-blog-comment','UserController@createBlogComment')->name('createBlogComment');
+    Route::get('read-blog-comment/{id}','UserController@readBlogComment')->name('readBlogComment');
+    Route::get('delete-blog-post/{id}','UserController@deleteBlogPost')->name('deleteBlogPost');
+
+});
+
 Route::view('login', 'login')->name('login');
 Route::view('registration', 'register');
 
@@ -32,8 +43,9 @@ Route::post('registration', 'AuthController@registration')->name('registration')
 Route::post('login', 'AuthController@process_login')->name('process_login');
 
 Route::post("submit_gig","GigController@gig_post");
-Route::view('blog', 'blog');
 Route::get('get_category',"GigController@get_category");
+
+Route::view('blog', 'blog');
 Route::post('create-blog-post','blogController@createBlogPost')->name('createBlogPost');
 Route::get('read-blog-post/{skip}/{take}','blogController@readBlogPost')->name('readBlogPost');
 Route::post('create-blog-comment','blogController@createBlogComment')->name('createBlogComment');
