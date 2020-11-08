@@ -5,9 +5,16 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\blog_post;
 use App\Models\blog_comment;
+use App\Models\blog_category;
 
 class blogController extends Controller
 {
+    public function categories()
+    {
+        $categories = blog_category::orderBy('id','DESC')->get();
+        return view('categories',['categories'=>$categories]);
+    }
+
     public function createBlogPost(Request $Request)
     {
         $fileName = time().'.'.$Request->upload->extension();

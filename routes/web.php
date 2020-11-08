@@ -54,6 +54,7 @@ Route::post('login', 'AuthController@process_login')->name('process_login');
 Route::post("submit_gig","GigController@gig_post");
 Route::post('get_category',"GigController@get_category");
 
+Route::get('browse-blog','blogController@categories');
 Route::view('blog/{id}', 'blog');
 Route::post('create-blog-post','blogController@createBlogPost')->name('createBlogPost');
 Route::post('read-blog-post','blogController@readBlogPost')->name('readBlogPost');
