@@ -17,7 +17,7 @@ class GigController extends Controller
     {
         $rating = $request->rating;
         $comment = $request->comment;
-        $client_id = $request->client_id;
+        $client_id = auth()->user()->id;
         $entrepreneur_id = $request->freelancer_id;
         $gig_id = $request->job_id;
         rating::create(['gig_id'=>$gig_id,'reviewer_id'=>$client_id,'rating'=>$rating,'review'=>$comment]);
@@ -29,7 +29,7 @@ class GigController extends Controller
 
     public function manage_hire()
     {
-     $user_id = 4;
+     $user_id = auth()->user()->id;;
      $hire_info = hire_information::where('hire_from',$user_id)->get();
      foreach($hire_info as $gig)
      {
@@ -44,14 +44,14 @@ class GigController extends Controller
     }
     Public function manage_gig()
     {
-       $entrepreneur_id = 1;
+       $entrepreneur_id =  auth()->user()->id;;
        $gigs = gig::where('user_id',$entrepreneur_id)->get();
        return view('manage_gig',['gigs'=>$gigs]);
     }
 
     Public function manage_work()
     {
-       $entrepreneur_id = 1;
+       $entrepreneur_id = auth()->user()->id;;
        $hire_info = hire_information::where('hire_to',$entrepreneur_id)->get();
        foreach($hire_info as $gig)
        {
@@ -66,7 +66,7 @@ class GigController extends Controller
 
     public function see_notification_entrepreneur()
     {
-        $entrepreneur_id = 1;//Auth
+        $entrepreneur_id =  auth()->user()->id;;//Auth
         $gig_information = hire_information::where('hire_to',$entrepreneur_id)->where('accept_status',0)->where('complete_status',0)->get();
         foreach($gig_information as $gig)
         {
@@ -83,7 +83,7 @@ class GigController extends Controller
         $image = time().'.'.request()->file->getClientOriginalExtension();
        request()->file->move(base_path('Gig Image'), $image);
        file_put_contents('test.txt',$request->gig_title);
-       gig::create(['user_id'=>1,"category_id"=>$request->gig_category,"title"=>$request->gig_title,"description"=>$request->gig_description,"image"=>$image,"min_price"=>$request->base_price_min,"max_price"=>$request->base_price_max,'minimum_duration'=>$request->duration,'city'=>$request->city]);
+       gig::create(['user_id'=> auth()->user()->id,"category_id"=>$request->gig_category,"title"=>$request->gig_title,"description"=>$request->gig_description,"image"=>$image,"min_price"=>$request->base_price_min,"max_price"=>$request->base_price_max,'minimum_duration'=>$request->duration,'city'=>$request->city]);
 
     }
     public function view_gig(Request $request)
@@ -119,13 +119,13 @@ class GigController extends Controller
 
     public function hire_entrepreneur(Request $request)
     {
-        $hire_from = 4;//Auth
+        $hire_from =  auth()->user()->id;//Auth
         $hire_to = $request->hire_to;
         $gig_id = $request->gig_id;
         $proposed_hired_day = $request->proposed_duration;
         $proposed_hired_budget = $request->proposed_rate;
         $proposed_message = $request->bid_message;
-        file_put_contents("test.txt",$hire_from." ".$hire_to." ".$gig_id." ".$proposed_hired_day." ".$proposed_hired_budget." ".$proposed_message);
+        //file_put_contents("test.txt",$hire_from." ".$hire_to." ".$gig_id." ".$proposed_hired_day." ".$proposed_hired_budget." ".$proposed_message);
         hire_information::create(['hire_from'=>$hire_from,"hire_to"=>$hire_to,"gig_id"=>$gig_id,'proposed_hired_day'=>$proposed_hired_day,'proposed_hired_budget'=>$proposed_hired_budget,'proposed_message'=>$proposed_message,'accept_status'=>0]);
         
         
@@ -135,7 +135,7 @@ class GigController extends Controller
     
     public function get_gig_details(Request $request)
     {
-      $hire_from = 4;//Auth user_id;
+      $hire_from =  auth()->user()->id;//Auth user_id;
       $gig_id = $request->gig_id;
       $gig_details = gig::where('id',$gig_id)->first();
       $user_id = $gig_details->user_id;

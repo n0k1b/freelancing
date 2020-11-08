@@ -29,12 +29,13 @@ Route::get('manage_hire','GigController@manage_hire');
 Route::post('submit_review','GigController@submit_review');
 Route::get('manage_gig','GigController@manage_gig');
 Route::get('manage_work','GigController@manage_work');
+Route::view('user_blog','my_blog');
 
 Route::prefix('user')->group(function(){
     Route::view('dashboard','dashboard');
     // Route::get('get_category',"GigController@get_category");
     Route::post('create-blog-post','UserController@createBlogPost')->name('createBlogPost');
-    Route::get('read-blog-post','UserController@readBlogPost')->name('readBlogPost');
+  
     Route::post('create-blog-comment','UserController@createBlogComment')->name('createBlogComment');
     Route::get('read-blog-comment/{id}','UserController@readBlogComment')->name('readBlogComment');
     Route::get('delete-blog-post/{id}','UserController@deleteBlogPost')->name('deleteBlogPost');
@@ -45,7 +46,7 @@ Route::group(['prefix' => 'admin'], function () {
     Route::view('dashboard','adminDashboard');
     Route::get('read-blog-cat','blogController@createCat');
 });
-
+Route::get('read-blog-post','UserController@readBlogPost')->name('readBlogPost');
 Route::view('login', 'login')->name('login');
 Route::view('registration', 'register');
 
