@@ -57,6 +57,6 @@ Route::post('get_category',"GigController@get_category");
 Route::view('blog/{id}', 'blog');
 Route::post('create-blog-post','blogController@createBlogPost')->name('createBlogPost');
 Route::post('read-blog-post','blogController@readBlogPost')->name('readBlogPost');
-Route::post('create-blog-comment','blogController@createBlogComment')->name('createBlogComment');
+Route::post('create-blog-comment/{id}','blogController@createBlogComment')->name('createBlogComment');
 Route::get('read-blog-comment/{id}','blogController@readBlogComment')->name('readBlogComment');
 Route::post("hire_entrepreneur","GigController@hire_entrepreneur")->name('hire_entrepreneur');

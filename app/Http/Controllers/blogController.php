@@ -65,7 +65,7 @@ class blogController extends Controller
                 $("#add_comment_<?php echo $value->id ?>").submit(function(e){
                     e.preventDefault()
                     $.ajax({
-                        url:'create-blog-comment',
+                        url:'<?php echo url('create-blog-comment/'.$value->id) ?>',
                         data:$("#add_comment_<?php echo $value->id ?>").serialize(),
                         type:'POST',
                         success:function(data){
@@ -78,7 +78,7 @@ class blogController extends Controller
                 })
                 function readComment<?php echo $value->id ?>() {
                     $.ajax({
-                        url:'read-blog-comment/'+<?php echo $value->id ?>,
+                        url:'<?php echo url('read-blog-comment/'.$value->id) ?>',
                         type:'GET',
                         success:function(data){
                             $("#comment_of_post_no_<?php echo $value->id ?>").html(data);
