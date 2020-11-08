@@ -6,7 +6,7 @@
 							
 							<li ><a href="{{url('create_gig')}}"><i class="icon-material-outline-question-answer"></i> Create Gig </a></li>
 							<li ><a href="{{url('manage_hire')}}"><i class="icon-material-outline-question-answer"></i> Manage Hire </a></li>
-
+							<li ><a href="{{url('create_gig')}}"><i class="icon-material-outline-question-answer"></i> My Blog </a></li>
 							<li ><a href="{{url('manage_gig')}}"><i class="icon-material-outline-question-answer"></i> Manage Gig </a></li>
 							<li ><a href="{{url('manage_work')}}"><i class="icon-material-outline-question-answer"></i> Manage Work </a></li>
 

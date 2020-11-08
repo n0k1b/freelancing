@@ -119,7 +119,7 @@
 
 												
 												<div class="buttons-to-right always-visible margin-top-25 margin-bottom-5">
-													<a href="job_detail.php?job_id=<?php echo $job_id=1 ?>"   class="button ripple-effect"><i class="icon-feather-file-text"></i> Work Details </a>
+													<a href="get_gig_details\{{$hire->gig_id}}"   class="button ripple-effect"><i class="icon-feather-file-text"></i> Work Details </a>
 													<a href="#small-dialog-2" class="popup-with-zoom-anim button ripple-effect"><i class="icon-material-outline-thumb-up"></i> Job done</a>
 													
 												</div>
