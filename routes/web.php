@@ -34,11 +34,16 @@ Route::prefix('user')->group(function(){
     Route::view('dashboard','dashboard');
     // Route::get('get_category',"GigController@get_category");
     Route::post('create-blog-post','UserController@createBlogPost')->name('createBlogPost');
-   // Route::get('read-blog-post/{skip}/{take}','UserController@readBlogPost')->name('readBlogPost');
+    Route::get('read-blog-post','UserController@readBlogPost')->name('readBlogPost');
     Route::post('create-blog-comment','UserController@createBlogComment')->name('createBlogComment');
     Route::get('read-blog-comment/{id}','UserController@readBlogComment')->name('readBlogComment');
     Route::get('delete-blog-post/{id}','UserController@deleteBlogPost')->name('deleteBlogPost');
 
+});
+
+Route::group(['prefix' => 'admin'], function () {
+    Route::view('dashboard','adminDashboard');
+    Route::get('read-blog-cat','blogController@createCat');
 });
 
 Route::view('login', 'login')->name('login');
