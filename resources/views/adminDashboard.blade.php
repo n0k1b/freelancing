@@ -416,7 +416,7 @@
 
              <!-- Post Content -->
 <div class="container padding-top-40">
-	<div class="row" id="posts">
+	<div class="row" id="category">
 
 	</div>
 </div>
@@ -505,23 +505,15 @@
             }
         });
         console.log("Jquery running!");
-        readPost(0,2);
+        readCat();
     })
-    var scroll = 0;
-    var total = 0
-    $(window).scroll(function() {
-        if($(window).scrollTop() == $(document).height() - $(window).height()) {
-            total = 2+scroll+total;
-            readPost(total,2);
-        }
-    });
 
 
-    function readPost(total,take) {
+    function readCat() {
         $.ajax({
             processData:false,
             contentType:false,
-            url:'read-blog-post',
+            url:'read-blog-cat',
             type:'get',
             success: function (response) {
                 $("#posts").html(response)
@@ -533,27 +525,15 @@
         $.ajax({
             processData:false,
             contentType:false,
-            url:'delete-blog-post/'+id,
+            url:'delete-blog-cat/'+id,
             type:'get',
             success: function (response) {
-                readPost()
+                readCat()
             },
         });
     }
 
-    // function readCategory(total,take) {
-    //     $.ajax({
-    //         processData:false,
-    //         contentType:false,
-    //         url:'get_category',
-    //         type:'get',
-    //         success: function (response) {
-    //             console.log(response);
-    //         },
-    //     });
-    // }
-
-    $("#creatingPost").submit(function (event) {
+    $("#creatingCategory").submit(function (event) {
         event.preventDefault();
         data = new FormData();
         data.append('category',$("#category").val());
@@ -562,8 +542,8 @@
         $.ajax({
             processData:false,
             contentType:false,
-            url:$("#creatingPost").attr('action'),
-            type:$("#creatingPost").attr('method'),
+            url:$("#creatingCategory").attr('action'),
+            type:$("#creatingCategory").attr('method'),
             data:data,
             success: function (response) {
                 alert('Success fully created your post');

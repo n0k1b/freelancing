@@ -26,10 +26,10 @@
 <!-- Header -->
 <div id="header">
     <div class="container">
-        
+
         <!-- Left Side Content -->
         <div class="left-side">
-            
+
             <!-- Logo -->
             <div id="logo">
                 <a href="index.php"><img src="{{asset('assets')}}/images/logo.jpeg" alt=""></a>
@@ -43,14 +43,14 @@
 
                     <li><a href="{{url('view_all_gig')}}" >Browse Entrepreneur</a></li>
 
-                    <li><a href="main_page_gig.php?category=all&location=all">Browse Blog</a></li>
+                <li><a href="{{url('browse-blog') }}">Browse Blog</a></li>
                       <li><a href="{{url('dashboard')}}">Dashboard</a></li>
 
                 </ul>
             </nav>
             <div class="clearfix"></div>
             <!-- Main Navigation / End -->
-            
+
         </div>
         <!-- Left Side Content / End -->
 
@@ -60,7 +60,7 @@
 
             <!--  User Notifications -->
             <div class="header-widget hide-on-mobile">
-                
+
                 <!-- Notifications -->
                 <div class="header-notifications">
 
@@ -70,9 +70,9 @@
                     </div>
 
                     <!-- Dropdown -->
-                    
+
                 </div>
-                
+
                 <!-- Messages -->
                 <div class="header-notifications">
                     <div class="header-notifications-trigger">
@@ -139,7 +139,7 @@
             <!--  User Notifications / End -->
 
             <!-- User Menu -->
-            
+
             <!-- User Menu / End -->
 
             <!-- Mobile Navigation Button -->

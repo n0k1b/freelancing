@@ -5,9 +5,21 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\blog_post;
 use App\Models\blog_comment;
+use App\Models\blog_category;
 
 class blogController extends Controller
 {
+    public function categories()
+    {
+        $categories = blog_category::orderBy('id','DESC')->get();
+        return view('categories',['categories'=>$categories]);
+    }
+
+    public function createCat(Request $Request)
+    {
+
+    }
+
     public function createBlogPost(Request $Request)
     {
         $fileName = time().'.'.$Request->upload->extension();
@@ -29,7 +41,13 @@ class blogController extends Controller
                         <h2 class="card-title"><?php echo $value->user->name ?></h2>
                         <p><?php echo $value->created_at!=''?$value->created_at:'unknow' ?></p>
                     </div>
+                    <?php
+                    if ($value->image!=='') {
+                    ?>
                     <img src="<?php echo asset('images') ?>/<?php echo $value->image ?>" class="card-img-top" alt="" height="200px">
+                    <?php
+                    }
+                    ?>
                     <div class="card-body">
                         <div class="card-text">
                         <?php echo $value->post ?>
