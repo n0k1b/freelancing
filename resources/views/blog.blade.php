@@ -43,12 +43,16 @@ $(window).scroll(function() {
 });
 
 
-function readPost(total,take) {
+function readPost() {
+   var id= "{{Request::route('id')}}";
+   var formdata = new FormData();
+   formdata.append('id',id);
     $.ajax({
         processData:false,
         contentType:false,
-        url:'read-blog-post/'+total+"/"+take,
-        type:'get',
+        type:'POST',
+        url:"{{url('read-blog-post')}}",
+        data:formdata,
         success: function (response) {
             $("#posts").append(response)
         },

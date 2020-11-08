@@ -15,9 +15,10 @@ class blogController extends Controller
         blog_post::create(['user_id'=>1,'category_id'=>1,'post'=>$Request->text,'image'=>$fileName,'status'=>1]);
     }
 
-    public function readBlogPost(Request $Request)
+    public function readBlogPost(Request $request)
     {
-        $variable = blog_post::skip($Request->skip)->take($Request->take)->get();
+        $category_id = $request->id;
+        $variable = blog_post::where('category_id',$category_id)->get();
 
         foreach ($variable as $value) {
             ?>

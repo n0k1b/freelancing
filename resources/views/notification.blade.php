@@ -1,4 +1,4 @@
-@include("layout.app");
+@include("layout.app")
 <div class="clearfix"></div>
 <!-- Header Container / End -->
 

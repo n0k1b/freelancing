@@ -22,7 +22,7 @@ class AuthController extends Controller
         $user = User::where('mobile',$request->mobile)->first();
         if ($user) {
                 if (auth()->attempt($credentials)) {
-                    return redirect('/');
+                    return redirect('view_all_gig');
                 }else{
                     session()->flash('message', 'Invalid credentials');
                     return redirect()->back();
@@ -75,7 +75,7 @@ class AuthController extends Controller
             $user->status = 1;
             $user->save();
             if ($user->user_role == 'entrepreneur') {
-                return redirect()->route('login')->with('message','Registration successfull. wait for approve your account.');
+                return redirect()->route('login')->with('message','Registration successfull');
             }else{
                 return redirect()->route('login')->with('message','Registration successfull');
             }

@@ -193,7 +193,7 @@
 
 			<div class="col-xl-3 col-md-6">
 				<!-- Photo Box -->
-				<a href="main_page_job.php?location=all&category=textile" class="photo-box small" data-background-image="{{asset('assets')}}/images/health.jpg">
+				<a href="{{url('blog/1')}}" class="photo-box small" data-background-image="{{asset('assets')}}/images/health.jpg">
 					<div class="photo-box-content">
 						<h3>Health</h3>
 						<span>612 post</span>
