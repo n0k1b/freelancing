@@ -1,5 +1,4 @@
-
-@include('layout.app')
+@include("layout.app")
 <div class="clearfix"></div>
 <!-- Header Container / End -->
 
@@ -57,39 +56,112 @@
 						
 						<div class="content">
 							<ul class="dashboard-box-list">
-							
-							   @foreach($gigs as $gig)
-							   
+								
+                                    @foreach($hire_infos as $hire)
+                                    <input type = "hidden" id = "client_id" value="{{$hire->hire_to}}">
+                                           <input type = "hidden" id = "freelancer_id" value="{{$hire->hire_to}}">
+                                           <input type = "hidden" id = "job_id" value="{{$hire->gig_id}}">
+                                   @if($hire->accept_status == 0 && $hire->complete_status==0 )
 								<li>
 									<!-- Overview -->
 									<div class="freelancer-overview manage-candidates">
 										<div class="freelancer-overview-inner">
-
-											<div class="freelancer-name">
 											
-												<h4>Gig Title:{{$gig->title}} <strong></strong></h4>
+
+                                            
+											<div class="freelancer-name">
+												<h4 style="color:#FF5733"><strong>Your pending work</strong></h4>
+
+												<h4><strong>{{$hire->gig_title}}</strong></h4>
+												<h4>Entreprenure name : <a href="#" style="color:blue">{{$hire->hire_to_name}} </a></h4>
+												<h4>Price : <a href="#" style="color:blue">{{$hire->proposed_hired_budget}} tk </a></h4>  
+
+											
+												
+												<span class="freelancer-detail-item"><i class="icon-feather-phone"></i>{{$hire->hire_to_mobile_number}} </span>
+
+											
 												
 
+												
 												<div class="buttons-to-right always-visible margin-top-25 margin-bottom-5">
-													<a href="get_gig_details\{{$gig->id}}"   class="button ripple-effect"><i class="icon-feather-file-text"></i> Gig Details </a>
-
-
-													<a href="javascript:;" onclick="remove_gig({{$gig->id}})" class="button gray ripple-effect ico" title="Remove Gig" data-tippy-placement="top"><i class="icon-feather-trash-2"></i></a>
+													<a href="get_gig_details\{{$hire->gig_id}}"   class="button ripple-effect"><i class="icon-feather-file-text"></i> Work Details </a>
 													
-										     
+													
+												</div>
+											</div>
+										</div>
+									</div>
+								</li>
+                                @elseif($hire->accept_status == 1 && $hire->complete_status == 0 )
+                                <li>
+									<!-- Overview -->
+									<div class="freelancer-overview manage-candidates">
+										<div class="freelancer-overview-inner">
+											 <input type = "hidden" id = "client_id" value="{{$hire->hire_from}}">
+                                           <input type = "hidden" id = "freelancer_id" value="{{$hire->hire_to}}">
+                                           <input type = "hidden" id = "job_id" value="{{$hire->gig_id}}">
+
+                                            
+											<div class="freelancer-name">
+												<h4 style="color:#6EBA10"><strong>Your running work</strong></h4>
+
+												<h4><strong>{{$hire->gig_title}}</strong></h4>
+												<h4>Entreprenure name : <a href="#" style="color:blue">{{$hire->hire_to_name}} </a></h4>
+												<h4>Price : <a href="#" style="color:blue">{{$hire->proposed_hired_budget}} tk </a></h4>  
+
+											
+												
+												<span class="freelancer-detail-item"><i class="icon-feather-phone"></i>{{$hire->hire_to_mobile_number}} </span>
+
+											
+												
+
+												
+												<div class="buttons-to-right always-visible margin-top-25 margin-bottom-5">
+													<a href="job_detail.php?job_id=<?php echo $job_id=1 ?>"   class="button ripple-effect"><i class="icon-feather-file-text"></i> Work Details </a>
+													<a href="#small-dialog-2" class="popup-with-zoom-anim button ripple-effect"><i class="icon-material-outline-thumb-up"></i> Job done</a>
+													
 												</div>
 											</div>
 										</div>
 									</div>
 								</li>
 
+                                @elseif($hire->accept_status == 1 && $hire->complete_status == 1 )
+                                <li>
+									<!-- Overview -->
+									<div class="freelancer-overview manage-candidates">
+										<div class="freelancer-overview-inner">
+											 <input type = "hidden" id = "client_id" value="{{$hire->hire_to}}">
+                                           <input type = "hidden" id = "freelancer_id" value="{{$hire->hire_to}}">
+                                           <input type = "hidden" id = "job_id" value="{{$hire->gig_id}}">
 
-								@endforeach
+                                            
+											<div class="freelancer-name">
+												<h4 style="color:#160FDE"><strong>Your completed work</strong></h4>
 
+												<h4><strong>{{$hire->gig_title}}</strong></h4>
+												<h4>Entreprenure name : <a href="#" style="color:blue">{{$hire->hire_to_name}} </a></h4>
+												<h4>Price : <a href="#" style="color:blue">{{$hire->proposed_hired_budget}} tk </a></h4>  
 
+											
+												
+												<span class="freelancer-detail-item"><i class="icon-feather-phone"></i>{{$hire->hire_to_mobile_number}} </span>
 
+											
+											</div>
+										</div>
+									</div>
+								</li>
+                                @endif
 							
 
+								
+							 @endforeach
+								
+
+							
 								
 
 							</ul>
@@ -118,6 +190,8 @@
 
 <!-- Apply for a job popup
 ================================================== -->
+
+
 <div id="small-dialog-2" class="zoom-anim-dialog mfp-hide dialog-with-tabs">
 
 	<!--Tabs -->
@@ -163,69 +237,13 @@
 				
 				
 				<!-- Button -->
-				<button onclick="review_client()" class="button full-width button-sliding-icon ripple-effect" type="button" form="leave-review-form">Leave a Review <i class="icon-material-outline-arrow-right-alt"></i></button>
+				<button onclick="review()" class="button full-width button-sliding-icon ripple-effect" type="button" form="leave-review-form">Leave a Review <i class="icon-material-outline-arrow-right-alt"></i></button>
 
 			</div>
 
 		</div>
 	</div>
 </div>
-
-
-<div id="small-dialog-3" class="zoom-anim-dialog mfp-hide dialog-with-tabs">
-
-	<!--Tabs -->
-	<div class="sign-in-form">
-
-		<ul class="popup-tabs-nav">
-		</ul>
-
-		<div class="popup-tabs-container">
-
-			<!-- Tab -->
-			<div class="popup-tab-content" id="tab2">
-				
-				<!-- Welcome Text -->
-				<div class="welcome-text">
-					<h3>Leave a Review</h3>
-					
-				</div>
-					
-				<!-- Form -->
-				
-
-					
-					
-					<div class="feedback-yes-no">
-						<strong>Your Rating</strong>
-						<div class="leave-rating">
-							<input type="radio" name="rating" id="rating-radio-1" value="5" required>
-							<label for="rating-radio-1" class="icon-material-outline-star"></label>
-							<input type="radio" name="rating" id="rating-radio-2" value="4"  required>
-							<label for="rating-radio-2" class="icon-material-outline-star"></label>
-							<input type="radio" name="rating" id="rating-radio-3" value="3"  required>
-							<label for="rating-radio-3" class="icon-material-outline-star"></label>
-							<input type="radio" name="rating" id="rating-radio-4" value="2"  required>
-							<label for="rating-radio-4" class="icon-material-outline-star"></label>
-							<input type="radio" name="rating" id="rating-radio-5" value="1"  required>
-							<label for="rating-radio-5" class="icon-material-outline-star"></label>
-						</div><div class="clearfix"></div>
-					</div>
-
-					<textarea class="with-border" placeholder="Comment" name="message2" id="comment" cols="7" required></textarea>
-
-				
-				
-				<!-- Button -->
-				<button onclick="review_freelancer()" class="button full-width button-sliding-icon ripple-effect" type="button" form="leave-review-form">Leave a Review <i class="icon-material-outline-arrow-right-alt"></i></button>
-
-			</div>
-
-		</div>
-	</div>
-</div>
-
-
 <div id="small-dialog" class="zoom-anim-dialog mfp-hide dialog-with-tabs">
 
 	<!--Tabs -->
@@ -271,30 +289,17 @@
 
 <!-- Scripts
 ================================================== -->
-<script src="js/jquery-3.3.1.min.js"></script>
-<script src="js/jquery-migrate-3.0.0.min.js"></script>
-<script src="js/mmenu.min.js"></script>
-<script src="js/tippy.all.min.js"></script>
-<script src="js/simplebar.min.js"></script>
-<script src="js/bootstrap-slider.min.js"></script>
-<script src="js/bootstrap-select.min.js"></script>
-<script src="js/snackbar.js"></script>
-<script src="js/clipboard.min.js"></script>
-<script src="js/counterup.min.js"></script>
-<script src="js/magnific-popup.min.js"></script>
-<script src="js/slick.min.js"></script>
-<script src="js/custom.js"></script>
-<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+@include('layout.page_js')
 
 
 <script type="text/javascript">
-
-	 function review_client()
+	
+       	 function review()
 	 {  
 	 	var client_id = $("#client_id").val();
 	 	var rating = $("input[name='rating']:checked").val();
 	 		var freelancer_id = $("#freelancer_id").val();
-	 			var gig_id = $("#gig_id").val();
+	 			var job_id = $("#job_id").val();
 
 	 	var comment = $("#comment").val();
 	 	 var formData= new FormData();
@@ -302,66 +307,18 @@
           formData.append('comment',comment);
           formData.append('client_id',client_id);
            formData.append('freelancer_id',freelancer_id);
-           formData.append('gig_id',gig_id);
-          formData.append("review_client","review_client");
-          $.ajax({
-      processData: false,
-      contentType: false,
-      url:"backend/rating_from_gig.php",
-      type:"POST",
-      data:formData,
-      success:function(data,status){
-         
-         swal({
-  title: "You accept this gig offer",
- 
-  icon: "success",
-  
- 
-})
-.then((isConfrim) => {
-  if (isConfrim) {
-     location.reload();
-  } 
-});
-       
-  
-        
-
-      },
-
-    });
-	 	
-
-
-	 }
-
-
-	  function review_freelancer()
-	 {  
-	 	var client_id = $("#client_id").val();
-	 	var rating = $("input[name='rating']:checked").val();
-	 		var freelancer_id = $("#freelancer_id").val();
-	 			var gig_id = $("#gig_id").val();
-
-	 	var comment = $("#comment").val();
-	 	 var formData= new FormData();
-         formData.append('rating',rating);
-          formData.append('comment',comment);
-          formData.append('client_id',client_id);
-           formData.append('freelancer_id',freelancer_id);
-           formData.append('gig_id',gig_id);
+           formData.append('job_id',job_id);
           formData.append("review_freelancer","review_freelancer");
           $.ajax({
       processData: false,
       contentType: false,
-      url:"backend/rating_from_gig.php",
+      url:"submit_review",
       type:"POST",
       data:formData,
       success:function(data,status){
          
          swal({
-  title: "You accept this gig offer",
+  title: "Your work successfully completed",
  
   icon: "success",
   
@@ -385,8 +342,6 @@
 	 }
 
 
-
-	
      function accept_gig(gig_apply_id,gig_id)
      {
        var formData= new FormData();
@@ -558,6 +513,18 @@
 
 <!-- Snackbar // documentation: https://www.polonel.com/snackbar/ -->
 <script>
+$(function()
+	{
+		$.ajaxSetup({
+
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+       		 }
+    	});
+
+		get_category();
+
+	});
 // Snackbar for user status switcher
 $('#snackbar-user-status label').click(function() { 
 	Snackbar.show({

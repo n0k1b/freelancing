@@ -16,10 +16,19 @@ use Illuminate\Support\Facades\Route;
 // Route::get('/', function () {
 //     return view('create_gig');
 // });
-
-Route::get('/','GigController@view_all_gig');
+Route::view('create_gig','create_gig');
+Route::view('/','index');
+Route::get('view_all_gig','GigController@view_all_gig');
+Route::post('search_gig','GigController@view_gig');
 Route::get('get_gig_details/{gig_id}','GigController@get_gig_details')->name('gig_details');
 Route::view('login', 'login');
+Route::view('dashboard', 'dashboard2');
+//Route::view('see_notification', 'notification');
+Route::get('see_notification_entrepreneur',"GigController@see_notification_entrepreneur");
+Route::get('manage_hire','GigController@manage_hire');
+Route::post('submit_review','GigController@submit_review');
+Route::get('manage_gig','GigController@manage_gig');
+Route::get('manage_work','GigController@manage_work');
 
 Route::prefix('user')->group(function(){
     Route::view('dashboard','dashboard');
@@ -43,7 +52,7 @@ Route::post('registration', 'AuthController@registration')->name('registration')
 Route::post('login', 'AuthController@process_login')->name('process_login');
 
 Route::post("submit_gig","GigController@gig_post");
-Route::get('get_category',"GigController@get_category");
+Route::post('get_category',"GigController@get_category");
 
 Route::view('blog', 'blog');
 Route::post('create-blog-post','blogController@createBlogPost')->name('createBlogPost');

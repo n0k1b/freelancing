@@ -1,8 +1,4 @@
-<?php 
- include("page_content/header.php");
- $sender_id = $user_id;
-  
-?>
+@include("layout.app");
 <div class="clearfix"></div>
 <!-- Header Container / End -->
 
@@ -30,44 +26,7 @@
 				<div class="dashboard-nav">
 					<div class="dashboard-nav-inner">
 
-						<ul data-submenu-title="Start">
-							<li><a href="dashboard.html"><i class="icon-material-outline-dashboard"></i> Dashboard</a></li>
-							<li ><a href="dashboard-messages.html"><i class="icon-material-outline-question-answer"></i> Messages <span class="nav-tag">2</span></a></li>
-							<li class="active"><a href="see_notification.php"><i class="icon-material-outline-question-answer"></i> Notificaton <span class="nav-tag"><?php echo $total_notification ?></span></a></li>
-
-							<li ><a href="manage_job.php"><i class="icon-material-outline-question-answer"></i> Manage Job </a></li>
-
-							<li ><a href="manage_bid.php"><i class="icon-material-outline-question-answer"></i> Manage Bid </a></li>
-
-							<li ><a href="manage_gig.php"><i class="icon-material-outline-question-answer"></i> Manage Gig </a></li>
-
-							<li><a href="dashboard-bookmarks.html"><i class="icon-material-outline-star-border"></i> Bookmarks</a></li>
-							<li><a href="dashboard-reviews.html"><i class="icon-material-outline-rate-review"></i> Reviews</a></li>
-						</ul>
-						
-						<ul data-submenu-title="Organize and Manage">
-							<li><a href="#"><i class="icon-material-outline-business-center"></i> Jobs</a>
-								<ul>
-									<li><a href="dashboard-manage-jobs.html">Manage Jobs <span class="nav-tag">3</span></a></li>
-									<li><a href="dashboard-manage-candidates.html">Manage Candidates</a></li>
-									<li><a href="dashboard-post-a-job.html">Post a Job</a></li>
-								</ul>	
-							</li>
-							<li><a href="#"><i class="icon-material-outline-assignment"></i> Tasks</a>
-								<ul>
-									<li><a href="dashboard-manage-tasks.html">Manage Tasks <span class="nav-tag">2</span></a></li>
-									<li><a href="dashboard-manage-bidders.html">Manage Bidders</a></li>
-									<li><a href="dashboard-my-active-bids.html">My Active Bids <span class="nav-tag">4</span></a></li>
-									<li><a href="dashboard-post-a-task.html">Post a Task</a></li>
-								</ul>	
-							</li>
-						</ul>
-
-						<ul data-submenu-title="Account">
-							<li><a href="dashboard-settings.html"><i class="icon-material-outline-settings"></i> Settings</a></li>
-							<li><a href="index-logged-out.html"><i class="icon-material-outline-power-settings-new"></i> Logout</a></li>
-						</ul>
-						
+					@include("layout.dashboard_sidebar");
 					</div>
 				</div>
 				<!-- Navigation / End -->
@@ -96,93 +55,55 @@
 						
 						<div class="content">
 							<ul class="dashboard-box-list">
-								<?php while($row_bid = mysqli_fetch_array($res_bid) ){ 
-									  $bid_id = $row_bid['bid_id'];
-                                      $freelancer_id = $row_bid['user_id'];
-                                      $job_id =$row_bid['job_id'];
-                                      $bidding_price = $row_bid['bidding_price'];
-                                      $work_duration = $row_bid['work_duration'];
-                                      $sql = "SELECT * from user where id = $freelancer_id";
-                                      $res = mysqli_query($conn,$sql);
-                                      $row = mysqli_fetch_array($res);
-                                      $name = $row['name'];
-                                      $rating = $row['rating']; 
-                                      $mobile_number = $row['mobile_number'];
-                                      $msg = $row_bid['bidding_message'];
-                                      $sql_job = "select * from job where id = $job_id";
-                                      $res_job = mysqli_query($conn,$sql_job);
-                                      $row_job = mysqli_fetch_array($res_job);
+								<?php 
+									//   $bid_id = $row_bid['bid_id'];
+                                    //   $freelancer_id = $row_bid['user_id'];
+                                    //   $job_id =$row_bid['job_id'];
+                                    //   $bidding_price = $row_bid['bidding_price'];
+                                    //   $work_duration = $row_bid['work_duration'];
+                                    //   $sql = "SELECT * from user where id = $freelancer_id";
+                                    //   $res = mysqli_query($conn,$sql);
+                                    //   $row = mysqli_fetch_array($res);
+                                    //   $name = $row['name'];
+                                    //   $rating = $row['rating']; 
+                                    //   $mobile_number = $row['mobile_number'];
+                                    //   $msg = $row_bid['bidding_message'];
+                                    //   $sql_job = "select * from job where id = $job_id";
+                                    //   $res_job = mysqli_query($conn,$sql_job);
+                                    //   $row_job = mysqli_fetch_array($res_job);
 
-                                      $job_title = $row_job['job_title'];
+                                    //   $job_title = $row_job['job_title'];
 
-                                      $receiver_id = $freelancer_id;
-                                      $work_id = $job_id;
+                                    //   $receiver_id = $freelancer_id;
+                                    //   $work_id = $job_id;
 
 
 
 									?>
-								<li>
-									<!-- Overview -->
-									<div class="freelancer-overview manage-candidates">
-										<div class="freelancer-overview-inner">
+								
 
-											<!-- Avatar -->
-											
-
-											<!-- Name -->
-											<div class="freelancer-name">
-												<h4><strong><?php echo $job_title ?></strong></h4>
-												<h4><a href="#" style="color:blue"><?php echo $name ?> </a> is bidding your job at <?php echo $bidding_price?>tk within <?php echo $work_duration ?> days </h4>
-
-												<!-- Details -->
-												
-												<span class="freelancer-detail-item"><i class="icon-feather-phone"></i><?php echo $mobile_number?> </span>
-
-												<!-- Rating -->
-												<div class="freelancer-rating">
-													<div class="star-rating" data-rating="<?php echo $rating ?>"></div>
-												</div>
-
-												<br>
-
-												<p><?php echo $msg ?></p>
-
-												<!-- Buttons -->
-												<div class="buttons-to-right always-visible margin-top-25 margin-bottom-5">
-													<a href="javascript:;" onclick="accept_bid(<?php echo $bid_id ?>,<?php echo $job_id ?>);"  class="button ripple-effect"><i class="icon-feather-file-text"></i> Accept</a>
-													<a href="javascript:;" onclick="message(<?php echo $sender_id ?>,<?php echo $receiver_id?>,<?php echo $work_id ?>)" class="popup-with-zoom-anim button dark ripple-effect"><i class="icon-feather-mail"></i> Send Message</a>
-													<a href="javascript:;" onclick="remove_bid(<?php echo $bid_id ?>)" class="button gray ripple-effect ico" title="Remove Bid" data-tippy-placement="top"><i class="icon-feather-trash-2"></i></a>
-												</div>
-											</div>
-										</div>
-									</div>
-								</li>
 								<?php  
 
-                                 }
+                                    //      $user_id = $row_gig['employee_id'];
+                                    //      $gig_id = $row_gig['gig_id'];
+                                    //      $gig_apply_id = $row_gig['id'];
+                                    //      $proposed_rate = $row_gig['proposed_rate'];
+                                    //      $proposed_duration = $row_gig['proposed_duration'];
+                                    //   $sql = "SELECT * from user where id = $user_id";
+                                    //   $res = mysqli_query($conn,$sql);
+                                    //   $row = mysqli_fetch_array($res);
+                                    //   $name = $row['name'];
+                                    //   $rating = $row['rating']; 
+                                    //   $mobile_number = $row['mobile_number'];
+                                    //   $msg = $row_gig['message'];
+                                    //   $sql_gig = "select * from gig where id = $gig_id";
+                                    //     $res_gig = mysqli_query($conn,$sql_gig);
+                                    //   $row_gig = mysqli_fetch_array($res_gig);
 
-								?>
-
-								<?php while($row_gig = mysqli_fetch_array($res_gig) ){ 
-
-                                         $user_id = $row_gig['employee_id'];
-                                         $gig_id = $row_gig['gig_id'];
-                                         $gig_apply_id = $row_gig['id'];
-                                         $proposed_rate = $row_gig['proposed_rate'];
-                                         $proposed_duration = $row_gig['proposed_duration'];
-                                      $sql = "SELECT * from user where id = $user_id";
-                                      $res = mysqli_query($conn,$sql);
-                                      $row = mysqli_fetch_array($res);
-                                      $name = $row['name'];
-                                      $rating = $row['rating']; 
-                                      $mobile_number = $row['mobile_number'];
-                                      $msg = $row_gig['message'];
-                                      $sql_gig = "select * from gig where id = $gig_id";
-                                        $res_gig = mysqli_query($conn,$sql_gig);
-                                      $row_gig = mysqli_fetch_array($res_gig);
-
-                                      $gig_title = $row_gig['gig_title'];
+                                    //   $gig_title = $row_gig['gig_title'];
 									?>
+
+									@foreach($gigs  as $gig)
 								<li>
 									<!-- Overview -->
 									<div class="freelancer-overview manage-candidates">
@@ -194,53 +115,51 @@
 											<!-- Name -->
 											<div class="freelancer-name">
 
-													<h4><strong><?php echo $gig_title ?></strong></h4>
-												<h4><a href="#"  style="color:blue"><?php echo $name ?> </a> Interested your gig at <?php echo $proposed_rate ?>tk within <?php echo $proposed_duration?> days  </h4>
+													<h4><strong>{{$gig->gig_title}}</strong></h4>
+												<h4><a href="#"  style="color:blue">{{$gig->hire_from_name}} </a> Interested in your gig at {{$gig->proposed_hired_budget}} tk within {{$gig->proposed_hired_day}} days  </h4>
 
 
 
 												<!-- Details -->
 												
-												<span class="freelancer-detail-item"><i class="icon-feather-phone"></i><?php echo $mobile_number?> </span>
+												<span class="freelancer-detail-item"><i class="icon-feather-phone"></i>{{$gig->hire_from_mobile_number}} </span>
 
 												<!-- Rating -->
 												<div class="freelancer-rating">
-													<div class="star-rating" data-rating="<?php echo $rating ?>"></div>
+													<div class="star-rating" data-rating="<?php echo $rating=5 ?>"></div>
 												</div>
 												<br>
 
-												<p><?php echo $msg ?></p>
+												<p>{{$gig->proposed_message}}</p>
 
 												<!-- Buttons -->
 												<div class="buttons-to-right always-visible margin-top-25 margin-bottom-5">
-													<a href="javascript:;" onclick='accept_gig(<?php echo $gig_apply_id ?>,<?php echo $gig_id ?>)' class="button ripple-effect"><i class="icon-feather-file-text"></i> Accept</a>
+													<a href="javascript:;" onclick='accept_gig(<?php echo $gig_apply_id=1 ?>,<?php echo $gig_id=1 ?>)' class="button ripple-effect"><i class="icon-feather-file-text"></i> Accept</a>
 													<a href="#small-dialog" class="popup-with-zoom-anim button dark ripple-effect"><i class="icon-feather-mail"></i> Send Message</a>
-													<a href="javascript:;" onclick="remove_gig(<?php echo $gig_apply_id ?>)" class="button gray ripple-effect ico" title="Remove gig" data-tippy-placement="top"><i class="icon-feather-trash-2"></i></a>
+													<a href="javascript:;" onclick="remove_gig(<?php echo $gig_apply_id=1 ?>)" class="button gray ripple-effect ico" title="Remove gig" data-tippy-placement="top"><i class="icon-feather-trash-2"></i></a>
 												</div>
 											</div>
 										</div>
 									</div>
 								</li>
-								<?php  
-                                 }
-								?>
+								@endforeach
+								
 
+								<?php 
+                                    //      $bid_id = $row_bid_accept['bid_id'];
+                                    //      $client_id = $row_bid_accept['job_given_id'];
+                                    //      $job_id = $row_bid_accept['job_id'];
+                                    //      $bidding_price = $row_bid_accept['bidding_price'];
+                                    //   $sql = "SELECT * from user where id = $client_id";
+                                    //   $res = mysqli_query($conn,$sql);
+                                    //   $row = mysqli_fetch_array($res);
+                                    //   $name = $row['name'];
 
-								<?php while($row_bid_accept = mysqli_fetch_array($res_bid_accept) ){ 
-                                         $bid_id = $row_bid_accept['bid_id'];
-                                         $client_id = $row_bid_accept['job_given_id'];
-                                         $job_id = $row_bid_accept['job_id'];
-                                         $bidding_price = $row_bid_accept['bidding_price'];
-                                      $sql = "SELECT * from user where id = $client_id";
-                                      $res = mysqli_query($conn,$sql);
-                                      $row = mysqli_fetch_array($res);
-                                      $name = $row['name'];
+                                    //   $sql_job = "select * from job where id = $job_id";
+                                    //   $res_job = mysqli_query($conn,$sql_job);
+                                    //   $row_job = mysqli_fetch_array($res_job);
 
-                                      $sql_job = "select * from job where id = $job_id";
-                                      $res_job = mysqli_query($conn,$sql_job);
-                                      $row_job = mysqli_fetch_array($res_job);
-
-                                      $job_title = $row_job['job_title'];
+                                    //   $job_title = $row_job['job_title'];
 
                                       // $rating = $row['rating']; 
                                       // $mobile_number = $row['mobile_number'];
@@ -251,43 +170,8 @@
 
                                       // $gig_title = $row_gig['gig_title'];
 									?>
-								<li>
-									<!-- Overview -->
-									<div class="freelancer-overview manage-candidates">
-										<div class="freelancer-overview-inner">
-
-											<!-- Avatar -->
-											
-
-											<!-- Name -->
-											<div class="freelancer-name">
-
-													
-												<h4><a href="#"  style="color:blue"><?php echo $name ?> </a> accepted your bid </h4>
-
-												<h4><strong>Job title: </strong><?php echo $job_title ?> </h4>
-												<h4><strong>Accepted Price: </strong><?php echo $bidding_price ?> </h4>
-
-
-
-
-												<!-- Details -->
-												
-												
-
-												<!-- Buttons -->
-
-												<div class="buttons-to-right always-visible margin-top-25 margin-bottom-5">
-													<a href="job_detail.php?job_id=<?php echo $job_id ?>"   class="button ripple-effect"><i class="icon-feather-file-text"></i> Job Details </a>
-													<a href="javascript:;" onclick="remove_notification(<?php echo $bid_id ?>)" class="button gray ripple-effect ico" title="Remove gig" data-tippy-placement="top"><i class="icon-feather-trash-2"></i></a>
-												
-											</div>
-										</div>
-									</div>
-								</li>
-								<?php  
-                                 }
-								?>
+							
+								
 
 
 							

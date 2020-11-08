@@ -1,39 +1,3 @@
-<?php
-//   include ("connection.php");
-  
-//   $location = $_REQUEST['location'];
-//   $category = $_REQUEST['category'];
-//     //file_put_contents("text.txt", $location." ".$category);
-
-
-//   if($location === "all" and $category === "all")
-//   {
-//   $sql = "SELECT * from gig";
-//   }
-//   else if ($location =="all" and $category !="all"){
-//          $sql = "SELECT * from gig where gig_category = '$category'";
-//   }
-//   else if($location!="all" and $category == 'all')
-//   {
-//   	   $sql = "SELECT * from gig where city = '$location'";
-//   }
-//   else 
-//   {
-//   	 $sql = "SELECT * from gig where city = '$location' and job_category = '$category'";
-//   }
- 
-
-
-//  $res = mysqli_query($conn,$sql);
-//   $num_rows = mysqli_num_rows($res);
-
-
-
-
-
-
-?>
-
 @include('layout.app')
 <div class="clearfix"></div>
 <!-- Header Container / End -->
@@ -44,9 +8,11 @@
 
 	<div class="full-page-sidebar">
 		<div class="full-page-sidebar-inner" data-simplebar>
+		<form action="{{url('search_gig')}}" method ="POST">
+		@csrf
 			<div class="sidebar-container">
 				
-			 
+			
 
 				<div class="sidebar-widget">
 					<h3>Location</h3>
@@ -59,42 +25,22 @@
 				</div>
 
 				
-				<!-- Keywords -->
-				<!-- div class="sidebar-widget">
-					<h3>Keywords</h3>
-					<div class="keywords-container">
-						<div class="keyword-input-container">
-							<input type="text" class="keyword-input" placeholder="e.g. job title"/>
-							<button class="keyword-input-button ripple-effect"><i class="icon-material-outline-add"></i></button>
-						</div>
-						<div class="keywords-list"></div>
-						<div class="clearfix"></div>
-					</div>
-				</div>
-				 -->
-				<!-- Category -->
+			
 				<div class="sidebar-widget">
 					<h3>Category</h3>
-					<select id="gig_category"  class="selectpicker default"  data-selected-text-format="count" data-size="7" title="All Categories" >
+					<select id="gig_category" name="gig_category" class="selectpicker default"  data-selected-text-format="count" data-size="7" title="All Categories" >
 						
 					</select>
 				</div>
-				
-				<!-- Job Types -->
-				
+		
 
-				<!-- Salary -->
+			</div>
 			
-				<!-- Tags -->
-				
-
-			</div>
-			<!-- Sidebar Container / End -->
-
-			<!-- Search Button -->
 			<div class="sidebar-search-button-container">
-				<button onclick="filter()" type = "submit" class="button ripple-effect">Search</button>
+				<button  type="submit" class="button ripple-effect">Search</button>
 			</div>
+
+			</form>
 			 
 			<!-- Search Button / End-->
              
@@ -263,7 +209,7 @@ $('#snackbar-user-status label').click(function() {
 		$.ajax({
         processData:false,
         contentType:false,
-        type:'GET',
+        type:'post',
         url:"get_category",
         success:function(data){
 			//alert(data);

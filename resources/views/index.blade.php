@@ -6,13 +6,14 @@
 
 <!-- Basic Page Needs
 ================================================== -->
-<title>Freelancer For Female</title>
+<title>Women World</title>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="csrf-token" content="{{ csrf_token() }}">
 
 <!-- CSS
 ================================================== -->
-<link rel="stylesheet" href="{{asset('assets')}}/css/style.css">
+<link rel="stylesheet" href="{{asset('assets')}}/css/style.css?{{time()}}">
 <link rel="stylesheet" href="{{asset('assets')}}/css/colors/blue.css">
 
 </head>
@@ -64,7 +65,7 @@
 				<div class="header-widget hide-on-mobile">
 					<div class="header-notifications user-menu">
                    <div class="join">
-							<a href="login.php">Join</a>
+							<a href="{{url('login')}}">Join</a>
 						</div>	
 						</div>			
 
@@ -112,9 +113,9 @@
 			<div class="col-md-12">
 				<div class="banner-headline">
 					<h3>
-						<strong>Hire freelancers for any homecraft ,any time.</strong>
+						<strong>Hire Women Entrepreneur for Any Work Any Time</strong>
 						<br>
-						<span>Huge community of Textile ,Craft and creative worker.</span>
+						<span>Huge Community of Women Entrepreneur </span>
 					</h3>
 				</div>
 			</div>
@@ -123,38 +124,31 @@
 		<!-- Search Bar -->
 		<div class="row">
 			<div class="col-md-12">
+			<form action="{{url('search_gig')}}" method ="POST">
+			@csrf
 				<div class="intro-banner-search-form margin-top-95">
 
-					<!-- Search Field -->
+				<div id="autocomplete-container"  class="intro-search-field">
+						<label  type="text" for ="intro-keywords" class="field-title ripple-effect">What you need done?</label>
+						<input  id="autocomplete-input" name="location" class="city" type="text" placeholder="Location">
+				</div>
+				
 					
-
 					<!-- Search Field -->
 					<div class="intro-search-field">
-						<label for ="intro-keywords" class="field-title ripple-effect">What you need done?</label>
-						<input id="intro-keywords" type="text" placeholder="e.g. Scrapbook">
-					</div>
-
-					<!-- Search Field -->
-					<div class="intro-search-field">
-						<select class="selectpicker default" multiple data-selected-text-format="count" data-size="7" title="All Categories" >
-							<option>Textile</option>
-							<option>Home Food</option>
-							<option>Antique Jewelery</option>
-							<option>Papercraft</option>
-							<option>Custom Portrait</option>
-							<option>Scrapbook</option>
-							<option>Cross Stitch</option>
-							<option>Embroiderer</option>
-							<option>Scented Candle</option>
+					
+						<select id="gig_category" name="gig_category" class="selectpicker default" data-size="7" title="All Categories" >
+							
 							
 						</select>
 					</div>
 
 					<!-- Button -->
 					<div class="intro-search-button">
-						<button class="button ripple-effect" onclick="window.location.href='freelancers-grid-layout-full-page.html'">Search</button>
+						<button class="button ripple-effect" type="submit">Search</button>
 					</div>
 				</div>
+				</form>
 			</div>
 		</div>
 
@@ -193,36 +187,36 @@
 			<!-- Section Headline -->
 			<div class="col-xl-12">
 				<div class="section-headline centered margin-top-0 margin-bottom-45">
-					<h3>Popular Categories</h3>
+					<h3>Popular Blog Category</h3>
 				</div>
 			</div>
 
 			<div class="col-xl-3 col-md-6">
 				<!-- Photo Box -->
-				<a href="main_page_job.php?location=all&category=textile" class="photo-box small" data-background-image="{{asset('assets')}}/images/textile.jpg">
+				<a href="main_page_job.php?location=all&category=textile" class="photo-box small" data-background-image="{{asset('assets')}}/images/health.jpg">
 					<div class="photo-box-content">
-						<h3>Textile</h3>
-						<span>612</span>
+						<h3>Health</h3>
+						<span>612 post</span>
 					</div>
 				</a>
 			</div>
 			
 			<div class="col-xl-3 col-md-6">
 				<!-- Photo Box -->
-				<a href="main_page_job.php?location=all&category=home made food" class="photo-box small" data-background-image="{{asset('assets')}}/images/food.jpeg">
+				<a href="main_page_job.php?location=all&category=home made food" class="photo-box small" data-background-image="{{asset('assets')}}/images/jewellary.jpg">
 					<div class="photo-box-content">
-						<h3>Home Made Food</h3>
-						<span>113</span>
+						<h3>Fashion and Beauty</h3>
+						<span>113 post</span>
 					</div>
 				</a>
 			</div>
 			
 			<div class="col-xl-3 col-md-6">
 				<!-- Photo Box -->
-				<a href="main_page_job.php?location=all&category=antique jewellary" class="photo-box small" data-background-image="{{asset('assets')}}/images/jewellary.jpg">
+				<a href="main_page_job.php?location=all&category=antique jewellary" class="photo-box small" data-background-image="{{asset('assets')}}/images/travel.jpg">
 					<div class="photo-box-content">
-						<h3>Antique Jewelery</h3>
-						<span>186</span>
+						<h3>Travel</h3>
+						<span>186 post</span>
 					</div>
 				</a>
 			</div>
@@ -231,48 +225,48 @@
 				<!-- Photo Box -->
 				<a href="main_page_job.php?location=all&category=paper craft" class="photo-box small" data-background-image="{{asset('assets')}}/images/paper_craft.jpg">
 					<div class="photo-box-content">
-						<h3>Papercraft</h3>
-						<span>298</span>
+						<h3>Craft</h3>
+						<span>298 post</span>
 					</div>
 				</a>
 			</div>
 
 			<div class="col-xl-3 col-md-6">
 				<!-- Photo Box -->
-				<a href="main_page_job.php?location=all&category=custom potrait" class="photo-box small" data-background-image="{{asset('assets')}}/images/potrait.jpg">
+				<a href="main_page_job.php?location=all&category=custom potrait" class="photo-box small" data-background-image="{{asset('assets')}}/images/education.jpg">
 					<div class="photo-box-content">
-						<h3>Custom Portrait</h3>
-						<span>549</span>
+						<h3>Career & Education</h3>
+						<span>549 post</span>
 					</div>
 				</a>
 			</div>
 			
 			<div class="col-xl-3 col-md-6">
 				<!-- Photo Box -->
-				<a href="main_page_job.php?location=all&category=scrapbook" class="photo-box small" data-background-image="{{asset('assets')}}/images/scrapbook.jpg">
+				<a href="main_page_job.php?location=all&category=scrapbook" class="photo-box small" data-background-image="{{asset('assets')}}/images/food.jpeg">
 					<div class="photo-box-content">
-						<h3>Scrapbook</h3>
-						<span>873</span>
+						<h3>Cooking and Recipes</h3>
+						<span>873 post</span>
 					</div>
 				</a>
 			</div>
 			
 			<div class="col-xl-3 col-md-6">
 				<!-- Photo Box -->
-				<a href="main_page_job.php?location=all&category=embroider" class="photo-box small" data-background-image="{{asset('assets')}}/images/embroider.jpg">
+				<a href="main_page_job.php?location=all&category=embroider" class="photo-box small" data-background-image="{{asset('assets')}}/images/parenting.jpg">
 					<div class="photo-box-content">
-						<h3>Embroiderer</h3>
-						<span>125</span>
+						<h3>Parenting and Babycare</h3>
+						<span>125 post</span>
 					</div>
 				</a>
 			</div>
 
 			<div class="col-xl-3 col-md-6">
 				<!-- Photo Box -->
-				<a href="main_page_job.php?location=all&category=scented candle" class="photo-box small" data-background-image="{{asset('assets')}}/images/andle.jpg">
+				<a href="main_page_job.php?location=all&category=scented candle" class="photo-box small" data-background-image="{{asset('assets')}}/images/abuse.jpeg">
 					<div class="photo-box-content">
-						<h3>Scented Candle</h3>
-						<span>445</span>
+						<h3>Abuse</h3>
+						<span>445 post</span>
 					</div>
 				</a>
 			</div>
@@ -812,6 +806,48 @@ $('#snackbar-user-status label').click(function() {
 
 <!-- Google Autocomplete -->
 <script>
+$(function()
+	{
+		$.ajaxSetup({
+
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+       		 }
+    	});
+
+		get_category();
+
+	});
+	function search_gig()
+	{
+		var gig_category_id = $("#gig_category").val();
+		var formdata = new FormData();
+		formdata.append('gig_category_id',gig_category_id);
+		$.ajax({
+        processData:false,
+        contentType:false,
+        type:'post',
+        url:"search_gig",
+        success:function(data){
+			//alert(data);
+		
+        }
+   		 })
+		
+	}
+	function get_category()
+	  {
+		$.ajax({
+        processData:false,
+        contentType:false,
+        type:'post',
+        url:"get_category",
+        success:function(data){
+			//alert(data);
+			$("#gig_category").html(data);
+        }
+   		 })
+	  }
 	function initAutocomplete() {
 		 var options = {
 		  types: ['(cities)'],

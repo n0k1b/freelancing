@@ -7,10 +7,77 @@ use App\Models\gig;
 use App\Models\gig_category;
 use App\Models\User;
 use App\Models\hire_information;
+use App\Models\rating;
 
 class GigController extends Controller
 {
     //
+
+    public function submit_review(Request $request)
+    {
+        $rating = $request->rating;
+        $comment = $request->comment;
+        $client_id = $request->client_id;
+        $entrepreneur_id = $request->freelancer_id;
+        $gig_id = $request->job_id;
+        rating::create(['gig_id'=>$gig_id,'reviewer_id'=>$client_id,'rating'=>$rating,'review'=>$comment]);
+        hire_information::where('gig_id',$gig_id)->update(['complete_status'=>1]);
+
+        //file_put_contents("test.txt",$rating." ".$comment." ".$client_id." ".$entrepreneur_id." ".$gig_id);
+        
+    }
+
+    public function manage_hire()
+    {
+     $user_id = 4;
+     $hire_info = hire_information::where('hire_from',$user_id)->get();
+     foreach($hire_info as $gig)
+     {
+     
+         $gig['gig_title']=gig::where('user_id',$gig->hire_to)->first()->title;
+         $gig['hire_to_mobile_number']= User::where('id',$gig->hire_to)->first()->mobile;
+         $gig['hire_to_name']= User::where('id',$gig->hire_to)->first()->name;
+
+     }
+   
+      return view('manage_hire',['hire_infos'=>$hire_info]);
+    }
+    Public function manage_gig()
+    {
+       $entrepreneur_id = 1;
+       $gigs = gig::where('user_id',$entrepreneur_id)->get();
+       return view('manage_gig',['gigs'=>$gigs]);
+    }
+
+    Public function manage_work()
+    {
+       $entrepreneur_id = 1;
+       $hire_info = hire_information::where('hire_to',$entrepreneur_id)->get();
+       foreach($hire_info as $gig)
+       {
+       
+           $gig['gig_title']=gig::where('user_id',$gig->hire_to)->first()->title;
+           $gig['hire_from_mobile_number']= User::where('id',$gig->hire_from)->first()->mobile;
+           $gig['hire_from_name']= User::where('id',$gig->hire_from)->first()->name;
+  
+       }
+       return view('manage_work',['hire_infos'=>$hire_info]);
+    }
+
+    public function see_notification_entrepreneur()
+    {
+        $entrepreneur_id = 1;//Auth
+        $gig_information = hire_information::where('hire_to',$entrepreneur_id)->where('accept_status',0)->where('complete_status',0)->get();
+        foreach($gig_information as $gig)
+        {
+        
+            $gig['gig_title']=gig::where('user_id',$gig->hire_to)->first()->title;
+            $gig['hire_from_mobile_number']= User::where('id',$gig->hire_from)->first()->mobile;
+            $gig['hire_from_name']= User::where('id',$gig->hire_from)->first()->name;
+
+        }
+        return view('notification',['gigs'=>$gig_information]);
+    }
     public function gig_post(Request $request)
     { 
         $image = time().'.'.request()->file->getClientOriginalExtension();
@@ -18,6 +85,22 @@ class GigController extends Controller
        file_put_contents('test.txt',$request->gig_title);
        gig::create(['user_id'=>1,"category_id"=>$request->gig_category,"title"=>$request->gig_title,"description"=>$request->gig_description,"image"=>$image,"min_price"=>$request->base_price_min,"max_price"=>$request->base_price_max,'minimum_duration'=>$request->duration,'city'=>$request->city]);
 
+    }
+    public function view_gig(Request $request)
+    {
+        $category_id = $request->gig_category;
+        $location = $request->location;
+        $location = explode(',',$location);
+        $location = $location[0];
+        $gig_list = gig::where('category_id',$category_id)->where('city',$location)->get();
+      foreach($gig_list as $gig)
+      {
+          $user_id = $gig->user_id;
+          $user_name = User::where('id',$user_id)->first()->name;
+          $gig['name'] = $user_name;
+      }
+      return view("freelancer",['gig_lists'=>$gig_list]);
+       
     }
     public function view_all_gig()
     {
@@ -49,15 +132,21 @@ class GigController extends Controller
         
     }
 
-
+    
     public function get_gig_details(Request $request)
     {
-     $hire_from = 4;//Auth user_id;
+      $hire_from = 4;//Auth user_id;
       $gig_id = $request->gig_id;
       $gig_details = gig::where('id',$gig_id)->first();
       $user_id = $gig_details->user_id;
       $user_name = User::where('id',$user_id)->first()->name;
       $gig_details['name'] = $user_name;
+      $review = rating::where('gig_id',$gig_id)->first();
+      $review['name']= User::where('id',$review->reviewer_id)->first()->name;
+      $overall_ratings = rating::where('entrepreneur_id',$user_id)->get();
+      $overall_rating = ceil(rating::where('entrepreneur_id',$user_id)->get()->sum('rating')/sizeof($overall_ratings));
+
+      
       if(hire_information::where('hire_from',$hire_from)->where('gig_id',$gig_id)->where('complete_status',0)->first())
       {
           $gig_details['previously_bid']=1;
@@ -66,7 +155,7 @@ class GigController extends Controller
       {
         $gig_details['previously_bid']=0;
       }
-      return view('gig_details',['gig'=>$gig_details]);
+      return view('gig_details',['gig'=>$gig_details,'review'=>$review,'overall_rating'=>$overall_rating]);
       //file_put_contents('test.txt',$gig_id);
       
     }

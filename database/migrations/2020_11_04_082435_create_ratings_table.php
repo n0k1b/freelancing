@@ -17,12 +17,15 @@ class CreateRatingsTable extends Migration
             $table->id();
             $table->bigInteger('gig_id')->unsigned();
             $table->bigInteger('reviewer_id')->unsigned();
+            $table->bigInteger('entrepreneur_id')->unsigned();
             $table->integer('rating');
             $table->string('review');
             $table->timestamps();
 
             $table->foreign('reviewer_id')->references('id')->on('users')->onDelete('cascade');
             $table->foreign('gig_id')->references('id')->on('gigs')->onDelete('cascade');
+            $table->foreign('entrepreneur_id')->references('id')->on('users')->onDelete('cascade');
+            
         });
     }
 

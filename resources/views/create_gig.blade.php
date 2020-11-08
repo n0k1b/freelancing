@@ -199,7 +199,7 @@
 		$.ajax({
         processData:false,
         contentType:false,
-        type:'GET',
+        type:'post',
         url:"get_category",
         success:function(data){
 			//alert(data);

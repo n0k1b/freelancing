@@ -1,46 +1,3 @@
-{{--<?php
-   include("connection.php");
-   include("page_content/header.php");
-  $gig_id = $_REQUEST['gig_id'];
-  $sql = "SELECT * from gig where id = $gig_id";
-  $res = mysqli_query($conn,$sql);
-  $row = mysqli_fetch_array($res);
-  $gig_given_id = $row['user_id'];
-  $gig_title = $row['gig_title'];
-  $base_price_min = $row['base_price_min'];
-  $base_price_max = $row['base_price_max'];
-  $gig_description = $row['gig_description'];
-  $gig_duration = $row['gig_duration'];
-  $gig_date = $row['gig_date'];
-  $gig_file = $row['gig_file'];
-
-  date_default_timezone_set('Asia/Dhaka');
-           $date = date('d-m-Y');
-        $currentdate= strtotime( $date );   
-    $timefromdb = strtotime( $gig_date );  
-    $daysleft = ($currentdate - $timefromdb)/(60 * 60 * 24);      
-
-    $remaining_day= $gig_duration - $daysleft;
-    
-
-      
-           
-
-  $sql2 = "select * from user where id = $gig_given_id";
-  $res2 = mysqli_query($conn,$sql2);
-  $row2 = mysqli_fetch_array($res2);
-  $name = $row2['name'];
-  $rating = $row2['rating'];
-   
-     $sql3 = "SELECT * from gig_apply where employee_id =$user_id and gig_id = $gig_id";
-  $res3 = mysqli_query($conn,$sql3);
-  $previously_bid = mysqli_num_rows($res3);
-
-
-
-
-?> --}}
-
 @include('layout.app')
 
 <div class="clearfix"></div>
@@ -62,7 +19,7 @@
 							<h5>{{$gig->name}}</h5>
 							<ul>
 								
-								<li><div class="star-rating" data-rating="1"></div></li>
+								<li><div class="star-rating" data-rating="{{$overall_rating}}"></div></li>
 								
 							</ul>
 						</div>
@@ -123,66 +80,28 @@
 
 			<div class="boxed-list margin-bottom-60">
 				<div class="boxed-list-headline">
-					<h3><i class="icon-material-outline-thumb-up"></i> Work History and Feedback</h3>
+					<h3><i class="icon-material-outline-thumb-up"></i> Ratings and Review</h3>
 				</div>
 				<ul class="boxed-list-ul">
+				
 					<li>
 						<div class="boxed-list-item">
 							<!-- Content -->
 							<div class="item-content">
-								<h4>Web, Database and API Developer <span>Rated as Freelancer</span></h4>
+								<h4>{{$review->name}}</h4>
 								<div class="item-details margin-top-10">
-									<div class="star-rating" data-rating="5.0"></div>
-									<div class="detail-item"><i class="icon-material-outline-date-range"></i> August 2019</div>
+									<div class="star-rating" data-rating="{{$review->rating}}"></div>
+									<div class="detail-item"><i class="icon-material-outline-date-range"></i> {{$review->created_at}}</div>
 								</div>
 								<div class="item-description">
-									<p>Excellent programmer - fully carried out my project in a very professional manner. </p>
+									<p>{{$review->review}}</p>
 								</div>
 							</div>
 						</div>
 					</li>
-					<li>
-						<div class="boxed-list-item">
-							<!-- Content -->
-							<div class="item-content">
-								<h4>WordPress Theme Installation <span>Rated as Freelancer</span></h4>
-								<div class="item-details margin-top-10">
-									<div class="star-rating" data-rating="5.0"></div>
-									<div class="detail-item"><i class="icon-material-outline-date-range"></i> June 2019</div>
-								</div>
-							</div>
-						</div>
-					</li>
-					<li>
-						<div class="boxed-list-item">
-							<!-- Content -->
-							<div class="item-content">
-								<h4>Fix Python Selenium Code <span>Rated as Employer</span></h4>
-								<div class="item-details margin-top-10">
-									<div class="star-rating" data-rating="5.0"></div>
-									<div class="detail-item"><i class="icon-material-outline-date-range"></i> May 2019</div>
-								</div>
-								<div class="item-description">
-									<p>I was extremely impressed with the quality of work AND how quickly he got it done. He then offered to help with another side part of the project that we didn't even think about originally.</p>
-								</div>
-							</div>
-						</div>
-					</li>
-					<li>
-						<div class="boxed-list-item">
-							<!-- Content -->
-							<div class="item-content">
-								<h4>PHP Core Website Fixes <span>Rated as Freelancer</span></h4>
-								<div class="item-details margin-top-10">
-									<div class="star-rating" data-rating="5.0"></div>
-									<div class="detail-item"><i class="icon-material-outline-date-range"></i> May 2019</div>
-								</div>
-								<div class="item-description">
-									<p>Awesome work, definitely will rehire. Poject was completed not only with the requirements, but on time, within our small budget.</p>
-								</div>
-							</div>
-						</div>
-					</li>
+			
+				
+					
 				</ul>
 
 				<!-- Pagination -->
@@ -247,7 +166,7 @@
 							<br>
 							<?php
 							
-							if($gig->previously_bid== 0)
+							if($gig->previously_bid == 0)
                                {
 							 ?>
 							<a href="#small-dialog" class="apply-now-button popup-with-zoom-anim margin-bottom-50">Confirm <i class="icon-material-outline-arrow-right-alt"></i></a>

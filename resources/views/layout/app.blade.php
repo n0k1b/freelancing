@@ -1,32 +1,3 @@
-{{--<?php
-  @ob_start();
-if(session_status()!=PHP_SESSION_ACTIVE) session_start();
-$user_id = $_SESSION['user_id'];
-   include("connection.php");
-   $sql_bid = "select * from bid_details where job_given_id = $user_id and status = 0 ";
-   $res_bid =mysqli_query($conn,$sql_bid);
-   $num_of_bid = mysqli_num_rows($res_bid);
-
-   $sql_gig = "Select * from gig_apply where user_id = $user_id and status = 0";
-   $res_gig = mysqli_query($conn,$sql_gig);
-   $num_of_gig = mysqli_num_rows($res_gig);
-
-
-   $sql_bid_accept = "SELECT * from bid_details where user_id =$user_id and bid_accepted = 1 and show_notification =0";
-   $res_bid_accept = mysqli_query($conn,$sql_bid_accept);
-   $num_of_bid_accept = mysqli_num_rows($res_bid_accept);
-
-  
-
-   $total_notification = $num_of_bid+$num_of_gig+$num_of_bid_accept;
-
-
-   
-
-//file_put_contents("test.txt",$user_id);
-
-?>--}}
-
 <!doctype html>
 <html lang="en">
 
@@ -34,12 +5,13 @@ $user_id = $_SESSION['user_id'];
 
 <!-- Basic Page Needs
 ================================================== -->
-<title>Freelancer For Female</title>
+<title>Women's world</title>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 <meta name="csrf-token" content="{{ csrf_token() }}">
 <!-- CSS
 ================================================== -->
+<link rel="stylesheet" href="{{ asset('assets') }}\bootstrap\bootstrap.min.css">
 <link rel="stylesheet" href="{{asset('assets')}}/css/style.css?{{time()}}">
 <link rel="stylesheet" href="{{asset('assets')}}/css/colors/blue.css">
 
@@ -69,15 +41,12 @@ $user_id = $_SESSION['user_id'];
 				<nav id="navigation">
 					<ul id="responsive">
 
-						<li><a href="index.php" >Home</a></li>
+						<li><a href="{{url('/')}}" >Home</a></li>
 
-						<li><a href="main_page_job.php?category=all&location=all" >Browse Job</a></li>
+						<li><a href="{{url('view_all_gig')}}" >Browse Entrepreneur</a></li>
 
-						<li><a href="main_page_gig.php?category=all&location=all">Browse Gig</a></li>
-
-						<li><a href="post_job.php">Post Job</a></li>
-			 		     <li><a href="create_gig.php">Create Gig</a></li>
-			 		     <li><a href="dashboard.php">Dashboard</a></li>
+						<li><a href="main_page_gig.php?category=all&location=all">Browse Blog</a></li>
+			 		     <li><a href="{{url('dashboard')}}">Dashboard</a></li>
 
 					</ul>
 				</nav>
