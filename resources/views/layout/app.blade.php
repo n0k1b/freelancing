@@ -45,7 +45,7 @@
 
 						<li><a href="{{url('view_all_gig')}}" >Browse Entrepreneur</a></li>
 
-						<li><a href="main_page_gig.php?category=all&location=all">Browse Blog</a></li>
+						<li><a href="{{url('browse-blog')}}">Browse Blog</a></li>
 			 		     <li><a href="{{url('dashboard')}}">Dashboard</a></li>
 
 					</ul>
