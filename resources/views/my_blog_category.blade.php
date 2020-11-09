@@ -43,10 +43,20 @@
 	<div class="dashboard-content-container" data-simplebar>
 		<div class="dashboard-content-inner" >
 
-        <!-- Post Content -->
         <div class="container padding-top-40">
-            <div class="row" id="posts">
-
+            <div class="row">
+            <!-- Post Content -->
+                @foreach ($categories as $item)
+                <div class="col-xl-3 col-md-6">
+                    <!-- Photo Box -->
+                    <a href="{{url('user_blog/'.$item->id)}}" class="photo-box small" @if ($item->image) data-background-image="{{ asset('images/'.$item->image) }}" @endif>
+                        <div class="photo-box-content">
+                            <h3>{{$item->name}}</h3>
+                            {{-- <span>125 post</span> --}}
+                        </div>
+                    </a>
+                </div>
+                @endforeach
             </div>
         </div>
 
@@ -125,84 +135,6 @@
 <script src="{{ asset('assets') }}/js/custom.js"></script>
 
 <!-- Snackbar // documentation: https://www.polonel.com/snackbar/ -->
-
-<script>
-    $(function() {
-        $.ajaxSetup({
-            headers: {
-                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-            }
-        });
-        console.log("Jquery running!");
-        readPost(0,2);
-    })
-    var scroll = 0;
-    var total = 0
-    $(window).scroll(function() {
-        if($(window).scrollTop() == $(document).height() - $(window).height()) {
-            total = 2+scroll+total;
-            readPost(total,2);
-        }
-    });
-
-
-    function readPost() {
-        $.ajax({
-            processData:false,
-            contentType:false,
-            url:"{{url('read-blog-post/'.Request::route('id'))}}",
-            type:'get',
-            success: function (response) {
-                $("#posts").html(response)
-            },
-        });
-    }
-
-    function delete_post(id) {
-        $.ajax({
-            processData:false,
-            contentType:false,
-            url:'delete-blog-post/'+id,
-            type:'get',
-            success: function (response) {
-                readPost()
-            },
-        });
-    }
-
-    // function readCategory(total,take) {
-    //     $.ajax({
-    //         processData:false,
-    //         contentType:false,
-    //         url:'get_category',
-    //         type:'get',
-    //         success: function (response) {
-    //             console.log(response);
-    //         },
-    //     });
-    // }
-
-    $("#creatingPost").submit(function (event) {
-        event.preventDefault();
-        data = new FormData();
-        data.append('category',$("#category").val());
-        data.append('text',$("#text").val());
-        data.append('upload',$("#upload")[0].files[0]);
-        $.ajax({
-            processData:false,
-            contentType:false,
-            url:$("#creatingPost").attr('action'),
-            type:$("#creatingPost").attr('method'),
-            data:data,
-            success: function (response) {
-                alert('Success fully created your post');
-                $("#text").val('')
-                $("#upload").val('')
-                $(".uploadButton-file-name").text('')
-            },
-        });
-    });
-    </script>
 
 </body>
 </html>

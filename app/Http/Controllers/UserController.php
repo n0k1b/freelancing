@@ -5,10 +5,17 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\blog_post;
 use App\Models\blog_comment;
+use App\Models\blog_category;
 use App\Models\User;
 
 class UserController extends Controller
 {
+    public function read_blog_category()
+    {
+        $categories = blog_category::orderBy('id','DESC')->get();
+        return view('my_blog_category',['categories'=>$categories]);
+    }
+
     public function deleteBlogPost(Request $Request)
     {
         blog_post::where('id',$Request->id)->delete();
@@ -24,7 +31,7 @@ class UserController extends Controller
     public function readBlogPost(Request $Request)
     {
         $id = auth()->check()?auth()->user()->id:1;
-        $variable = blog_post::where('user_id',$id)->get();
+        $variable = blog_post::where('user_id',$id)->where('category_id',$Request->id)->get();
         if (count($variable)!=0) {
             foreach ($variable as $value) {
                 ?>
