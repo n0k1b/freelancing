@@ -178,6 +178,7 @@
 				</div>
 			</div>
 
+           @if(auth()->check())
 			<div class="col-xl-3 col-md-6">
 				<!-- Photo Box -->
 				<a href="{{url('blog/1')}}" class="photo-box small" data-background-image="{{asset('assets')}}/images/health.jpg">
@@ -190,7 +191,7 @@
 
 			<div class="col-xl-3 col-md-6">
 				<!-- Photo Box -->
-				<a href="main_page_job.php?location=all&category=home made food" class="photo-box small" data-background-image="{{asset('assets')}}/images/jewellary.jpg">
+				<a href="{{url('blog/1')}}" class="photo-box small" data-background-image="{{asset('assets')}}/images/jewellary.jpg">
 					<div class="photo-box-content">
 						<h3>Fashion and Beauty</h3>
 						<span>113 post</span>
@@ -200,7 +201,7 @@
 
 			<div class="col-xl-3 col-md-6">
 				<!-- Photo Box -->
-				<a href="main_page_job.php?location=all&category=antique jewellary" class="photo-box small" data-background-image="{{asset('assets')}}/images/travel.jpg">
+				<a href="{{url('blog/1')}}" class="photo-box small" data-background-image="{{asset('assets')}}/images/travel.jpg">
 					<div class="photo-box-content">
 						<h3>Travel</h3>
 						<span>186 post</span>
@@ -210,7 +211,7 @@
 
 			<div class="col-xl-3 col-md-6">
 				<!-- Photo Box -->
-				<a href="main_page_job.php?location=all&category=paper craft" class="photo-box small" data-background-image="{{asset('assets')}}/images/paper_craft.jpg">
+				<a href="{{url('blog/1')}}" class="photo-box small" data-background-image="{{asset('assets')}}/images/paper_craft.jpg">
 					<div class="photo-box-content">
 						<h3>Craft</h3>
 						<span>298 post</span>
@@ -220,7 +221,7 @@
 
 			<div class="col-xl-3 col-md-6">
 				<!-- Photo Box -->
-				<a href="main_page_job.php?location=all&category=custom potrait" class="photo-box small" data-background-image="{{asset('assets')}}/images/education.jpg">
+				<a href="{{url('blog/1')}}" class="photo-box small" data-background-image="{{asset('assets')}}/images/education.jpg">
 					<div class="photo-box-content">
 						<h3>Career & Education</h3>
 						<span>549 post</span>
@@ -230,7 +231,7 @@
 
 			<div class="col-xl-3 col-md-6">
 				<!-- Photo Box -->
-				<a href="main_page_job.php?location=all&category=scrapbook" class="photo-box small" data-background-image="{{asset('assets')}}/images/food.jpeg">
+				<a href="{{url('blog/1')}}" class="photo-box small" data-background-image="{{asset('assets')}}/images/food.jpeg">
 					<div class="photo-box-content">
 						<h3>Cooking and Recipes</h3>
 						<span>873 post</span>
@@ -240,7 +241,7 @@
 
 			<div class="col-xl-3 col-md-6">
 				<!-- Photo Box -->
-				<a href="main_page_job.php?location=all&category=embroider" class="photo-box small" data-background-image="{{asset('assets')}}/images/parenting.jpg">
+				<a href="{{url('blog/1')}}" class="photo-box small" data-background-image="{{asset('assets')}}/images/parenting.jpg">
 					<div class="photo-box-content">
 						<h3>Parenting and Babycare</h3>
 						<span>125 post</span>
@@ -250,7 +251,88 @@
 
 			<div class="col-xl-3 col-md-6">
 				<!-- Photo Box -->
-				<a href="main_page_job.php?location=all&category=scented candle" class="photo-box small" data-background-image="{{asset('assets')}}/images/abuse.jpeg">
+				<a href="{{url('blog/1')}}" class="photo-box small" data-background-image="{{asset('assets')}}/images/abuse.jpeg">
+					<div class="photo-box-content">
+						<h3>Abuse</h3>
+						<span>445 post</span>
+					</div>
+				</a>
+			</div>
+			@else
+
+			<div class="col-xl-3 col-md-6">
+				<!-- Photo Box -->
+				<a href="javascript:;" onclick="login_alert()" class="photo-box small" data-background-image="{{asset('assets')}}/images/health.jpg">
+					<div class="photo-box-content">
+						<h3>Health</h3>
+						<span>612 post</span>
+					</div>
+				</a>
+			</div>
+
+			<div class="col-xl-3 col-md-6">
+				<!-- Photo Box -->
+				<a href="javascript:;" onclick="login_alert()" class="photo-box small" data-background-image="{{asset('assets')}}/images/jewellary.jpg">
+					<div class="photo-box-content">
+						<h3>Fashion and Beauty</h3>
+						<span>113 post</span>
+					</div>
+				</a>
+			</div>
+
+			<div class="col-xl-3 col-md-6">
+				<!-- Photo Box -->
+				<a href="javascript:;" onclick="login_alert()" class="photo-box small" data-background-image="{{asset('assets')}}/images/travel.jpg">
+					<div class="photo-box-content">
+						<h3>Travel</h3>
+						<span>186 post</span>
+					</div>
+				</a>
+			</div>
+
+			<div class="col-xl-3 col-md-6">
+				<!-- Photo Box -->
+				<a href="javascript:;" onclick="login_alert()" class="photo-box small" data-background-image="{{asset('assets')}}/images/paper_craft.jpg">
+					<div class="photo-box-content">
+						<h3>Craft</h3>
+						<span>298 post</span>
+					</div>
+				</a>
+			</div>
+
+			<div class="col-xl-3 col-md-6">
+				<!-- Photo Box -->
+				<a href="javascript:;" onclick="login_alert()" class="photo-box small" data-background-image="{{asset('assets')}}/images/education.jpg">
+					<div class="photo-box-content">
+						<h3>Career & Education</h3>
+						<span>549 post</span>
+					</div>
+				</a>
+			</div>
+
+			<div class="col-xl-3 col-md-6">
+				<!-- Photo Box -->
+				<a href="javascript:;" onclick="login_alert()" class="photo-box small" data-background-image="{{asset('assets')}}/images/food.jpeg">
+					<div class="photo-box-content">
+						<h3>Cooking and Recipes</h3>
+						<span>873 post</span>
+					</div>
+				</a>
+			</div>
+
+			<div class="col-xl-3 col-md-6">
+				<!-- Photo Box -->
+				<a href="javascript:;" onclick="login_alert()" class="photo-box small" data-background-image="{{asset('assets')}}/images/parenting.jpg">
+					<div class="photo-box-content">
+						<h3>Parenting and Babycare</h3>
+						<span>125 post</span>
+					</div>
+				</a>
+			</div>
+
+			<div class="col-xl-3 col-md-6">
+				<!-- Photo Box -->
+				<a href="javascript:;" onclick="login_alert()" class="photo-box small" data-background-image="{{asset('assets')}}/images/abuse.jpeg">
 					<div class="photo-box-content">
 						<h3>Abuse</h3>
 						<span>445 post</span>
@@ -258,202 +340,12 @@
 				</a>
 			</div>
 
+			@endif
+
+
 		</div>
 	</div>
 </div>
-<!-- Features Cities / End -->
-
-
-
-<!-- Features Jobs -->
-<!-- <div class="section gray margin-top-45 padding-top-65 padding-bottom-75">
-	<div class="container">
-		<div class="row">
-			<div class="col-xl-12">
-
-				 Section Headline
-				<div class="section-headline margin-top-0 margin-bottom-35">
-					<h3>Recent Tasks</h3>
-					<a href="tasks-list-layout-1.html" class="headline-link">Browse All Tasks</a>
-				</div>
-
-				 Jobs Container
-				<div class="tasks-list-container compact-list margin-top-35">
-
-					 Task
-					<a href="single-task-page.html" class="task-listing">
-
-						 Job Listing Details
-						<div class="task-listing-details">
-
-							<Details
-							<div class="task-listing-description">
-								<h3 class="task-listing-title">Food Delviery Mobile App</h3>
-								<ul class="task-icons">
-									<li><i class="icon-material-outline-location-on"></i> San Francisco</li>
-									<li><i class="icon-material-outline-access-time"></i> 2 minutes ago</li>
-								</ul>
-								<div class="task-tags margin-top-15">
-									<span>iOS</span>
-									<span>Android</span>
-									<span>mobile apps</span>
-									<span>design</span>
-								</div>
-							</div>
-
-						</div>
-
-						<div class="task-listing-bid">
-							<div class="task-listing-bid-inner">
-								<div class="task-offers">
-									<strong>$1,000 - $2,500</strong>
-									<span>Fixed Price</span>
-								</div>
-								<span class="button button-sliding-icon ripple-effect">Bid Now <i class="icon-material-outline-arrow-right-alt"></i></span>
-							</div>
-						</div>
-					</a>
-
-					 Task
-					<a href="single-task-page.html" class="task-listing">
-
-						 Job Listing Details
-						<div class="task-listing-details">
-
-							 Details
-							<div class="task-listing-description">
-								<h3 class="task-listing-title">2000 Words English to German</h3>
-								<ul class="task-icons">
-									<li><i class="icon-material-outline-location-off"></i> Online Job</li>
-									<li><i class="icon-material-outline-access-time"></i> 5 minutes ago</li>
-								</ul>
-								<div class="task-tags margin-top-15">
-									<span>copywriting</span>
-									<span>translating</span>
-									<span>editing</span>
-								</div>
-							</div>
-
-						</div>
-
-						<div class="task-listing-bid">
-							<div class="task-listing-bid-inner">
-								<div class="task-offers">
-									<strong>$75</strong>
-									<span>Fixed Price</span>
-								</div>
-								<span class="button button-sliding-icon ripple-effect">Bid Now <i class="icon-material-outline-arrow-right-alt"></i></span>
-							</div>
-						</div>
-					</a>
-
-					Task
-					<a href="single-task-page.html" class="task-listing">
-
-						 Job Listing Details
-						<div class="task-listing-details">
-
-							Details
-							<div class="task-listing-description">
-								<h3 class="task-listing-title">Fix Python Selenium Code</h3>
-								<ul class="task-icons">
-									<li><i class="icon-material-outline-location-off"></i> Online Job</li>
-									<li><i class="icon-material-outline-access-time"></i> 30 minutes ago</li>
-								</ul>
-								<div class="task-tags margin-top-15">
-									<span>Python</span>
-									<span>Flask</span>
-									<span>API Development</span>
-								</div>
-							</div>
-
-						</div>
-
-						<div class="task-listing-bid">
-							<div class="task-listing-bid-inner">
-								<div class="task-offers">
-									<strong>$100 - $150</strong>
-									<span>Hourly Rate</span>
-								</div>
-								<span class="button button-sliding-icon ripple-effect">Bid Now <i class="icon-material-outline-arrow-right-alt"></i></span>
-							</div>
-						</div>
-					</a>
-
-					Task
-					<a href="single-task-page.html" class="task-listing">
-
-						Job Listing Details
-						<div class="task-listing-details">
-
-							 Details
-							<div class="task-listing-description">
-								<h3 class="task-listing-title">WordPress Theme Installation</h3>
-								<ul class="task-icons">
-									<li><i class="icon-material-outline-location-off"></i> Online Job</li>
-									<li><i class="icon-material-outline-access-time"></i> 1 hour ago</li>
-								</ul>
-								<div class="task-tags margin-top-15">
-									<span>WordPress</span>
-									<span>Theme Installation</span>
-								</div>
-							</div>
-
-						</div>
-
-						<div class="task-listing-bid">
-							<div class="task-listing-bid-inner">
-								<div class="task-offers">
-									<strong>$100</strong>
-									<span>Fixed Price</span>
-								</div>
-								<span class="button button-sliding-icon ripple-effect">Bid Now <i class="icon-material-outline-arrow-right-alt"></i></span>
-							</div>
-						</div>
-					</a>
-
-					 Task
-					<a href="single-task-page.html" class="task-listing">
-
-						Job Listing Details
-						<div class="task-listing-details">
-
-							Details
-							<div class="task-listing-description">
-								<h3 class="task-listing-title">PHP Core Website Fixes</h3>
-								<ul class="task-icons">
-									<li><i class="icon-material-outline-location-off"></i> Online Job</li>
-									<li><i class="icon-material-outline-access-time"></i> 1 hour ago</li>
-								</ul>
-								<div class="task-tags margin-top-15">
-									<span>PHP</span>
-									<span>MySQL Administration</span>
-									<span>API Development</span>
-								</div>
-							</div>
-
-						</div>
-
-						<div class="task-listing-bid">
-							<div class="task-listing-bid-inner">
-								<div class="task-offers">
-									<strong>$50 - $80</strong>
-									<span>Hourly Rate</span>
-								</div>
-								<span class="button button-sliding-icon ripple-effect">Bid Now <i class="icon-material-outline-arrow-right-alt"></i></span>
-							</div>
-						</div>
-					</a>
-
-
-				</div>
-				 Jobs Container / End
-
-			</div>
-		</div>
-	</div>
-</div> -->
-<!-- Featured Jobs / End -->
 
 <!-- Icon Boxes -->
 <div class="section padding-top-65 padding-bottom-65">
@@ -518,103 +410,7 @@
 <!-- Icon Boxes / End -->
 
 
-<!-- Testimonials -->
-<!-- <div class="section gray padding-top-65 padding-bottom-55">
 
-	<div class="container">
-		<div class="row">
-			<div class="col-xl-12">
-				 Section Headline
-				<div class="section-headline centered margin-top-0 margin-bottom-5">
-					<h3>Testimonials</h3>
-				</div>
-			</div>
-		</div>
-	</div>
-
-	 Categories Carousel
-	<div class="fullwidth-carousel-container margin-top-20">
-		<div class="testimonial-carousel testimonials">
-
-			Item
-			<div class="fw-carousel-review">
-				<div class="testimonial-box">
-					<div class="testimonial-avatar">
-						<img src="images/user-avatar-small-02.jpg" alt="">
-					</div>
-					<div class="testimonial-author">
-						<h4>Sindy Forest</h4>
-						 <span>Freelancer</span>
-					</div>
-					<div class="testimonial">Efficiently unleash cross-media information without cross-media value. Quickly maximize timely deliverables for real-time schemas. Dramatically maintain clicks-and-mortar solutions without functional solutions.</div>
-				</div>
-			</div>
-
-			 Item
-			<div class="fw-carousel-review">
-				<div class="testimonial-box">
-					<div class="testimonial-avatar">
-						<img src="images/user-avatar-small-01.jpg" alt="">
-					</div>
-					<div class="testimonial-author">
-						<h4>Tom Smith</h4>
-						 <span>Freelancer</span>
-					</div>
-					<div class="testimonial">Completely synergize resource taxing relationships via premier niche markets. Professionally cultivate one-to-one customer service with robust ideas. Dynamically innovate resource-leveling customer service for state of the art.</div>
-				</div>
-			</div>
-
-			 Item
-			<div class="fw-carousel-review">
-				<div class="testimonial-box">
-					<div class="testimonial-avatar">
-						<img src="images/user-avatar-placeholder.png" alt="">
-					</div>
-					<div class="testimonial-author">
-						<h4>Sebastiano Piccio</h4>
-						 <span>Employer</span>
-					</div>
-					<div class="testimonial">Completely synergize resource taxing relationships via premier niche markets. Professionally cultivate one-to-one customer service with robust ideas. Dynamically innovate resource-leveling customer service for state of the art.</div>
-				</div>
-			</div>
-
-			 Item
-			<div class="fw-carousel-review">
-				<div class="testimonial-box">
-					<div class="testimonial-avatar">
-						<img src="images/user-avatar-small-03.jpg" alt="">
-					</div>
-					<div class="testimonial-author">
-						<h4>David Peterson</h4>
-						 <span>Freelancer</span>
-					</div>
-					<div class="testimonial">Collaboratively administrate turnkey channels whereas virtual e-tailers. Objectively seize scalable metrics whereas proactive e-services. Seamlessly empower fully researched growth strategies and interoperable sources.</div>
-				</div>
-			</div>
-
-			 Item
-			<div class="fw-carousel-review">
-				<div class="testimonial-box">
-					<div class="testimonial-avatar">
-						<img src="images/user-avatar-placeholder.png" alt="">
-					</div>
-					<div class="testimonial-author">
-						<h4>Marcin Kowalski</h4>
-						 <span>Freelancer</span>
-					</div>
-					<div class="testimonial">Efficiently unleash cross-media information without cross-media value. Quickly maximize timely deliverables for real-time schemas. Dramatically maintain clicks-and-mortar solutions without functional solutions.</div>
-				</div>
-			</div>
-
-		</div>
-	</div>
-	Categories Carousel / End
-
-</div> -->
-<!-- Testimonials / End -->
-
-
-<!-- Counters -->
 
 
 <div class="section padding-top-70 padding-bottom-75">
@@ -760,21 +556,10 @@
 
 <!-- Scripts
 ================================================== -->
-<script src="{{asset('assets')}}/js/jquery-3.3.1.min.js"></script>
-<script src="{{asset('assets')}}/js/jquery-migrate-3.0.0.min.js"></script>
-<script src="{{asset('assets')}}/js/mmenu.min.js"></script>
-<script src="{{asset('assets')}}/js/tippy.all.min.js"></script>
-<script src="{{asset('assets')}}/js/simplebar.min.js"></script>
-<script src="{{asset('assets')}}/js/bootstrap-slider.min.js"></script>
-<script src="{{asset('assets')}}/js/bootstrap-select.min.js"></script>
-<script src="{{asset('assets')}}/js/snackbar.js"></script>
-<script src="{{asset('assets')}}/js/clipboard.min.js"></script>
-<script src="{{asset('assets')}}/js/counterup.min.js"></script>
-<script src="{{asset('assets')}}/js/magnific-popup.min.js"></script>
-<script src="{{asset('assets')}}/js/slick.min.js"></script>
-<script src="{{asset('assets')}}/js/custom.js"></script>
+
 
 <!-- Snackbar // documentation: https://www.polonel.com/snackbar/ -->
+@include('layout.page_js')
 <script>
 // Snackbar for user status switcher
 $('#snackbar-user-status label').click(function() {
@@ -805,6 +590,17 @@ $(function()
 		get_category();
 
 	});
+	function login_alert()
+	{
+		
+		swal({
+  title: "Your have to login to see blog post",
+ 
+  icon: "error",
+  
+ 
+})
+	}
 	function search_gig()
 	{
 		var gig_category_id = $("#gig_category").val();

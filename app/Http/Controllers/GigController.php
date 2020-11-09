@@ -8,6 +8,7 @@ use App\Models\gig_category;
 use App\Models\User;
 use App\Models\hire_information;
 use App\Models\rating;
+use Auth;
 
 class GigController extends Controller
 {
@@ -135,7 +136,8 @@ class GigController extends Controller
     
     public function get_gig_details(Request $request)
     {
-      $hire_from =  auth()->user()->id;//Auth user_id;
+    
+     //Auth user_id;
       $gig_id = $request->gig_id;
       $gig_details = gig::where('id',$gig_id)->first();
       $user_id = $gig_details->user_id;
@@ -146,7 +148,12 @@ class GigController extends Controller
       $overall_ratings = rating::where('entrepreneur_id',$user_id)->get();
       $overall_rating = ceil(rating::where('entrepreneur_id',$user_id)->get()->sum('rating')/sizeof($overall_ratings));
 
-      
+      if(Auth::check())
+   
+      {
+        $hire_from =  auth()->user()->id;
+
+
       if(hire_information::where('hire_from',$hire_from)->where('gig_id',$gig_id)->where('complete_status',0)->first())
       {
           $gig_details['previously_bid']=1;
@@ -155,6 +162,11 @@ class GigController extends Controller
       {
         $gig_details['previously_bid']=0;
       }
+    }
+    else
+    {
+        $gig_details['previously_bid']=2;
+    }
       return view('gig_details',['gig'=>$gig_details,'review'=>$review,'overall_rating'=>$overall_rating]);
       //file_put_contents('test.txt',$gig_id);
       

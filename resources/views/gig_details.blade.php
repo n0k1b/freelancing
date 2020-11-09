@@ -164,23 +164,19 @@
 							<!-- Button -->
 							<br>
 							<br>
-							<?php
 							
-							if($gig->previously_bid == 0)
-                               {
-							 ?>
+							
+							@if($gig->previously_bid == 0)
+                              
 							<a href="#small-dialog" class="apply-now-button popup-with-zoom-anim margin-bottom-50">Confirm <i class="icon-material-outline-arrow-right-alt"></i></a>
-							<?php 
-                            }
+							
 
-                            else{
-                               
-							?>
+                            @elseif($gig->previously_bid == 1)
 							<button type="button" disabled  class="btn btn-danger"> You already apply for this gig</button>
-                          <?php
 
-                            }
-                          ?>
+							@else
+							<button type="button" disabled  class="btn btn-danger"> You need to login for hiring an Entrepreneur</button>
+                         @endif
 						</div>
 						
 					</div>
