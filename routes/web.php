@@ -17,7 +17,7 @@ use Illuminate\Support\Facades\Route;
 //     return view('create_gig');
 // });
 Route::view('create_gig','create_gig');
-Route::view('/','index');
+Route::view('/','index')->name('home');
 Route::get('view_all_gig','GigController@view_all_gig');
 Route::post('search_gig','GigController@view_gig');
 Route::get('get_gig_details/{gig_id}','GigController@get_gig_details')->name('gig_details');
@@ -57,6 +57,7 @@ Route::get('resend_otp/{id}','AuthController@process_otp')->name('resendOtp');
 
 Route::post('registration', 'AuthController@registration')->name('registration');
 Route::post('login', 'AuthController@process_login')->name('process_login');
+Route::get('logout', 'AuthController@logout')->name('logout');
 
 Route::post("submit_gig","GigController@gig_post");
 Route::post('get_category',"GigController@get_category");

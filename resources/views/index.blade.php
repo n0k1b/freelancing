@@ -24,57 +24,44 @@
 
 <!-- Header Container
 ================================================== -->
-<header id="header-container" class="fullwidth transparent-header">
+<header id="header-container" class="fullwidth">
 
 	<!-- Header -->
 	<div id="header">
 		<div class="container">
-			
+
 			<!-- Left Side Content -->
 			<div class="left-side">
-				
+
 				<!-- Logo -->
-				<div id="logo">
-					<a href="index.php"><img src="images/new_logo.png" data-sticky-logo="images/new_logo.png" data-transparent-logo="" alt=""></a>
-				</div>
+				{{-- <div id="logo">
+					<a href="index.php"><img src="{{asset('assets')}}/images/logo.jpeg" alt=""></a>
+				</div> --}}
 
 				<!-- Main Navigation -->
 				<nav id="navigation">
 					<ul id="responsive">
+						<li><a href="{{url('view_all_gig')}}" >Browse Entrepreneur</a></li>
+						<li><a href="{{url('browse-blog')}}">Browse Blog</a></li>
+			 		    @if (auth()->check())
+                         <li><a href="{{url('dashboard')}}">Dashboard</a></li>
+                         <li><a href="{{route('logout')}}">Logout</a></li>
+                         @else
+                         <li><a href="{{url('login')}}">Login</a></li>
+			 		    <li><a href="{{url('registration')}}">Registration</a></li>
+                         @endif
 
-						
-
-					
-
-						
-
-						
 					</ul>
 				</nav>
 				<div class="clearfix"></div>
 				<!-- Main Navigation / End -->
-				
+
 			</div>
 			<!-- Left Side Content / End -->
 
 
 			<!-- Right Side Content / End -->
 			<div class="right-side">
-
-				<!--  User Notifications -->
-				<div class="header-widget hide-on-mobile">
-					<div class="header-notifications user-menu">
-                   <div class="join">
-							<a href="{{url('login')}}">Join</a>
-						</div>	
-						</div>			
-
-				</div>
-				<!--  User Notifications / End -->
-
-				<!-- User Menu -->
-				
-				<!-- User Menu / End -->
 
 				<!-- Mobile Navigation Button -->
 				<span class="mmenu-trigger">
@@ -107,7 +94,7 @@
 	<div class="transparent-header-spacer"></div>
 
 	<div class="container">
-		
+
 		<!-- Intro Headline -->
 		<div class="row">
 			<div class="col-md-12">
@@ -120,7 +107,7 @@
 				</div>
 			</div>
 		</div>
-		
+
 		<!-- Search Bar -->
 		<div class="row">
 			<div class="col-md-12">
@@ -132,14 +119,14 @@
 						<label  type="text" for ="intro-keywords" class="field-title ripple-effect">What you need done?</label>
 						<input  id="autocomplete-input" name="location" class="city" type="text" placeholder="Location">
 				</div>
-				
-					
+
+
 					<!-- Search Field -->
 					<div class="intro-search-field">
-					
+
 						<select id="gig_category" name="gig_category" class="selectpicker default" data-size="7" title="All Categories" >
-							
-							
+
+
 						</select>
 					</div>
 
@@ -200,7 +187,7 @@
 					</div>
 				</a>
 			</div>
-			
+
 			<div class="col-xl-3 col-md-6">
 				<!-- Photo Box -->
 				<a href="main_page_job.php?location=all&category=home made food" class="photo-box small" data-background-image="{{asset('assets')}}/images/jewellary.jpg">
@@ -210,7 +197,7 @@
 					</div>
 				</a>
 			</div>
-			
+
 			<div class="col-xl-3 col-md-6">
 				<!-- Photo Box -->
 				<a href="main_page_job.php?location=all&category=antique jewellary" class="photo-box small" data-background-image="{{asset('assets')}}/images/travel.jpg">
@@ -240,7 +227,7 @@
 					</div>
 				</a>
 			</div>
-			
+
 			<div class="col-xl-3 col-md-6">
 				<!-- Photo Box -->
 				<a href="main_page_job.php?location=all&category=scrapbook" class="photo-box small" data-background-image="{{asset('assets')}}/images/food.jpeg">
@@ -250,7 +237,7 @@
 					</div>
 				</a>
 			</div>
-			
+
 			<div class="col-xl-3 col-md-6">
 				<!-- Photo Box -->
 				<a href="main_page_job.php?location=all&category=embroider" class="photo-box small" data-background-image="{{asset('assets')}}/images/parenting.jpg">
@@ -283,17 +270,17 @@
 	<div class="container">
 		<div class="row">
 			<div class="col-xl-12">
-				
-				 Section Headline 
+
+				 Section Headline
 				<div class="section-headline margin-top-0 margin-bottom-35">
 					<h3>Recent Tasks</h3>
 					<a href="tasks-list-layout-1.html" class="headline-link">Browse All Tasks</a>
 				</div>
-				
-				 Jobs Container 
+
+				 Jobs Container
 				<div class="tasks-list-container compact-list margin-top-35">
-						
-					 Task 
+
+					 Task
 					<a href="single-task-page.html" class="task-listing">
 
 						 Job Listing Details
@@ -327,13 +314,13 @@
 						</div>
 					</a>
 
-					 Task 
+					 Task
 					<a href="single-task-page.html" class="task-listing">
 
-						 Job Listing Details 
+						 Job Listing Details
 						<div class="task-listing-details">
 
-							 Details 
+							 Details
 							<div class="task-listing-description">
 								<h3 class="task-listing-title">2000 Words English to German</h3>
 								<ul class="task-icons">
@@ -360,13 +347,13 @@
 						</div>
 					</a>
 
-					Task 
+					Task
 					<a href="single-task-page.html" class="task-listing">
 
 						 Job Listing Details
 						<div class="task-listing-details">
 
-							Details 
+							Details
 							<div class="task-listing-description">
 								<h3 class="task-listing-title">Fix Python Selenium Code</h3>
 								<ul class="task-icons">
@@ -393,13 +380,13 @@
 						</div>
 					</a>
 
-					Task 
+					Task
 					<a href="single-task-page.html" class="task-listing">
 
-						Job Listing Details 
+						Job Listing Details
 						<div class="task-listing-details">
 
-							 Details 
+							 Details
 							<div class="task-listing-description">
 								<h3 class="task-listing-title">WordPress Theme Installation</h3>
 								<ul class="task-icons">
@@ -428,10 +415,10 @@
 					 Task
 					<a href="single-task-page.html" class="task-listing">
 
-						Job Listing Details 
+						Job Listing Details
 						<div class="task-listing-details">
 
-							Details 
+							Details
 							<div class="task-listing-description">
 								<h3 class="task-listing-title">PHP Core Website Fixes</h3>
 								<ul class="task-icons">
@@ -456,11 +443,11 @@
 								<span class="button button-sliding-icon ripple-effect">Bid Now <i class="icon-material-outline-arrow-right-alt"></i></span>
 							</div>
 						</div>
-					</a>		
+					</a>
 
 
 				</div>
-				 Jobs Container / End 
+				 Jobs Container / End
 
 			</div>
 		</div>
@@ -479,7 +466,7 @@
 					<h3>How It Works?</h3>
 				</div>
 			</div>
-			
+
 			<div class="col-xl-4 col-md-4">
 				<!-- Icon Box -->
 				<div class="icon-box with-line">
@@ -533,11 +520,11 @@
 
 <!-- Testimonials -->
 <!-- <div class="section gray padding-top-65 padding-bottom-55">
-	
+
 	<div class="container">
 		<div class="row">
 			<div class="col-xl-12">
-				 Section Headline 
+				 Section Headline
 				<div class="section-headline centered margin-top-0 margin-bottom-5">
 					<h3>Testimonials</h3>
 				</div>
@@ -545,11 +532,11 @@
 		</div>
 	</div>
 
-	 Categories Carousel 
+	 Categories Carousel
 	<div class="fullwidth-carousel-container margin-top-20">
 		<div class="testimonial-carousel testimonials">
 
-			Item 
+			Item
 			<div class="fw-carousel-review">
 				<div class="testimonial-box">
 					<div class="testimonial-avatar">
@@ -563,7 +550,7 @@
 				</div>
 			</div>
 
-			 Item 
+			 Item
 			<div class="fw-carousel-review">
 				<div class="testimonial-box">
 					<div class="testimonial-avatar">
@@ -577,7 +564,7 @@
 				</div>
 			</div>
 
-			 Item 
+			 Item
 			<div class="fw-carousel-review">
 				<div class="testimonial-box">
 					<div class="testimonial-avatar">
@@ -591,7 +578,7 @@
 				</div>
 			</div>
 
-			 Item 
+			 Item
 			<div class="fw-carousel-review">
 				<div class="testimonial-box">
 					<div class="testimonial-avatar">
@@ -605,7 +592,7 @@
 				</div>
 			</div>
 
-			 Item 
+			 Item
 			<div class="fw-carousel-review">
 				<div class="testimonial-box">
 					<div class="testimonial-avatar">
@@ -621,7 +608,7 @@
 
 		</div>
 	</div>
-	Categories Carousel / End 
+	Categories Carousel / End
 
 </div> -->
 <!-- Testimonials / End -->
@@ -636,7 +623,7 @@
 
 			<div class="col-xl-12">
 				<div class="counters-container">
-					
+
 					<!-- Counter -->
 					<div class="single-counter">
 						<i class="icon-line-awesome-suitcase"></i>
@@ -684,7 +671,7 @@
 <!-- Footer
 ================================================== -->
 <div id="footer">
-	
+
 	<!-- Footer Top Section -->
 	<div class="footer-top-section">
 		<div class="container">
@@ -693,7 +680,7 @@
 
 					<!-- Footer Rows Container -->
 					<div class="footer-rows-container">
-						
+
 						<!-- Left Side -->
 						<div class="footer-rows-left">
 							<div class="footer-row">
@@ -702,7 +689,7 @@
 								</div>
 							</div>
 						</div>
-						
+
 						<!-- Right Side -->
 						<div class="footer-rows-right">
 
@@ -734,7 +721,7 @@
 									<div class="clearfix"></div>
 								</div>
 							</div>
-							
+
 							<!-- Language Switcher -->
 							<div class="footer-row">
 								<div class="footer-row-inner">
@@ -757,11 +744,11 @@
 	<!-- Footer Top Section / End -->
 
 	<!-- Footer Middle Section -->
-	
+
 	<!-- Footer Middle Section / End -->
-	
+
 	<!-- Footer Copyrights -->
-	
+
 	<!-- Footer Copyrights / End -->
 
 </div>
@@ -790,7 +777,7 @@
 <!-- Snackbar // documentation: https://www.polonel.com/snackbar/ -->
 <script>
 // Snackbar for user status switcher
-$('#snackbar-user-status label').click(function() { 
+$('#snackbar-user-status label').click(function() {
 	Snackbar.show({
 		text: 'Your status has been changed!',
 		pos: 'bottom-center',
@@ -799,8 +786,8 @@ $('#snackbar-user-status label').click(function() {
 		duration: 3000,
 		textColor: '#fff',
 		backgroundColor: '#383838'
-	}); 
-}); 
+	});
+});
 </script>
 
 
@@ -830,10 +817,10 @@ $(function()
         url:"search_gig",
         success:function(data){
 			//alert(data);
-		
+
         }
    		 })
-		
+
 	}
 	function get_category()
 	  {
@@ -860,7 +847,7 @@ $(function()
 
 	// Autocomplete adjustment for homepage
 	if ($('.intro-banner-search-form')[0]) {
-	    setTimeout(function(){ 
+	    setTimeout(function(){
 	        $(".pac-container").prependTo(".intro-search-field.with-autocomplete");
 	    }, 300);
 	}
