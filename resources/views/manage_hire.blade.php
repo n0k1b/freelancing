@@ -42,6 +42,13 @@
 	================================================== -->
 	<div class="dashboard-content-container" data-simplebar>
 			<div class="dashboard-content-inner" >
+			@if(Session::has('success'))
+			<div class="alert alert-success">
+       
+            <li>{{Session::get('success')}}</li>
+        
+   			 </div>
+			@endif
 			
 			<!-- Dashboard Headline -->
 			
@@ -120,7 +127,9 @@
 												
 												<div class="buttons-to-right always-visible margin-top-25 margin-bottom-5">
 													<a href="get_gig_details\{{$hire->gig_id}}"   class="button ripple-effect"><i class="icon-feather-file-text"></i> Work Details </a>
-													<a href="#small-dialog-2" class="popup-with-zoom-anim button ripple-effect"><i class="icon-material-outline-thumb-up"></i> Job done</a>
+													<a href="payment_gateway\{{$hire->gig_id}}"   class="button ripple-effect"><i class="icon-feather-file-text"></i> Make Payment </a>
+								
+													<a href="#small-dialog-2" class="popup-with-zoom-anim button ripple-effect"><i class="icon-material-outline-thumb-up"></i>Give Review</a>
 													
 												</div>
 											</div>
@@ -148,7 +157,12 @@
 											
 												
 												<span class="freelancer-detail-item"><i class="icon-feather-phone"></i>{{$hire->hire_to_mobile_number}} </span>
-
+												<div class="buttons-to-right always-visible margin-top-25 margin-bottom-5">
+													
+								
+													<a href="#small-dialog-2" class="popup-with-zoom-anim button ripple-effect"><i class="icon-material-outline-thumb-up"></i>Give Review</a>
+													
+												</div>
 											
 											</div>
 										</div>

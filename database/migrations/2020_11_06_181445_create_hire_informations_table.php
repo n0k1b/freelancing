@@ -23,6 +23,7 @@ class CreateHireInformationsTable extends Migration
             $table->string('proposed_message');
             $table->integer('accept_status');
             $table->integer('complete_status')->default('0');
+            $table->integer('payment_status')->default('0');
             $table->timestamps();
 
             $table->foreign('hire_from')->references('id')->on('users')->onDelete('cascade');

@@ -14,6 +14,13 @@ class GigController extends Controller
 {
     //
 
+    public function payment_confirmation(Request $request)
+    {
+       $gig_id =$request->gig_id;
+       hire_information::where('gig_id',$gig_id)->update(['payment_status'=>1,'complete_status'=>1]);
+       return redirect()->route('manage_hire')->with('success','Your payment confirm');
+    }
+
     public function submit_review(Request $request)
     {
         $rating = $request->rating;
@@ -103,6 +110,14 @@ class GigController extends Controller
       return view("freelancer",['gig_lists'=>$gig_list]);
        
     }
+    public function payment_gateway(Request $request)
+    {
+        $gig_id = $request->gig_id;
+       
+        return view ('payment gateway.index',['gig_id'=>$gig_id]);
+
+    }
+    
     public function view_all_gig()
     {
      $gig_list = gig::get();
