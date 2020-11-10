@@ -9,29 +9,74 @@ use App\Models\blog_category;
 
 class blogController extends Controller
 {
+    public function blogReport()
+    {
+        $data = post_report::orderBy('id','DESC')->get();
+        return view('blogReport',['reports'=>$data]);
+    }
+
+    public function createBlogCat(Request $Request)
+    {
+        $categories = blog_category::create(['name'=>$Request->name]);
+        return redirect('admin');
+    }
+    public function readBlogCat()
+    {
+        $categories = blog_category::orderBy('id','DESC')->get();
+        return view('admin.blogCategory',['categories'=>$categories]);
+    }
+    public function editBlogCat(Request $Request)
+    {
+        $categories = blog_category::where('id',$Request->id)->first();
+        return view('admin.editBlogCategory',['categoriy'=>$categories]);
+    }
+    public function updateBlogCat(Request $Request)
+    {
+        $categories = blog_category::where('id',$Request->id)->update(['name'=>$Request->name]);
+        return redirect('admin');
+    }
+    public function deleteBlogCat(Request $Request)
+    {
+        blog_category::where('id',$Request->id)->delete();
+        return redirect('admin');
+    }
+
     public function categories()
     {
         $categories = blog_category::orderBy('id','DESC')->get();
         return view('categories',['categories'=>$categories]);
     }
 
-    public function createCat(Request $Request)
-    {
-
-    }
-
     public function createBlogPost(Request $Request)
     {
-        $fileName = time().'.'.$Request->upload->extension();
-        $Request->upload->move(public_path('../images'), $fileName);
-        blog_post::create(['user_id'=>1,'category_id'=>1,'post'=>$Request->text,'image'=>$fileName,'status'=>1]);
+        $user_id = auth()->check()?auth()->user()->id:1;
+        $fileName = '';
+        if ($Request->has('upload')) {
+            $fileName = time().'.'.$Request->upload->extension();
+            $Request->upload->move(public_path('../images'), $fileName);
+        }
+        blog_post::create(['user_id'=>$user_id,'category_id'=>$Request->category,'post'=>$Request->text,'image'=>$fileName,'status'=>1]);
     }
 
     public function readBlogPost(Request $request)
     {
         $category_id = $request->id;
         $variable = blog_post::where('category_id',$category_id)->get();
-
+        ?>
+        <div class="col-12 mb-5">
+            <h3 class="mb-2">Write a post</h3>
+            <form method="POST" action="{{ route('createBlogPost') }}" id="creatingPost" enctype="multipart/form-data">
+                <input name="category" type="hidden" value="<?php echo $category_id; ?>">
+                <textarea class="with-border m-0" id="text" value=""></textarea>
+                <div class="uploadButton margin-top-10 align-items-center">
+                    <input class="uploadButton-input" type="file" id="upload"/>
+                    <label class="uploadButton-button ripple-effect" for="upload">Upload Files</label>
+                    <span class="uploadButton-file-name">Images or documents that might be helpful in describing your post</span>
+                    <button type="submit" class="button ripple-effect big"><i class="icon-feather-plus"></i> Post</button>
+                </div>
+            </form>
+        </div>
+        <?php
         foreach ($variable as $value) {
             ?>
             <div class="col-12">

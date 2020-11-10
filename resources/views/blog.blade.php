@@ -5,18 +5,7 @@
 <div class="container padding-top-40">
 	<div class="row" id="posts">
         <!-- Inner Content -->
-        <div class="col-12 mb-5">
-            <h3 class="mb-2">Write a post</h3>
-            <form method="POST" action="{{ route('createBlogPost') }}" id="creatingPost" enctype="multipart/form-data">
-                <textarea class="with-border m-0" id="text" value=""></textarea>
-                <div class="uploadButton margin-top-10 align-items-center">
-                    <input class="uploadButton-input" type="file" id="upload"/>
-                    <label class="uploadButton-button ripple-effect" for="upload">Upload Files</label>
-                    <span class="uploadButton-file-name">Images or documents that might be helpful in describing your post</span>
-                    <button type="submit" class="button ripple-effect big"><i class="icon-feather-plus"></i> Post</button>
-                </div>
-            </form>
-        </div>
+
 
 	</div>
 </div>

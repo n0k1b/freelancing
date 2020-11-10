@@ -45,12 +45,26 @@ Route::prefix('user')->group(function(){
 });
 
 Route::group(['prefix' => 'admin'], function () {
-    Route::view('/','adminDashboard');
-    Route::get('read-blog-cat','blogController@createCat');
+    Route::view('create-blog-cat','admin.createBlogCategory');
+    Route::post('create-blog-cat','blogController@createBlogCat');
+    Route::get('/','blogController@readBlogCat');
+    Route::get('edit-blog-cat/{id}','blogController@editBlogCat');
+    Route::get('delete-blog-cat/{id}','blogController@deleteBlogCat');
+    Route::post('update-blog-cat','blogController@updateBlogCat');
+
+    Route::view('create-gig-cat','admin.createGigCategory');
+    Route::post('create-gig-cat','GigController@createGigCat');
+    Route::get('gig-categories','gigController@readGigCat');
+    Route::get('edit-gig-cat/{id}','GigController@editGigCat');
+    Route::get('delete-gig-cat/{id}','GigController@deleteGigCat');
+    Route::post('update-gig-cat','GigController@updateGigCat');
+
+    Route::get('blog-report','blogController@blogReport');
+
 });
 Route::get('read-blog-post/{id}','UserController@readBlogPost')->name('readBlogPost'); // editing
 Route::view('login', 'login')->name('login');
-Route::view('registration', 'register');
+Route::view('registration', 'register')->name('register');
 
 Route::view('otp/{id}','otp')->name('otp');
 Route::post('sending-otp','AuthController@sendingOtp')->name('sending-otp');
