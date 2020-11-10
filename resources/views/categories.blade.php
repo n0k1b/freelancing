@@ -17,7 +17,7 @@
             @foreach ($categories as $item)
 			<div class="col-xl-3 col-md-6">
 				<!-- Photo Box -->
-				<a href="{{url('blog/'.$item->id)}}" class="photo-box small" data-background-image="{{asset('assets')}}/images/parenting.jpg">
+				<a href="{{url('blog/'.$item->id)}}" class="photo-box small" data-background-image="{{url('images/'.$item->image)}}">
 					<div class="photo-box-content">
 						<h3>{{$item->name}}</h3>
 						{{-- <span>125 post</span> --}}

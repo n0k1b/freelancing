@@ -45,9 +45,17 @@
 
         <!-- Post Content -->
         <div class="container padding-top-40">
-            <div class="row" id="posts">
-
-            </div>
+            <form method="POST" action="{{url('user/update-blog-post')}}" enctype="multipart/form-data">
+                @csrf
+                <input type="hidden" name="id" value="{{$post->id}}">
+                <textarea class="with-border m-0" name="post">{{$post->post}}</textarea>
+                <div class="uploadButton margin-top-10 align-items-center">
+                    <input class="uploadButton-input" type="file" id="upload" name="image"/>
+                    <label class="uploadButton-button ripple-effect" for="upload">Upload Files</label>
+                    <span class="uploadButton-file-name">{{$post->image}}</span>
+                    <button type="submit" class="button ripple-effect big"><i class="icon-feather-plus"></i>Update Post</button>
+                </div>
+            </form>
         </div>
 
 		</div>
@@ -60,50 +68,6 @@
 </div>
 <!-- Wrapper / End -->
 
-
-<!-- Apply for a job popup
-================================================== -->
-<div id="small-dialog" class="zoom-anim-dialog mfp-hide dialog-with-tabs">
-
-	<!--Tabs -->
-	<div class="sign-in-form">
-
-		<ul class="popup-tabs-nav">
-			<li><a href="#tab">Add Note</a></li>
-		</ul>
-
-		<div class="popup-tabs-container">
-
-			<!-- Tab -->
-			<div class="popup-tab-content" id="tab">
-
-				<!-- Welcome Text -->
-				<div class="welcome-text">
-					<h3>Do Not Forget 😎</h3>
-				</div>
-
-				<!-- Form -->
-				<form method="post" id="add-note">
-
-					<select class="selectpicker with-border default margin-bottom-20" data-size="7" title="Priority">
-						<option>Low Priority</option>
-						<option>Medium Priority</option>
-						<option>High Priority</option>
-					</select>
-
-					<textarea name="textarea" cols="10" placeholder="Note" class="with-border"></textarea>
-
-				</form>
-
-				<!-- Button -->
-				<button class="button full-width button-sliding-icon ripple-effect" type="submit" form="add-note">Add Note <i class="icon-material-outline-arrow-right-alt"></i></button>
-
-			</div>
-
-		</div>
-	</div>
-</div>
-<!-- Apply for a job popup / End -->
 <!-- Scripts
 ================================================== -->
 <script src="{{ asset('assets') }}/js/jquery-3.3.1.min.js"></script>
@@ -121,44 +85,5 @@
 <script src="{{ asset('assets') }}/js/magnific-popup.min.js"></script>
 <script src="{{ asset('assets') }}/js/slick.min.js"></script>
 <script src="{{ asset('assets') }}/js/custom.js"></script>
-
-<!-- Snackbar // documentation: https://www.polonel.com/snackbar/ -->
-
-<script>
-    $(function() {
-        $.ajaxSetup({
-            headers: {
-                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-            }
-        });
-        console.log("Jquery running!");
-        readPost();
-    })
-
-    function readPost() {
-        $.ajax({
-            processData:false,
-            contentType:false,
-            url:"{{url('user/read-blog-post/'.Request::route('id'))}}",
-            type:'get',
-            success: function (response) {
-                $("#posts").html(response)
-            },
-        });
-    }
-
-    function delete_post(id) {
-        $.ajax({
-            processData:false,
-            contentType:false,
-            url:'{{url("user/delete-blog-post")}}/'+id,
-            type:'get',
-            success: function (response) {
-                readPost()
-            },
-        });
-    }
-    </script>
-
 </body>
 </html>
