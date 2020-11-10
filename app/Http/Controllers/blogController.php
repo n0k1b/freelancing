@@ -65,7 +65,7 @@ class blogController extends Controller
         ?>
         <div class="col-12 mb-5">
             <h3 class="mb-2">Write a post</h3>
-            <form method="POST" action="{{ route('createBlogPost') }}" id="creatingPost" enctype="multipart/form-data">
+            <form method="POST" action="{{url('create-blog-post')}}" id="creatingPost" enctype="multipart/form-data">
                 <input name="category" type="hidden" value="<?php echo $category_id; ?>">
                 <textarea class="with-border m-0" id="text" value=""></textarea>
                 <div class="uploadButton margin-top-10 align-items-center">

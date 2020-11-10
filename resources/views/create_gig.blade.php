@@ -80,7 +80,7 @@
 									<div class="col-xl-4">
 										<div class="submit-field">
 											<h5>Category</h5>
-											<select  id = "gig_category" class="selectpicker with-border" data-size="7" title="Select Category">
+											<select  id = "gig_category"  data-size="7" title="Select Category">
 												
 											</select>
 										</div>
@@ -277,7 +277,7 @@
 })
 .then((isConfrim) => {
   if (isConfrim) {
-      window.location.href = 'main_page_gig.php?category=all&location=all';
+      window.location.href = 'view_all_gig';
   } 
 });
         

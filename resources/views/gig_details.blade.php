@@ -83,7 +83,7 @@
 					<h3><i class="icon-material-outline-thumb-up"></i> Ratings and Review</h3>
 				</div>
 				<ul class="boxed-list-ul">
-				
+				@foreach($reviews as $review)
 					<li>
 						<div class="boxed-list-item">
 							<!-- Content -->
@@ -99,7 +99,7 @@
 							</div>
 						</div>
 					</li>
-			
+			    @endforeach
 				
 					
 				</ul>

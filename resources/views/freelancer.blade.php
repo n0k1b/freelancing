@@ -28,7 +28,7 @@
 			
 				<div class="sidebar-widget">
 					<h3>Category</h3>
-					<select id="gig_category" name="gig_category" class="selectpicker default"  data-selected-text-format="count" data-size="7" title="All Categories" >
+					<select id="gig_category" name="gig_category"   data-selected-text-format="count" data-size="7" title="All Categories" >
 						
 					</select>
 				</div>
@@ -150,19 +150,7 @@
 
 
 ================================================== -->
-<script src="js/jquery-3.3.1.min.js"></script>
-<script src="js/jquery-migrate-3.0.0.min.js"></script>
-<script src="js/mmenu.min.js"></script>
-<script src="js/tippy.all.min.js"></script>
-<script src="js/simplebar.min.js"></script>
-<script src="js/bootstrap-slider.min.js"></script>
-<script src="js/bootstrap-select.min.js"></script>
-<script src="js/snackbar.js"></script>
-<script src="js/clipboard.min.js"></script>
-<script src="js/counterup.min.js"></script>
-<script src="js/magnific-popup.min.js"></script>
-<script src="js/slick.min.js"></script>
-<script src="js/custom.js"></script>
+@include('layout.page_js');
 
 <script type="text/javascript">
 

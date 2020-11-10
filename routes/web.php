@@ -36,7 +36,8 @@ Route::get('user_blog_category','UserController@read_blog_category');
 Route::prefix('user')->group(function(){
     Route::view('dashboard','dashboard');
     // Route::get('get_category',"GigController@get_category");
-    Route::post('create-blog-post','UserController@createBlogPost')->name('createBlogPost');
+
+   // Route::post('create-blog-post','UserController@createBlogPost')->name('createBlogPost');
 
     Route::post('create-blog-comment','UserController@createBlogComment')->name('createBlogComment');
     Route::get('read-blog-comment/{id}','UserController@readBlogComment')->name('readBlogComment');
