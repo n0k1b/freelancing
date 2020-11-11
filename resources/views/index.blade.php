@@ -124,7 +124,7 @@
 					<!-- Search Field -->
 					<div class="intro-search-field">
 
-						<select id="gig_category" name="gig_category" class="selectpicker default" data-size="7" title="All Categories" >
+						<select id="gig_category" data-size="100" title="All Categories" >
 
 
 						</select>

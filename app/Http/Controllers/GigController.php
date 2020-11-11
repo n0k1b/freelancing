@@ -182,11 +182,28 @@ class GigController extends Controller
       $user_id = $gig_details->user_id;
       $user_name = User::where('id',$user_id)->first()->name;
       $gig_details['name'] = $user_name;
-      $review = rating::where('gig_id',$gig_id)->first();
-      $review['name']= User::where('id',$review->reviewer_id)->first()->name;
+      
+      $reviews = rating::where('gig_id',$gig_id)->get();
+      if($reviews){
+          foreach($reviews as $review)
+          {
+            $review['name']= User::where('id',$review->reviewer_id)->first()->name;
+          }
+     
+      }
+    
       $overall_ratings = rating::where('entrepreneur_id',$user_id)->get();
+      if(sizeof($overall_ratings)>0)
+      {
       $overall_rating = ceil(rating::where('entrepreneur_id',$user_id)->get()->sum('rating')/sizeof($overall_ratings));
-
+      }
+      else
+      {
+        $overall_rating = 5;
+      }
+      
+      
+      
       if(Auth::check())
 
       {
@@ -206,7 +223,7 @@ class GigController extends Controller
     {
         $gig_details['previously_bid']=2;
     }
-      return view('gig_details',['gig'=>$gig_details,'review'=>$review,'overall_rating'=>$overall_rating]);
+      return view('gig_details',['gig'=>$gig_details,'reviews'=>$reviews,'overall_rating'=>$overall_rating]);
       //file_put_contents('test.txt',$gig_id);
 
     }
