@@ -1,5 +1,5 @@
 @extends('admin.app')
-@section('blog-category','active')
+@section('post-report','active')
 @section('body')
     <div class="card">
         {{-- <div class="card-header d-flex align-items-center justify-content-end">
@@ -10,21 +10,21 @@
                 <thead class="thead-light">
                   <tr>
                     <th scope="col">#</th>
-                    <th scope="col">Name</th>
-                    <th scope="col"></th>
-                    <th scope="col"></th>
+                    <th scope="col">Reported user</th>
+                    <th scope="col">Post owner</th>
+                    <th scope="col">Post</th>
                   </tr>
                 </thead>
                 <tbody>
                     @php
                         $i=1;
                     @endphp
-                  @foreach ($reports as $item)
+                  @foreach ($reports as $report)
                       <tr>
                         <td>{{$i}}</td>
-                        <td>{{$item->name}}</td>
-                        <td><a class="btn btn-warning" href="{{url('admin/edit-blog-cat/'.$item->id)}}">Edit</a></td>
-                        <td><a class="btn btn-danger" href="{{url('admin/delete-blog-cat/'.$item->id)}}">Delete</a></td>
+                        <td>{{$report->user->name}}</td>
+                        <td>{{$report->post->user->name}}</td>
+                        <td>{{$report->post->post}}</td>
                       </tr>
                       @php
                         $i++;

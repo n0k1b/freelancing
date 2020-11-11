@@ -13,7 +13,7 @@ class blogController extends Controller
     public function readBlogReport()
     {
         $data = post_report::orderBy('id','DESC')->get();
-        return view('blogReport',['reports'=>$data]);
+        return view('admin.blogReport',['reports'=>$data]);
     }
     public function createBlogReport(Request $Request)
     {

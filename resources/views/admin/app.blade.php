@@ -96,8 +96,8 @@
 						<ul data-submenu-title="Start">
 							<li class="@yield('blog-category')"><a href="{{url('admin')}}"><i class="icon-material-outline-dashboard"></i>Blog Categories</a></li>
 							<li class="@yield('gig-category')"><a href="{{url('admin/gig-categories')}}"><i class="icon-material-outline-dashboard"></i>Gig Categories</a></li>
-							<li class="@yield('active')"><a href="{{url('admin/blog-report')}}"><i class="icon-material-outline-dashboard"></i>Blog Reports</a></li>
-							<li class="@yield('active')"><a href="{{url('admin/comment-report')}}"><i class="icon-material-outline-dashboard"></i>Comment Reports</a></li>
+							<li class="@yield('post-report')"><a href="{{url('admin/blog-report')}}"><i class="icon-material-outline-dashboard"></i>Blog Reports</a></li>
+							{{-- <li class="@yield('active')"><a href="{{url('admin/comment-report')}}"><i class="icon-material-outline-dashboard"></i>Comment Reports</a></li> --}}
 						</ul>
 					</div>
 				</div>

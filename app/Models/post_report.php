@@ -13,4 +13,8 @@ class post_report extends Model
     {
         return $this->belongsTo('App\Models\blog_post');
     }
+    public function user()
+    {
+        return $this->belongsTo('App\Models\User');
+    }
 }
