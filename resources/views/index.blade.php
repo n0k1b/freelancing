@@ -31,7 +31,7 @@
 		<div class="container">
 
 			<!-- Left Side Content -->
-			<div class="left-side">
+			<div class="right-side">
 
 				<!-- Logo -->
 				{{-- <div id="logo">
@@ -41,9 +41,9 @@
 				<!-- Main Navigation -->
 				<nav id="navigation">
 					<ul id="responsive">
+                        @if (auth()->check())
 						<li><a href="{{url('view_all_gig')}}" >Browse Entrepreneur</a></li>
 						<li><a href="{{url('browse-blog')}}">Browse Blog</a></li>
-			 		    @if (auth()->check())
                          <li><a href="{{url('dashboard')}}">Dashboard</a></li>
                          <li><a href="{{route('logout')}}">Logout</a></li>
                          @else
@@ -592,13 +592,13 @@ $(function()
 	});
 	function login_alert()
 	{
-		
+
 		swal({
   title: "Your have to login to see blog post",
- 
+
   icon: "error",
-  
- 
+
+
 })
 	}
 	function search_gig()
