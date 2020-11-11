@@ -13,6 +13,7 @@
     <link rel="stylesheet" href="{{ asset('assets') }}\bootstrap\bootstrap.min.css">
     <link rel="stylesheet" href="{{ asset('assets') }}/css/style.css">
     <link rel="stylesheet" href="{{ asset('assets') }}/css/colors/blue.css">
+    <script src="{{asset('assets')}}/js/jquery-3.3.1.min.js"></script>
 </head>
 <body class="gray">
 

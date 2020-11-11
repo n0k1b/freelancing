@@ -46,10 +46,10 @@
 	<!-- Header -->
 	<div id="header">
 		<div class="container">
-			
+
 			<!-- Left Side Content -->
 			<div class="left-side">
-				
+
 				<!-- Logo -->
 				<div id="logo">
 					<a href="index.php"><img src="{{asset('assets')}}/images/logo.jpeg" alt=""></a>
@@ -64,7 +64,7 @@
 						<li><a href="{{url('view_all_gig')}}" >Browse Entrepreneur</a></li>
 
 						<li><a href="{{url('browse-blog')}}">Browse Blog</a></li>
-						
+
 						@if(auth()->check())
 			 		     <li><a href="{{url('dashboard')}}">Dashboard</a></li>
 						  <li><a href="{{route('logout')}}">Logout</a></li>
@@ -77,7 +77,7 @@
 				</nav>
 				<div class="clearfix"></div>
 				<!-- Main Navigation / End -->
-				
+
 			</div>
 			<!-- Left Side Content / End -->
 
@@ -87,25 +87,25 @@
 
 				<!--  User Notifications -->
 				<div class="header-widget hide-on-mobile">
-					
+
 					<!-- Notifications -->
 					<div class="header-notifications">
 
 						<!-- Trigger -->
-						
+
 
 						<!-- Dropdown -->
-						
+
 					</div>
-					
+
 					<!-- Messages -->
-					
+
 
 				</div>
 				<!--  User Notifications / End -->
 
 				<!-- User Menu -->
-				
+
 				<!-- User Menu / End -->
 
 				<!-- Mobile Navigation Button -->
