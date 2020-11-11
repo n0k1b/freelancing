@@ -80,7 +80,7 @@
 									<div class="col-xl-4">
 										<div class="submit-field">
 											<h5>Category</h5>
-											<select  name = "gig_category"  data-size="7" title="Select Category">
+											<select  id="gig_category" name = "gig_category"  data-size="7" title="Select Category">
 											@foreach($gig_categoris as $category)
 							<option value ='{{$category->id}}'>{{$category->name}}</option>
 							@endforeach
@@ -303,7 +303,7 @@
        		 }
     	});
 
-		get_category();
+		
 
 	});
 // Snackbar for user status switcher
