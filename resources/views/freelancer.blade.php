@@ -28,8 +28,10 @@
 			
 				<div class="sidebar-widget">
 					<h3>Category</h3>
-					<select id="gig_category" name="gig_category"   data-selected-text-format="count" data-size="7" title="All Categories" >
-						
+					<select  name="gig_category"   data-selected-text-format="count" data-size="7" title="All Categories" >
+					@foreach($gig_categoris as $category)
+							<option value ='{{$category->id}}'>{{$category->name}}</option>
+							@endforeach
 					</select>
 				</div>
 		
