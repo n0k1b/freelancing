@@ -11,6 +11,7 @@
                   <tr>
                     <th scope="col">#</th>
                     <th scope="col">Name</th>
+                    <th scope="col">Image</th>
                     <th scope="col"></th>
                     <th scope="col"></th>
                   </tr>
@@ -23,6 +24,7 @@
                       <tr>
                         <td>{{$i}}</td>
                         <td>{{$item->name}}</td>
+                        <td><img style="width: 50px;height:50px;" src="{{asset('images/'.$item->image)}}" alt="not found" class="img-fluid"></td>
                         <td><a class="btn btn-warning" href="{{url('admin/edit-blog-cat/'.$item->id)}}">Edit</a></td>
                         <td><a class="btn btn-danger" href="{{url('admin/delete-blog-cat/'.$item->id)}}">Delete</a></td>
                       </tr>

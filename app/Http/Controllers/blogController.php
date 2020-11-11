@@ -26,9 +26,14 @@ class blogController extends Controller
         return redirect()->back()->with('message',['msg'=>'Your report has submitted successfully!','link'=>'Return to browse posts']);
     }
 
-    public function createBlogCat(Request $Request)
+    public function createBlogCat(Request $Request) // editing
     {
-        $categories = blog_category::create(['name'=>$Request->name]);
+        $fileName = '';
+        if ($Request->hasFile('image')) {
+            $fileName = time().'.'.$Request->image->extension();
+            $Request->image->move(public_path('../images'), $fileName);
+        }
+        blog_category::create(['name'=>$Request->name,'image'=>$fileName]);
         return redirect('admin');
     }
     public function readBlogCat()
@@ -43,12 +48,25 @@ class blogController extends Controller
     }
     public function updateBlogCat(Request $Request)
     {
-        $categories = blog_category::where('id',$Request->id)->update(['name'=>$Request->name]);
+        $categories = blog_category::where('id',$Request->id)->first();
+        $fileName = $categories->image;
+        if ($Request->hasFile('image')) {
+            if ($fileName!='') {
+                unlink('images/'.$categories->image);
+            }
+            $fileName = time().'.'.$Request->image->extension();
+            $Request->image->move(public_path('../images'), $fileName);
+        }
+        $categories->update(['name'=>$Request->name,'image'=>$fileName]);
         return redirect('admin');
     }
     public function deleteBlogCat(Request $Request)
     {
-        blog_category::where('id',$Request->id)->delete();
+        $cat = blog_category::where('id',$Request->id)->first();
+        if ($cat->image!='') {
+            unlink('images/'.$cat->image);
+        }
+        $cat->delete();
         return redirect('admin');
     }
 

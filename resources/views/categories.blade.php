@@ -13,7 +13,8 @@
     </div>
 </div>
 
-			<!-- Section Headline -->
+            <!-- Section Headline -->
+            @if (count($categories)>0)
             @foreach ($categories as $item)
 			@if(auth()->check())
 			<div class="col-xl-3 col-md-6">
@@ -37,7 +38,13 @@
 			</div>
 			@endif
             @endforeach
-
+            @else
+            <div class="col-12">
+            <div class="card">
+                <div class="card-body text-center">No categoreis available!</div>
+            </div>
+            </div>
+            @endif
 		</div>
 	</div>
 </div>

@@ -42,7 +42,7 @@
                     <li><a href="{{url('/')}}" >Home</a></li>
                     <li><a href="{{url('view_all_gig')}}" >Browse Entrepreneur</a></li>
                     <li><a href="{{url('browse-blog') }}">Browse Blog</a></li>
-                    
+
                     @if (auth()->check())
                     <li><a href="{{url('dashboard')}}">Dashboard</a></li>
                     <li><a href="{{route('logout')}}">Logout</a></li>
@@ -355,23 +355,6 @@
 <script src="{{asset('assets')}}\bootstrap\popper.min.js"></script>
 <script src="{{asset('assets')}}\bootstrap\bootstrap.min.js"></script>
 
-<!-- Snackbar // documentation: https://www.polonel.com/snackbar/ -->
-<script>
-// Snackbar for user status switcher
-// $('#snackbar-user-status label').click(function() {
-// 	Snackbar.show({
-// 		text: 'Your status has been changed!',
-// 		pos: 'bottom-center',
-// 		showAction: false,
-// 		actionText: "Dismiss",
-// 		duration: 3000,
-// 		textColor: '#fff',
-// 		backgroundColor: '#383838'
-// 	});
-// });
-
-
-</script>
 @yield('page-js')
 </body>
 </html>

@@ -127,7 +127,9 @@ class UserController extends Controller
         $data = blog_post::where('id',$Request->id)->first();
         // $data->category_id;
         if ($Request->hasFile('image')) {
-            unlink("images/".$data->image);
+            if ($data->image!='') {
+                unlink("images/".$data->image);
+            }
             $fileName = time().'.'.$Request->image->extension();
             $Request->image->move(public_path('../images'), $fileName);
             $data->image = $fileName;

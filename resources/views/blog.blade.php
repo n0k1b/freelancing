@@ -50,8 +50,8 @@ function readPost() {
     });
 }
 
-$("#creatingPost").submit(function (event) {
-    
+$("#creatingPost").on('submit',function (event) {
+    event.preventDefault();
     data = new FormData();
     data.append('text',$("#text").val());
     data.append('category',$("#category").val());
@@ -59,8 +59,8 @@ $("#creatingPost").submit(function (event) {
     $.ajax({
         processData:false,
         contentType:false,
-        url:"create-blog-post",
-        type:post,
+        url:"{{route('createBlogPost')}}",
+        type:"post",
         data:data,
         success: function (response) {
             alert('Success fully created your post');
