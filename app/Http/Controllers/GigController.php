@@ -12,6 +12,24 @@ use Auth;
 
 class GigController extends Controller
 {
+    public function show_index()
+    { 
+        $category = gig_category::get();
+        // $data = "";
+        // for($i=0;$i<sizeof($category);$i++)
+        // {
+        //     $data.='<option value ='.$category[$i]->id.'>'.$category[$i]->name.'</option>';
+        // }
+     
+        return view('index',["gig_categoris"=>$category]);
+    }
+    public function create_gig()
+    {  
+        $category = gig_category::get();
+        return view ('create_gig',["gig_categoris"=>$category]);
+        
+    }
+
     public function createGigCat(Request $Request)
     {
         $categories = gig_category::create(['name'=>$Request->name]);
@@ -83,7 +101,7 @@ class GigController extends Controller
 
     Public function manage_work()
     {
-       $entrepreneur_id = auth()->user()->id;;
+       $entrepreneur_id = auth()->user()->id;
        $hire_info = hire_information::where('hire_to',$entrepreneur_id)->get();
        foreach($hire_info as $gig)
        {
@@ -110,6 +128,7 @@ class GigController extends Controller
         }
         return view('notification',['gigs'=>$gig_information]);
     }
+    
     public function gig_post(Request $request)
     {
         $image = time().'.'.request()->file->getClientOriginalExtension();
@@ -118,20 +137,24 @@ class GigController extends Controller
        gig::create(['user_id'=> auth()->user()->id,"category_id"=>$request->gig_category,"title"=>$request->gig_title,"description"=>$request->gig_description,"image"=>$image,"min_price"=>$request->base_price_min,"max_price"=>$request->base_price_max,'minimum_duration'=>$request->duration,'city'=>$request->city]);
 
     }
+
     public function view_gig(Request $request)
     {
+        $category = gig_category::get();
+        $user_id = auth()->user()->id;
         $category_id = $request->gig_category;
         $location = $request->location;
         $location = explode(',',$location);
         $location = $location[0];
-        $gig_list = gig::where('category_id',$category_id)->where('city',$location)->get();
+       
+        $gig_list = gig::where('category_id',$category_id)->where('city',$location)->where('user_id','!=',$user_id)->get();
       foreach($gig_list as $gig)
       {
           $user_id = $gig->user_id;
           $user_name = User::where('id',$user_id)->first()->name;
           $gig['name'] = $user_name;
       }
-      return view("freelancer",['gig_lists'=>$gig_list]);
+      return view("freelancer",['gig_lists'=>$gig_list,"gig_categoris"=>$category]);
 
     }
     public function payment_gateway(Request $request)
