@@ -57,7 +57,7 @@ Route::group(['prefix' => 'admin'], function () {
     Route::get('delete-gig-cat/{id}','GigController@deleteGigCat');
     Route::post('update-gig-cat','GigController@updateGigCat');
 
-    Route::get('blog-report','blogController@blogReport');
+    Route::get('blog-report','blogController@readBlogReport');
 
 });
 Route::view('login', 'login')->name('login');
@@ -77,10 +77,12 @@ Route::post('get_category',"GigController@get_category");
 // about blogs
 Route::get('browse-blog','blogController@categories');
 Route::view('blog/{id}', 'blog');
-Route::get('read-blog-post/{id}','blogController@readBlogPost');
+Route::get('read-blog-post/{id}','blogController@readBlogPost')->name('allPosts');
 Route::post('create-blog-post','blogController@createBlogPost')->name('createBlogPost');
 Route::post('create-blog-comment/{id}','blogController@createBlogComment')->name('createBlogComment');
 Route::get('read-blog-comment/{id}','blogController@readBlogComment')->name('readBlogComment');
+Route::get('create-report-post/{id}', 'blogController@createBlogReport');
+Route::post('create-report-post', 'blogController@submitBlogReport');
 // about blogs
 
 Route::post("hire_entrepreneur","GigController@hire_entrepreneur")->name('hire_entrepreneur');

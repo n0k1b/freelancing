@@ -38,16 +38,13 @@ $(function() {
 
 function readPost() {
    var id= "{{Request::route('id')}}";
-   var formdata = new FormData();
-   formdata.append('id',id);
     $.ajax({
         processData:false,
         contentType:false,
         type:'GET',
-        url:"{{url('read-blog-post/'.Request::route('id'))}}",
-        data:formdata,
+        url:`{{url('read-blog-post/${id}')}}`,
+        // url:"../read-blog-post/"+id,
         success: function (response) {
-            // $("#posts").html('')
             $("#posts").html(response)
         },
     });
