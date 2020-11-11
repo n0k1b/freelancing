@@ -150,11 +150,11 @@ class GigController extends Controller
        if(auth()->check())
        {
         $user_id = auth()->user()->id;
-        $gig_list = gig::where('category_id',$category_id)->where('city',$location)->where('user_id','!=',$user_id)->get();
+        $gig_list = gig::where('category_id',$category_id)->where('city',"Like",$location."%")->where('user_id','!=',$user_id)->get();
        }
         else
         {
-            $gig_list = gig::where('category_id',$category_id)->where('city',$location)->get();
+            $gig_list = gig::where('category_id',$category_id)->where('city',"Like",$location."%")->get();
         }
       foreach($gig_list as $gig)
       {
