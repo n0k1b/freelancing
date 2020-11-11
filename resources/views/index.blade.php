@@ -42,11 +42,13 @@
 				<nav id="navigation">
 					<ul id="responsive">
 						<li><a href="{{url('view_all_gig')}}" >Browse Entrepreneur</a></li>
-                        @if (auth()->check())
 						<li><a href="{{url('browse-blog')}}">Browse Blog</a></li>
+                        @if (auth()->check())
+					
                          <li><a href="{{url('dashboard')}}">Dashboard</a></li>
                          <li><a href="{{route('logout')}}">Logout</a></li>
                          @else
+						
                          <li><a href="{{url('login')}}">Login</a></li>
 			 		    <li><a href="{{url('registration')}}">Registration</a></li>
                          @endif
