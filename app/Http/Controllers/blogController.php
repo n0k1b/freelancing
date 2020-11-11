@@ -51,7 +51,7 @@ class blogController extends Controller
     {
         $user_id = auth()->check()?auth()->user()->id:1;
         $fileName = '';
-        if ($Request->has('upload')) {
+        if ($Request->hasFile('upload') != '') {
             $fileName = time().'.'.$Request->upload->extension();
             $Request->upload->move(public_path('../images'), $fileName);
         }
@@ -61,94 +61,85 @@ class blogController extends Controller
     public function readBlogPost(Request $request)
     {
         $category_id = $request->id;
-        $variable = blog_post::where('category_id',$category_id)->get();
-        ?>
-        <div class="col-12 mb-5">
-            <h3 class="mb-2">Write a post</h3>
-            <form method="POST" action="{{url('create-blog-post')}}" id="creatingPost" enctype="multipart/form-data">
-                <input name="category" type="hidden" value="<?php echo $category_id; ?>">
-                <textarea class="with-border m-0" id="text" value=""></textarea>
-                <div class="uploadButton margin-top-10 align-items-center">
-                    <input class="uploadButton-input" type="file" id="upload"/>
-                    <label class="uploadButton-button ripple-effect" for="upload">Upload Files</label>
-                    <span class="uploadButton-file-name">Images or documents that might be helpful in describing your post</span>
-                    <button type="submit" class="button ripple-effect big"><i class="icon-feather-plus"></i> Post</button>
-                </div>
-            </form>
-        </div>
-        <?php
-        foreach ($variable as $value) {
-            ?>
-            <div class="col-12">
-                <!-- Blog Post -->
-                <div class="card">
-                    <div class="card-header pt-4 d-flex align-item-center justify-content-between">
-                        <h2 class="card-title"><?php echo $value->user->name ?></h2>
-                        <p><?php echo $value->created_at!=''?$value->created_at:'unknow' ?></p>
-                    </div>
-                    <?php
-                    if ($value->image!=='') {
-                    ?>
-                    <img src="<?php echo asset('images') ?>/<?php echo $value->image ?>" class="card-img-top" alt="" height="200px">
-                    <?php
-                    }
-                    ?>
-                    <div class="card-body">
-                        <div class="card-text">
-                        <?php echo $value->post ?>
+        $variable = blog_post::where('category_id',$category_id)->orderBy('id','desc')->get();
+        if (count($variable)>0) {
+            foreach ($variable as $value) {
+                ?>
+                <div class="col-12">
+                    <!-- Blog Post -->
+                    <div class="card my-3">
+                        <div class="card-header pt-4 d-flex align-item-center justify-content-between">
+                            <h2 class="card-title"><?php echo $value->user->name ?></h2>
+                            <p><?php echo $value->created_at!=''?$value->created_at:'unknow' ?></p>
                         </div>
-                    </div>
-                    <div class="card-footer">
-                        <form id="add_comment_<?php echo $value->id ?>">
-                            <input type="hidden" name="postId" value="<?php echo $value->id ?>">
-                            <textarea id="commentContent_<?php echo $value->id ?>" name="commentContent"  placeholder="Comment" required></textarea>
-                        <!-- Button -->
-                        <button class="button button-sliding-icon ripple-effect " type="submit">Add Comment <i class="icon-material-outline-arrow-right-alt"></i></button>
-                        </form>
-                        <hr>
-                        <div id="accordion">
-                            <div class="card">
-                            <div class="card-header text-center" data-toggle="collapse" data-target="#collapse_<?php echo $value->id ?>" aria-expanded="true" aria-controls="collapseOne" style="cursor:pointer;">Comments</div>
+                        <?php
+                        if ($value->image!=='') {
+                        ?>
+                        <img src="<?php echo asset('images') ?>/<?php echo $value->image ?>" class="card-img-top" alt="" height="200px">
+                        <?php
+                        }
+                        ?>
+                        <div class="card-body">
+                            <div class="card-text">
+                            <?php echo $value->post ?>
+                            </div>
+                        </div>
+                        <div class="card-footer">
+                            <form id="add_comment_<?php echo $value->id ?>">
+                                <input type="hidden" name="postId" value="<?php echo $value->id ?>">
+                                <textarea id="commentContent_<?php echo $value->id ?>" name="commentContent"  placeholder="Comment" required></textarea>
+                            <!-- Button -->
+                            <button class="button button-sliding-icon ripple-effect " type="submit">Add Comment <i class="icon-material-outline-arrow-right-alt"></i></button>
+                            </form>
+                            <hr>
+                            <div id="accordion">
+                                <div class="card">
+                                <div class="card-header text-center" data-toggle="collapse" data-target="#collapse_<?php echo $value->id ?>" aria-expanded="true" aria-controls="collapseOne" style="cursor:pointer;">Comments</div>
 
-                                <div id="collapse_<?php echo $value->id ?>" class="collapse" aria-labelledby="headingOne" data-parent="#accordion">
-                                    <div class="card-body"  id="comment_of_post_no_<?php echo $value->id ?>">
+                                    <div id="collapse_<?php echo $value->id ?>" class="collapse" aria-labelledby="headingOne" data-parent="#accordion">
+                                        <div class="card-body"  id="comment_of_post_no_<?php echo $value->id ?>">
 
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
 
-            <script>
-                $(function() {
-                    readComment<?php echo $value->id ?>();
-                })
-                $("#add_comment_<?php echo $value->id ?>").submit(function(e){
-                    e.preventDefault()
-                    $.ajax({
-                        url:'<?php echo url('create-blog-comment/'.$value->id) ?>',
-                        data:$("#add_comment_<?php echo $value->id ?>").serialize(),
-                        type:'POST',
-                        success:function(data){
+                <script>
+                    $(function() {
+                        readComment<?php echo $value->id ?>();
+                    })
+                    $("#add_comment_<?php echo $value->id ?>").submit(function(e){
+                        e.preventDefault()
+                        $.ajax({
+                            url:'<?php echo url('create-blog-comment/'.$value->id) ?>',
+                            data:$("#add_comment_<?php echo $value->id ?>").serialize(),
+                            type:'POST',
+                            success:function(data){
 
-                            readComment<?php echo $value->id ?>();
-                            $("#commentContent_<?php echo $value->id ?>").val('');
-                            $("#collapse_<?php echo $value->id ?>").show().scrollTop();
-                        }
+                                readComment<?php echo $value->id ?>();
+                                $("#commentContent_<?php echo $value->id ?>").val('');
+                                $("#collapse_<?php echo $value->id ?>").show().scrollTop();
+                            }
+                        })
                     })
-                })
-                function readComment<?php echo $value->id ?>() {
-                    $.ajax({
-                        url:'<?php echo url('read-blog-comment/'.$value->id) ?>',
-                        type:'GET',
-                        success:function(data){
-                            $("#comment_of_post_no_<?php echo $value->id ?>").html(data);
-                        }
-                    })
-                }
-            </script>
+                    function readComment<?php echo $value->id ?>() {
+                        $.ajax({
+                            url:'<?php echo url('read-blog-comment/'.$value->id) ?>',
+                            type:'GET',
+                            success:function(data){
+                                $("#comment_of_post_no_<?php echo $value->id ?>").html(data);
+                            }
+                        })
+                    }
+                </script>
+                <?php
+            }
+        }else{
+            ?>
+            <h1 class="text-center">No post available</h1>
             <?php
         }
     }

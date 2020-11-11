@@ -18,14 +18,11 @@ class UserController extends Controller
 
     public function deleteBlogPost(Request $Request)
     {
-        blog_post::where('id',$Request->id)->delete();
-    }
-
-    public function createBlogPost(Request $Request)
-    {
-        $fileName = time().'.'.$Request->upload->extension();
-        $Request->upload->move(public_path('../images'), $fileName);
-        blog_post::create(['user_id'=>auth()->user()->id,'category_id'=>1,'post'=>$Request->text,'image'=>$fileName,'status'=>1]);
+        $data = blog_post::where('id',$Request->id)->first();
+        if ($data->image!='') {
+            unlink("images/".$data->image);
+        }
+        $data->delete();
     }
 
     public function readBlogPost(Request $Request)
@@ -42,7 +39,7 @@ class UserController extends Controller
                             <h2 class="card-title"><?php echo $value->user->name ?></h2>
                             <p>
                             <?php echo $value->created_at!=''?$value->created_at:'unknow' ?>
-                            <a href="javascript:void(0)" onclick="edit_post(<?php echo $value->id ?>)" class="mx-2"><i class="icon-feather-edit"></i></a>
+                            <a href="<?php echo url('user/edit-blog-post/'.$value->id) ?>" class="mx-2"><i class="icon-feather-edit"></i></a>
                             <a href="javascript:void(0)" onclick="delete_post(<?php echo $value->id ?>)" class="mx-2"><i class="icon-feather-delete"></i></a>
                             </p>
                         </div>
@@ -101,7 +98,7 @@ class UserController extends Controller
                     })
                     function readComment<?php echo $value->id ?>() {
                         $.ajax({
-                            url:'read-blog-comment/'+<?php echo $value->id ?>,
+                            url:"<?php echo url('read-blog-comment/'.$value->id) ?>",
                             type:'GET',
                             success:function(data){
                                 $("#comment_of_post_no_<?php echo $value->id ?>").html(data);
@@ -119,35 +116,24 @@ class UserController extends Controller
         }
     }
 
-    public function readBlogComment(Request $Request)
+    public function editBlogPost(Request $Request)
     {
-        $comments = blog_comment::where('post_id',$Request->id)->get();
-        if (count($comments)>0) {
-            foreach ($comments as $comment) {
-                ?>
-                <div class="card">
-                    <div class="card-body pt-4">
-                        <div class="d-flex justify-content-between align-items-center">
-                            <h2 class="card-title"><?php echo $comment->user->name ?></h2>
-                            <span><?php echo $comment->created_at ?></span>
-                        </div>
-                        <p class="card-text"><?php echo $comment->comment ?></p>
-                    </div>
-                </div>
-                <?php
-            }
-        }else{
-            ?>
-            <h1 class="text-center pt-4 pb-3">No comment</h1>
-            <?php
-        }
+        $data = blog_post::where('id',$Request->id)->first();
+        return view('editPost',['post'=>$data]);
     }
 
-    public function createBlogComment(Request $Request)
+    public function updateBlogPost(Request $Request)
     {
-        $user_id = auth()->user()?auth()->user()->id:1;
-        $postId = $Request->postId;
-        $commentContent = $Request->commentContent;
-        blog_comment::create(['user_id'=>$user_id,'post_id'=>$postId,'comment'=>$commentContent,'status'=>0]);
+        $data = blog_post::where('id',$Request->id)->first();
+        // $data->category_id;
+        if ($Request->hasFile('image')) {
+            unlink("images/".$data->image);
+            $fileName = time().'.'.$Request->image->extension();
+            $Request->image->move(public_path('../images'), $fileName);
+            $data->image = $fileName;
+        }
+        $data->post = $Request->post;
+        $data->update();
+        return redirect('user_blog/'.$data->category_id);
     }
 }
