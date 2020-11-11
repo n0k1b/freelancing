@@ -42,8 +42,9 @@
                     <li><a href="{{url('/')}}" >Home</a></li>
                     <li><a href="{{url('view_all_gig')}}" >Browse Entrepreneur</a></li>
                     <li><a href="{{url('browse-blog') }}">Browse Blog</a></li>
-                    <li><a href="{{url('dashboard')}}">Dashboard</a></li>
+                    
                     @if (auth()->check())
+                    <li><a href="{{url('dashboard')}}">Dashboard</a></li>
                     <li><a href="{{route('logout')}}">Logout</a></li>
                     @else
                     <li><a href="{{route('login')}}">Login</a></li>
