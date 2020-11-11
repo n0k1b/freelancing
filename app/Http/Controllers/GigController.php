@@ -168,6 +168,7 @@ class GigController extends Controller
     public function view_all_gig()
     {
      $gig_list = gig::get();
+     $category = gig_category::get();
       foreach($gig_list as $gig)
       {
           $user_id = $gig->user_id;
@@ -175,8 +176,7 @@ class GigController extends Controller
           $gig['name'] = $user_name;
       }
 
-
-    return view("freelancer",['gig_lists'=>$gig_list]);
+    return view("freelancer",['gig_lists'=>$gig_list,"gig_categoris"=>$category]);
      //return redirect()->route('show_gig');
     }
 
