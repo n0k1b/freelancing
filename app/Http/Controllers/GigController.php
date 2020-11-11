@@ -141,13 +141,21 @@ class GigController extends Controller
     public function view_gig(Request $request)
     {
         $category = gig_category::get();
-        $user_id = auth()->user()->id;
+      
+       // $user_id = auth()->user()->id;
         $category_id = $request->gig_category;
         $location = $request->location;
         $location = explode(',',$location);
         $location = $location[0];
-       
+       if(auth()->check())
+       {
+        $user_id = auth()->user()->id;
         $gig_list = gig::where('category_id',$category_id)->where('city',$location)->where('user_id','!=',$user_id)->get();
+       }
+        else
+        {
+            $gig_list = gig::where('category_id',$category_id)->where('city',$location)->get();
+        }
       foreach($gig_list as $gig)
       {
           $user_id = $gig->user_id;
