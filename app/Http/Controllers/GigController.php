@@ -103,7 +103,7 @@ class GigController extends Controller
         $client_id = auth()->user()->id;
         $entrepreneur_id = $request->freelancer_id;
         $gig_id = $request->job_id;
-        rating::create(['gig_id'=>$gig_id,'reviewer_id'=>$client_id,'rating'=>$rating,'review'=>$comment]);
+        rating::create(['gig_id'=>$gig_id,'	entrepreneur_id'=>$entrepreneur_id,'reviewer_id'=>$client_id,'rating'=>$rating,'review'=>$comment]);
         hire_information::where('gig_id',$gig_id)->update(['complete_status'=>1]);
 
         //file_put_contents("test.txt",$rating." ".$comment." ".$client_id." ".$entrepreneur_id." ".$gig_id);
@@ -117,7 +117,7 @@ class GigController extends Controller
      foreach($hire_info as $gig)
      {
 
-         $gig['gig_title']=gig::where('user_id',$gig->hire_to)->first()->title;
+         $gig['gig_title']=gig::where('id',$gig->gig_id)->first()->title;
          $gig['hire_to_mobile_number']= User::where('id',$gig->hire_to)->first()->mobile;
          $gig['hire_to_name']= User::where('id',$gig->hire_to)->first()->name;
 

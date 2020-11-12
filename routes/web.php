@@ -30,7 +30,7 @@ Route::view('dashboard', 'dashboard2')->name('dashboard');
 //Route::view('see_notification', 'notification');
 Route::get('see_notification_entrepreneur',"GigController@see_notification_entrepreneur");
 Route::get('manage_hire','GigController@manage_hire')->name('manage_hire');
-Route::post('submit_review','GigController@submit_review');
+Route::post('submit_review','GigController@submit_review')->name('submit_review');
 Route::get('manage_gig','GigController@manage_gig');
 Route::get('manage_work','GigController@manage_work');
 Route::view('user_blog/{id}','my_blog');
