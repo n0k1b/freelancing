@@ -12,6 +12,12 @@ use Auth;
 
 class GigController extends Controller
 {
+    public function accept_gig(Request $request)
+    {
+        $gig_id = $request->gig_id;
+        file_put_contents("test.txt",$gig_id);
+        hire_information::where('gig_id',$gig_id)->update(['accept_status'=>1]);
+    }
     public function show_index()
     { 
         $category = gig_category::get();
@@ -61,6 +67,12 @@ class GigController extends Controller
        $gig_id =$request->gig_id;
        hire_information::where('gig_id',$gig_id)->update(['payment_status'=>1,'complete_status'=>1]);
        return redirect()->route('manage_hire')->with('success','Your payment confirm');
+    }
+    public function delete_gig(Request $request)
+    {
+        $gig_id = $request->gig_id;
+        gig::where('id',$gig_id)->delete();
+
     }
 
     public function submit_review(Request $request)

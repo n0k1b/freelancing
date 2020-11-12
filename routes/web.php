@@ -89,16 +89,5 @@ Route::post('create-report-post', 'blogController@submitBlogReport');
 Route::post("hire_entrepreneur","GigController@hire_entrepreneur")->name('hire_entrepreneur');
 Route::post('payment_confirmation',"GigController@payment_confirmation");
 
-// SSLCOMMERZ Start
-Route::get('/example1', 'SslCommerzPaymentController@exampleEasyCheckout');
-Route::get('/example2', 'SslCommerzPaymentController@exampleHostedCheckout');
-
-Route::post('/pay', 'SslCommerzPaymentController@index');
-Route::post('pay-via-ajax', 'SslCommerzPaymentController@payViaAjax');
-
-Route::post('/success', 'SslCommerzPaymentController@success');
-Route::post('/fail', 'SslCommerzPaymentController@fail');
-Route::post('/cancel', 'SslCommerzPaymentController@cancel');
-
-Route::post('/ipn', 'SslCommerzPaymentController@ipn');
-//SSLCOMMERZ END
+Route::post('delete_gig',"GigController@delete_gig");
+Route::post('accept_gig',"GigController@accept_gig");

@@ -134,9 +134,9 @@
 
 												<!-- Buttons -->
 												<div class="buttons-to-right always-visible margin-top-25 margin-bottom-5">
-													<a href="javascript:;" onclick='accept_gig(<?php echo $gig_apply_id=1 ?>,<?php echo $gig_id=1 ?>)' class="button ripple-effect"><i class="icon-feather-file-text"></i> Accept</a>
-													<a href="#small-dialog" class="popup-with-zoom-anim button dark ripple-effect"><i class="icon-feather-mail"></i> Send Message</a>
-													<a href="javascript:;" onclick="remove_gig(<?php echo $gig_apply_id=1 ?>)" class="button gray ripple-effect ico" title="Remove gig" data-tippy-placement="top"><i class="icon-feather-trash-2"></i></a>
+													<a href="javascript:;" onclick='accept_gig(<?php echo $gig_apply_id=1 ?>,{{$gig->gig_id}})' class="button ripple-effect"><i class="icon-feather-file-text"></i> Accept</a>
+													<!-- <a href="#small-dialog" class="popup-with-zoom-anim button dark ripple-effect"><i class="icon-feather-mail"></i> Send Message</a> -->
+													<!-- <a href="javascript:;" onclick="remove()" class="button gray ripple-effect ico" title="Remove gig" data-tippy-placement="top"><i class="icon-feather-trash-2"></i></a> -->
 												</div>
 											</div>
 										</div>
@@ -249,23 +249,20 @@
 
 <!-- Scripts
 ================================================== -->
-<script src="js/jquery-3.3.1.min.js"></script>
-<script src="js/jquery-migrate-3.0.0.min.js"></script>
-<script src="js/mmenu.min.js"></script>
-<script src="js/tippy.all.min.js"></script>
-<script src="js/simplebar.min.js"></script>
-<script src="js/bootstrap-slider.min.js"></script>
-<script src="js/bootstrap-select.min.js"></script>
-<script src="js/snackbar.js"></script>
-<script src="js/clipboard.min.js"></script>
-<script src="js/counterup.min.js"></script>
-<script src="js/magnific-popup.min.js"></script>
-<script src="js/slick.min.js"></script>
-<script src="js/custom.js"></script>
-<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+@include('layout.page_js');
 
 
 <script type="text/javascript">
+  $(function() {
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+        console.log("Jquery running!");
+        readPost();
+    })
+
    function message(sender_id,receiver_id,work_id)
    {
    	 window.location.href = 'chat.php?sender_id='+sender_id+'& receiver_id='+receiver_id+'& work_id='+work_id;
@@ -299,7 +296,7 @@
      function accept_gig(gig_apply_id,gig_id)
      {
        var formData= new FormData();
-    formData.append('gig_apply_id',gig_apply_id);
+   
     formData.append('gig_id',gig_id);
 
 
@@ -311,7 +308,7 @@
     $.ajax({
       processData: false,
       contentType: false,
-      url:"backend/bid_gig_accept.php",
+      url:"accept_gig",
       type:"POST",
       data:formData,
       success:function(data,status){
