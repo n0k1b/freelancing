@@ -19,21 +19,42 @@ class GigController extends Controller
         hire_information::where('gig_id',$gig_id)->update(['accept_status'=>1]);
     }
     public function show_index()
-    { 
+    {
         $category = gig_category::get();
         // $data = "";
         // for($i=0;$i<sizeof($category);$i++)
         // {
         //     $data.='<option value ='.$category[$i]->id.'>'.$category[$i]->name.'</option>';
         // }
-     
+
         return view('index',["gig_categoris"=>$category]);
     }
     public function create_gig()
-    {  
+    {
         $category = gig_category::get();
-        return view ('create_gig',["gig_categoris"=>$category]);
-        
+        return view('create_gig',["gig_categoris"=>$category]);
+
+    }
+
+    public function gig_edit(Request $request)
+    {
+        $gig = gig::where('id',$request->id)->first();
+        return view('editGig',['gig'=>$gig]);
+    }
+
+    public function update_gig(Request $request)
+    {
+        $gig = gig::where('id',$request->id)->first();
+        $image=$gig->image;
+        if ($request->hasFile('upload')) {
+            if ($gig->image!='') {
+                unlink('Gig Image/'.$gig->image);
+            }
+            $image = time().'.'.$request->upload->extension();
+            $request->upload->move(base_path('Gig Image'), $image);
+        }
+        $gig->update(["title"=>$request->gig_title,"description"=>$request->gig_description,"image"=>$image,"min_price"=>$request->base_price_min,"max_price"=>$request->base_price_max,'minimum_duration'=>$request->duration]);
+        return redirect('manage_gig')->with('message','Updated successfully');
     }
 
     public function createGigCat(Request $Request)
@@ -140,7 +161,7 @@ class GigController extends Controller
         }
         return view('notification',['gigs'=>$gig_information]);
     }
-    
+
     public function gig_post(Request $request)
     {
         $image = time().'.'.request()->file->getClientOriginalExtension();
@@ -153,7 +174,7 @@ class GigController extends Controller
     public function view_gig(Request $request)
     {
         $category = gig_category::get();
-      
+
        // $user_id = auth()->user()->id;
         $category_id = $request->gig_category;
         $location = $request->location;
@@ -225,16 +246,16 @@ class GigController extends Controller
       $user_id = $gig_details->user_id;
       $user_name = User::where('id',$user_id)->first()->name;
       $gig_details['name'] = $user_name;
-      
+
       $reviews = rating::where('gig_id',$gig_id)->get();
       if($reviews){
           foreach($reviews as $review)
           {
             $review['name']= User::where('id',$review->reviewer_id)->first()->name;
           }
-     
+
       }
-    
+
       $overall_ratings = rating::where('entrepreneur_id',$user_id)->get();
       if(sizeof($overall_ratings)>0)
       {
@@ -244,9 +265,9 @@ class GigController extends Controller
       {
         $overall_rating = 5;
       }
-      
-      
-      
+
+
+
       if(Auth::check())
 
       {
