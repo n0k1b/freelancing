@@ -314,43 +314,43 @@
 	 	var rating = $("input[name='rating']:checked").val();
 	 		var freelancer_id = $("#freelancer_id").val();
 	 			var job_id = $("#job_id").val();
-				 alert(client_id+" "+rating+" "+freelancer_id+" "+job_id);
+				 //alert(client_id+" "+rating+" "+freelancer_id+" "+job_id);
 
-// 	 	var comment = $("#comment").val();
-// 	 	 var formData= new FormData();
-//          formData.append('rating',rating);
-//           formData.append('comment',comment);
-//           formData.append('client_id',client_id);
-//            formData.append('freelancer_id',freelancer_id);
-//            formData.append('job_id',job_id);
-//           formData.append("review_freelancer","review_freelancer");
-//           $.ajax({
-//       processData: false,
-//       contentType: false,
-//       url:"submit_review",
-//       type:"POST",
-//       data:formData,
-//       success:function(data,status){
+	 	var comment = $("#comment").val();
+	 	 var formData= new FormData();
+         formData.append('rating',rating);
+          formData.append('comment',comment);
+          formData.append('client_id',client_id);
+           formData.append('freelancer_id',freelancer_id);
+           formData.append('job_id',job_id);
+          formData.append("review_freelancer","review_freelancer");
+          $.ajax({
+      processData: false,
+      contentType: false,
+      url:"submit_review",
+      type:"POST",
+      data:formData,
+      success:function(data,status){
          
-//          swal({
-//   title: "Your work successfully completed",
+         swal({
+  title: "Your work successfully completed",
  
-//   icon: "success",
+  icon: "success",
   
  
-// })
-// .then((isConfrim) => {
-//   if (isConfrim) {
-//      location.reload();
-//   } 
-// });
+})
+.then((isConfrim) => {
+  if (isConfrim) {
+     location.reload();
+  } 
+});
        
   
         
 
-//       },
+      },
 
-//     });
+    });
 	 	
 
 
