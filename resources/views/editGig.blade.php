@@ -56,47 +56,25 @@
 				<!-- Row -->
 				<div class="row">
 
-					<!-- Dashboard Box -->
+                    <form action="{{url('update-gig')}}" method="post" enctype="multipart/form-data">
+                        @csrf
+                    <!-- Dashboard Box -->
 					<div class="col-xl-12">
 						<div class="dashboard-box margin-top-0">
 
 							<!-- Headline -->
 							<div class="headline">
-								<h3><i class="icon-feather-folder-plus"></i> Gig Post Form</h3>
+								<h3><i class="icon-feather-folder-plus"></i> Gig Update Form</h3>
 							</div>
 
 							<div class="content with-padding padding-bottom-10">
 								<div class="row">
+                                    <input type="hidden" name="id" value="{{$gig->id}}">
 
 									<div class="col-xl-4">
 										<div class="submit-field">
 											<h5>Title</h5>
-											<input id = "gig_title" type="text" class="with-border">
-										</div>
-									</div>
-
-
-
-									<div class="col-xl-4">
-										<div class="submit-field">
-											<h5>Category</h5>
-											<select  id="gig_category" name = "gig_category"  data-size="7" title="Select Category">
-											@foreach($gig_categoris as $category)
-							<option value ='{{$category->id}}'>{{$category->name}}</option>
-							@endforeach
-											</select>
-										</div>
-									</div>
-
-									<div class="col-xl-4">
-										<div class="submit-field">
-											<h5>City</h5>
-											<div class="input-with-icon">
-												<div id="autocomplete-container">
-													<input id="autocomplete-input" class="with-border city" type="text" placeholder="Type Address">
-												</div>
-												<i class="icon-material-outline-location-on"></i>
-											</div>
+											<input name="gig_title" type="text" class="with-border" value="{{$gig->title}}">
 										</div>
 									</div>
 
@@ -106,13 +84,13 @@
 											<div class="row">
 												<div class="col-xl-6">
 													<div class="input-with-icon">
-														<input id = "base_price_min" class="with-border" type="text" placeholder="Min">
+														<input name="base_price_min" class="with-border" type="text" placeholder="Min" value="{{$gig->min_price}}">
 														<i class="currency">BDT</i>
 													</div>
 												</div>
 												<div class="col-xl-6">
 													<div class="input-with-icon">
-														<input id = "base_price_max" class="with-border" type="text" placeholder="Max">
+														<input name="base_price_max" class="with-border" type="text" placeholder="Max" value="{{$gig->max_price}}">
 														<i class="currency">BDT</i>
 													</div>
 												</div>
@@ -126,7 +104,7 @@
 											<div class="row">
 												<div class="col-xl-6">
 													<div class="input-with-icon">
-														<input id = "duration" class="with-border" type="text" placeholder="Minimum Duration">
+														<input name="duration" class="with-border" type="text" placeholder="Minimum Duration" value="{{$gig->minimum_duration}}">
 														<i class="currency">Days</i>
 													</div>
 												</div>
@@ -135,29 +113,14 @@
 										</div>
 									</div>
 
-									<!-- <div class="col-xl-4">
-										<div class="submit-field">
-											<h5>Tags <span>(optional)</span>  <i class="help-icon" data-tippy-placement="right" title="Maximum of 10 tags"></i></h5>
-											<div class="keywords-container">
-												<div class="keyword-input-container">
-													<input type="text" class="keyword-input with-border" placeholder="e.g. job title, responsibilites"/>
-													<button class="keyword-input-button ripple-effect"><i class="icon-material-outline-add"></i></button>
-												</div>
-												<div class="keywords-list"> keywords go here </div>
-												<div class="clearfix"></div>
-											</div>
-
-										</div>
-									</div> -->
-
 									<div class="col-xl-12">
 										<div class="submit-field">
 											<h5>Gig Description</h5>
-											<textarea id = 'gig_description' cols="30" rows="5" class="with-border"></textarea>
+											<textarea name='gig_description' cols="30" rows="5" class="with-border">{{$gig->description}}</textarea>
 											<div class="uploadButton margin-top-30">
-												<input class="uploadButton-input" type="file" accept="image/*, application/pdf" id="upload"/>
+												<input id="upload" class="uploadButton-input" type="file" accept="image/*, application/pdf" name="upload"/>
 												<label class="uploadButton-button ripple-effect" for="upload">Upload Files</label>
-												<span class="uploadButton-file-name">Images or documents that might be helpful in describing your job</span>
+												<span class="uploadButton-file-name">{{$gig->image}}</span>
 											</div>
 										</div>
 									</div>
@@ -168,8 +131,9 @@
 					</div>
 
 					<div class="col-xl-12">
-						<a href="#" onclick="gig_post()" class="button ripple-effect big margin-top-30"><i class="icon-feather-plus"></i> Post a Job</a>
+						<button type="submit" class="button ripple-effect big margin-top-30">Update</button>
 					</div>
+                    </form>
 
 				</div>
 				<!-- Row / End -->
@@ -237,57 +201,6 @@
         }
    		 })
 	  }
-
-  	function gig_post()
-  	{
-    var gig_title = $("#gig_title").val();
-	var city = $(".city").val();
-	var base_price_min = $("#base_price_min").val();
-	var base_price_max = $("#base_price_max").val();
-	var gig_category = $("#gig_category").val();
-	var gig_description = $("#gig_description").val();
-	var duration = $("#duration").val();
-
-
-     var formData= new FormData();
-    formData.append('gig_title',gig_title);
-    formData.append("city",city);
-    formData.append("base_price_min",base_price_min);
-    formData.append("base_price_max",base_price_max);
-    formData.append("gig_category",gig_category);
-    formData.append("gig_description",gig_description);
-        formData.append("duration",duration);
-       formData.append("user_id",1);
-    formData.append("gig_post","gig_post");
-       formData.append('file',$('#upload')[0].files[0]);
-
-    $.ajax({
-      processData: false,
-      contentType: false,
-      url:"submit_gig",
-      type:"POST",
-      data:formData,
-      success:function(data,status){
-
-
-         swal({
-  title: "Your gig is successfully created",
-
-  icon: "success",
-
-
-})
-.then((isConfrim) => {
-  if (isConfrim) {
-      window.location.href = 'view_all_gig';
-  }
-});
-
-
-      },
-
-    });
-  	}
 
   </script>
 
@@ -415,12 +328,6 @@ $('#snackbar-user-status label').click(function() {
 		}
 	}
 </script>
-
-<!-- Google API & Maps -->
-<!-- Geting an API Key: https://developers.google.com/maps/documentation/javascript/get-api-key -->
-<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAgeuuDfRlweIs7D6uo4wdIHVvJ0LonQ6g&amp;libraries=places&amp;callback=initAutocomplete"></script>
-
-
 </body>
 
 </html>

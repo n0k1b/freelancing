@@ -17,6 +17,8 @@ use Illuminate\Support\Facades\Route;
 //     return view('create_gig');
 // });
 Route::get('create_gig','GigController@create_gig');
+Route::get('gig-edit/{id}','GigController@gig_edit');
+Route::post('update-gig','GigController@update_gig');
 Route::get('/','GigController@show_index')->name('home');
 //Route::view('/','index')->name('home');
 Route::get('view_all_gig','GigController@view_all_gig');
