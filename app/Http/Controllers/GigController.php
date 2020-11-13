@@ -154,7 +154,7 @@ class GigController extends Controller
         foreach($gig_information as $gig)
         {
 
-            $gig['gig_title']=gig::where('user_id',$gig->hire_to)->first()->title;
+            $gig['gig_title']=gig::where('id',$gig->gig_id)->first()->title;
             $gig['hire_from_mobile_number']= User::where('id',$gig->hire_from)->first()->mobile;
             $gig['hire_from_name']= User::where('id',$gig->hire_from)->first()->name;
 
