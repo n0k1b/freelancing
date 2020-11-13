@@ -52,7 +52,7 @@ class blogController extends Controller
         $fileName = $categories->image;
         if ($Request->hasFile('image')) {
             if ($fileName!='') {
-                unlink('images/'.$categories->image);
+                //unlink('images/'.$categories->image);
             }
             $fileName = time().'.'.$Request->image->extension();
             $Request->image->move(public_path('../images'), $fileName);
