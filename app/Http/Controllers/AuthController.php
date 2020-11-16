@@ -20,16 +20,16 @@ class AuthController extends Controller
             );
 
         $user = User::where('mobile',$request->mobile)->first();
-        if ($user) {
-                if (auth()->attempt($credentials)) {
-                    return redirect('view_all_gig');
-                }else{
-                    session()->flash('message', 'Invalid credentials');
-                    return redirect()->back();
-                }
+        if ($user->status==0||$user->role=='admin') {
+            if (auth()->attempt($credentials)) {
+                return redirect('view_all_gig');
+            }else{
+                session()->flash('message', 'Invalid credentials');
+                return redirect()->back();
+            }
         }
         else{
-            session()->flash('message', 'Invalid credentials');
+            session()->flash('message', 'Your account is not approved yet!');
             return redirect()->back();
         }
     }
@@ -75,9 +75,9 @@ class AuthController extends Controller
             $user->status = 1;
             $user->save();
             if ($user->user_role == 'entrepreneur') {
-                return redirect()->route('login')->with('message','Registration successfull');
+                return redirect()->route('login')->with('message','Registration successfull. wait for admin approval.');
             }else{
-                return redirect()->route('login')->with('message','Registration successfull');
+                return redirect()->route('login')->with('message','Registration successfull. wait for admin approval.');
             }
         }
         else {
@@ -107,6 +107,7 @@ class AuthController extends Controller
             'name' => 'required',
             'address' => 'required',
             'district' => 'required',
+            'gender' => 'required',
             'role' => 'required',
             'mobile' => 'required|unique:users',
             'email' => 'required|unique:users|email',
@@ -114,7 +115,7 @@ class AuthController extends Controller
             'password' => 'required|confirmed',
         ]);
 
-        $user = User::create(['name'=>$Request->name, 'email'=>$Request->email, 'mobile'=>$Request->mobile, 'address'=>$Request->address, 'district'=>$Request->district, 'nid'=>$Request->nid, 'role'=>$Request->role, 'status'=>0, 'password'=>Hash::make($Request->password)]);
+        $user = User::create(['name'=>$Request->name, 'email'=>$Request->email, 'mobile'=>$Request->mobile,'gender'=>$Request->gender, 'address'=>$Request->address, 'district'=>$Request->district, 'nid'=>$Request->nid, 'role'=>$Request->role, 'status'=>0, 'password'=>Hash::make($Request->password)]);
         if ($user) {
            $this->process_otp($user->id);
            return redirect('/otp/'.$user->id);

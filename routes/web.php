@@ -62,6 +62,9 @@ Route::group(['prefix' => 'admin'], function () {
 
     Route::get('blog-report','blogController@readBlogReport');
 
+    Route::get('user-list','UserController@readUserList');
+    Route::get('approve-user/{id}','UserController@approveUser');
+
 });
 Route::view('login', 'login')->name('login');
 Route::view('registration', 'register')->name('register');

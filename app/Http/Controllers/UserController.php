@@ -10,6 +10,17 @@ use App\Models\User;
 
 class UserController extends Controller
 {
+    public function approveUser(Request $Request)
+    {
+        $user = User::where('id',$Request->id)->update(['status'=>0]);
+        return redirect()->back()->with('message',"Account has been activated successfully");
+    }
+
+    public function readUserList()
+    {
+        return view('admin.userList',['users'=>User::where('status','1')->get()]);
+    }
+
     public function read_blog_category()
     {
         $categories = blog_category::orderBy('id','DESC')->get();

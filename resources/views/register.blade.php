@@ -92,6 +92,14 @@ input::-webkit-inner-spin-button {
 					</div>
 
 					<div class="input-with-icon-left">
+                        <select  name="gender" id="gender" required>
+                            <option value="">Select gender</option>
+                            <option value="male">Male</option>
+                            <option value="female">Female</option>
+                        </select>
+					</div>
+
+					<div class="input-with-icon-left">
 						<i class="icon-material-outline-credit-card"></i>
 						<input type="number" class="input-text with-border" name="nid" id="nid-register" placeholder="NID" required/>
 					</div>

@@ -33,7 +33,7 @@
         <div class="col-md-6 col-12">
             <form method="POST" action="{{ url('create-report-post') }}">
                 @csrf
-                <input name="post" type="text" value="{{Request::route('id')}}">
+                <input name="post" type="hidden" value="{{Request::route('id')}}">
                 <textarea class="with-border m-0" name="report" placeholder="Describe your report here"></textarea>
                 <div class="uploadButton margin-top-10 align-items-center">
                     <button type="submit" class="button ripple-effect big">Submit</button>

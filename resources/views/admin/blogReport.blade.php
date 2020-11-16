@@ -11,6 +11,7 @@
                   <tr>
                     <th scope="col">#</th>
                     <th scope="col">Reported user</th>
+                    <th scope="col">Report</th>
                     <th scope="col">Post owner</th>
                     <th scope="col">Post</th>
                   </tr>
@@ -23,6 +24,7 @@
                       <tr>
                         <td>{{$i}}</td>
                         <td>{{$report->user->name}}</td>
+                        <td>{{$report->report}}</td>
                         <td>{{$report->post->user->name}}</td>
                         <td>{{$report->post->post}}</td>
                       </tr>
