@@ -11,7 +11,7 @@
 <meta name="csrf-token" content="{{ csrf_token() }}">
 <!-- CSS
 ================================================== -->
-<link rel="stylesheet" href="{{ asset('assets') }}\bootstrap\bootstrap.min.css">
+<link rel="stylesheet" href="{{ asset('assets') }}/bootstrap/bootstrap.min.css">
 <link rel="stylesheet" href="{{asset('assets')}}/css/style.css?{{time()}}">
 <link rel="stylesheet" href="{{asset('assets')}}/css/colors/blue.css">
 <style>
@@ -31,6 +31,12 @@
     outline: 0;
     overflow: hidden;
     }
+	.modal{
+		top:115px !important;
+	}
+	.modal-backdrop{
+		height:auto !important;
+	}
 </style>
 
 </head>

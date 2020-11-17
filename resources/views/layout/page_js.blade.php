@@ -12,3 +12,5 @@
 <script src="{{asset('assets')}}/js/slick.min.js"></script>
 <script src="{{asset('assets')}}/js/custom.js"></script>
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+<script src="{{asset('assets')}}\bootstrap\popper.min.js"></script>
+<script src="{{asset('assets')}}\bootstrap\bootstrap.min.js"></script>

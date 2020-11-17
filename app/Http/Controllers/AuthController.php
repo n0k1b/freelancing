@@ -22,7 +22,14 @@ class AuthController extends Controller
         $user = User::where('mobile',$request->mobile)->first();
         if ($user->status==0||$user->role=='admin') {
             if (auth()->attempt($credentials)) {
+                if($user->role !='admin')
+                {
                 return redirect('view_all_gig');
+                }
+                else
+                {
+                    return redirect('admin');
+                }
             }else{
                 session()->flash('message', 'Invalid credentials');
                 return redirect()->back();

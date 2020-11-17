@@ -54,7 +54,8 @@
 			
 			<!-- Row -->
 			<div class="row">
-
+			
+			
 				<!-- Dashboard Box -->
 				<div class="col-xl-12">
 					<div class="dashboard-box margin-top-0">
@@ -62,18 +63,57 @@
 						<!-- Headline -->
 						
 						<div class="content">
+    <div class="modal fade" id="review_model" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="false">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Rating and Review</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+				<div class="feedback-yes-no">
+						<strong>Your Rating</strong>
+						<div class="leave-rating">
+							<input type="radio" name="rating" id="rating-radio-1" value="5" required>
+							<label for="rating-radio-1" class="icon-material-outline-star"></label>
+							<input type="radio" name="rating" id="rating-radio-2" value="4"  required>
+							<label for="rating-radio-2" class="icon-material-outline-star"></label>
+							<input type="radio" name="rating" id="rating-radio-3" value="3"  required>
+							<label for="rating-radio-3" class="icon-material-outline-star"></label>
+							<input type="radio" name="rating" id="rating-radio-4" value="2"  required>
+							<label for="rating-radio-4" class="icon-material-outline-star"></label>
+							<input type="radio" name="rating" id="rating-radio-5" value="1"  required>
+							<label for="rating-radio-5" class="icon-material-outline-star"></label>
+						</div><div class="clearfix"></div>
+					</div>
+
+					<textarea class="with-border" placeholder="Comment" name="message2" id="comment" cols="7" required></textarea>
+                </div>
+                <div class="modal-footer">
+                    
+                    <button type="button" onclick="review()" class="btn btn-primary">Submit</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
 							<ul class="dashboard-box-list">
 								
                                     @foreach($hire_infos as $hire)
-                                    <input type = "hidden" id = "client_id" value="{{$hire->hire_from}}">
-                                           <input type = "hidden" id = "freelancer_id" value="{{$hire->hire_to}}">
-                                           <input type = "hidden" id = "job_id" value="{{$hire->gig_id}}">
+									
+									<input type="hidden" id="gig_id">
+									<input type="hidden" id="hire_from">
+									<input type="hidden" id="hire_to">
                                    @if($hire->accept_status == 0 && $hire->complete_status==0 )
 								<li>
 									<!-- Overview -->
 									<div class="freelancer-overview manage-candidates">
 										<div class="freelancer-overview-inner">
-											
+										<input type="hidden" id="gig_id" value="{{$hire->gig_id}}" >
 
                                             
 											<div class="freelancer-name">
@@ -82,7 +122,7 @@
 												<h4><strong>{{$hire->gig_title}}</strong></h4>
 												<h4>Entreprenure name : <a href="#" style="color:blue">{{$hire->hire_to_name}} </a></h4>
 												<h4>Price : <a href="#" style="color:blue">{{$hire->proposed_hired_budget}} tk </a></h4>  
-
+												<h4>Price : <a href="#" style="color:blue">{{$hire->gig_id}} tk </a></h4> 
 											
 												
 												<span class="freelancer-detail-item"><i class="icon-feather-phone"></i>{{$hire->hire_to_mobile_number}} </span>
@@ -105,9 +145,7 @@
 									<!-- Overview -->
 									<div class="freelancer-overview manage-candidates">
 										<div class="freelancer-overview-inner">
-											 <input type = "hidden" id = "client_id" value="{{$hire->hire_from}}">
-                                           <input type = "hidden" id = "freelancer_id" value="{{$hire->hire_to}}">
-                                           <input type = "hidden" id = "job_id" value="{{$hire->gig_id}}">
+											
 
                                             
 											<div class="freelancer-name">
@@ -116,8 +154,8 @@
 												<h4><strong>{{$hire->gig_title}}</strong></h4>
 												<h4>Entreprenure name : <a href="#" style="color:blue">{{$hire->hire_to_name}} </a></h4>
 												<h4>Price : <a href="#" style="color:blue">{{$hire->proposed_hired_budget}} tk </a></h4>  
-
-											
+												<h4>Price : <a href="#" style="color:blue">{{$hire->gig_id}} tk </a></h4> 
+												<input type="hidden" id="gig_id" value="{{$hire->gig_id}}" >
 												
 												<span class="freelancer-detail-item"><i class="icon-feather-phone"></i>{{$hire->hire_to_mobile_number}} </span>
 
@@ -129,7 +167,8 @@
 													<a href="get_gig_details\{{$hire->gig_id}}"   class="button ripple-effect"><i class="icon-feather-file-text"></i> Work Details </a>
 													<a href="payment_gateway\{{$hire->gig_id}}"   class="button ripple-effect"><i class="icon-feather-file-text"></i> Make Payment </a>
 								
-													<a href="#small-dialog-2" class="popup-with-zoom-anim button ripple-effect"><i class="icon-material-outline-thumb-up"></i>Give Review</a>
+													
+													<a href='javascript:;' onclick="test({{$hire->hire_from}},{{$hire->hire_to}},{{$hire->gig_id}})" class="popup-with-zoom-anim button ripple-effect"><i class="icon-material-outline-thumb-up"></i>Give Review</a>
 													
 												</div>
 											</div>
@@ -142,9 +181,7 @@
 									<!-- Overview -->
 									<div class="freelancer-overview manage-candidates">
 										<div class="freelancer-overview-inner">
-											 <input type = "hidden" id = "client_id" value="{{$hire->hire_from}}">
-                                           <input type = "hidden" id = "freelancer_id" value="{{$hire->hire_to}}">
-                                           <input type = "hidden" id = "job_id" value="{{$hire->gig_id}}">
+											
 
                                             
 											<div class="freelancer-name">
@@ -153,14 +190,16 @@
 												<h4><strong>{{$hire->gig_title}}</strong></h4>
 												<h4>Entreprenure name : <a href="#" style="color:blue">{{$hire->hire_to_name}} </a></h4>
 												<h4>Price : <a href="#" style="color:blue">{{$hire->proposed_hired_budget}} tk </a></h4>  
-
+												<h4>Price : <a href="#" style="color:blue">{{$hire->gig_id}} tk </a></h4>  
+												
 											
 												
 												<span class="freelancer-detail-item"><i class="icon-feather-phone"></i>{{$hire->hire_to_mobile_number}} </span>
 												<div class="buttons-to-right always-visible margin-top-25 margin-bottom-5">
 													
 								
-													<a href="#small-dialog-2" class="popup-with-zoom-anim button ripple-effect"><i class="icon-material-outline-thumb-up"></i>Give Review</a>
+													<a href='javascript:;' onclick="test({{$hire->hire_from}},{{$hire->hire_to}},{{$hire->gig_id}})"  class="popup-with-zoom-anim button ripple-effect"><i class="icon-material-outline-thumb-up"></i>Give Review</a>
+													
 													
 												</div>
 											
@@ -169,45 +208,10 @@
 									</div>
 								</li>
                                 @endif
+
+
+								<div id="small-dialog-2" class="zoom-anim-dialog mfp-hide dialog-with-tabs">
 							
-
-								
-							 @endforeach
-								
-
-							
-								
-
-							</ul>
-						</div>
-					</div>
-				</div>
-
-			</div>
-			<!-- Row / End -->
-
-			<!-- Footer -->
-			<div class="dashboard-footer-spacer"></div>
-			
-			<!-- Footer / End -->
-
-		</div>
-	</div>
-	<!-- Dashboard Content / End -->
-
-</div>
-<!-- Dashboard Container / End -->
-
-</div>
-<!-- Wrapper / End -->
-
-
-<!-- Apply for a job popup
-================================================== -->
-
-
-<div id="small-dialog-2" class="zoom-anim-dialog mfp-hide dialog-with-tabs">
-
 	<!--Tabs -->
 	<div class="sign-in-form">
 
@@ -251,53 +255,53 @@
 				
 				
 				<!-- Button -->
-				<button onclick="review()" class="button full-width button-sliding-icon ripple-effect" type="button" form="leave-review-form">Leave a Review <i class="icon-material-outline-arrow-right-alt"></i></button>
+				<button onclick="review({{$hire->hire_from}},{{$hire->hire_to}},{{$hire->gig_id}})" class="button full-width button-sliding-icon ripple-effect" type="button" form="leave-review-form">Leave a Review <i class="icon-material-outline-arrow-right-alt"></i></button>
+				<!-- <button onclick="review()" class="button full-width button-sliding-icon ripple-effect" type="button" form="leave-review-form">Leave a Review <i class="icon-material-outline-arrow-right-alt"></i></button> -->
 
 			</div>
 
 		</div>
 	</div>
 </div>
-<div id="small-dialog" class="zoom-anim-dialog mfp-hide dialog-with-tabs">
+							
 
-	<!--Tabs -->
-	<div class="sign-in-form">
+								
+							 @endforeach
+								
 
-		<ul class="popup-tabs-nav">
-			<li><a href="#tab">Add Note</a></li>
-		</ul>
+							
+								
 
-		<div class="popup-tabs-container">
-
-			<!-- Tab -->
-			<div class="popup-tab-content" id="tab">
-				
-				<!-- Welcome Text -->
-				<div class="welcome-text">
-					<h3>Do Not Forget 😎</h3>
+							</ul>
+						</div>
+					</div>
 				</div>
-					
-				<!-- Form -->
-				<form method="post" id="add-note">
-
-					<select class="selectpicker with-border default margin-bottom-20" data-size="7" title="Priority">
-						<option>Low Priority</option>
-						<option>Medium Priority</option>
-						<option>High Priority</option>
-					</select>
-
-					<textarea name="textarea" cols="10" placeholder="Note" class="with-border"></textarea>
-
-				</form>
-				
-				<!-- Button -->
-				<button class="button full-width button-sliding-icon ripple-effect" type="submit" form="add-note">Add Note <i class="icon-material-outline-arrow-right-alt"></i></button>
 
 			</div>
+			<!-- Row / End -->
+
+			<!-- Footer -->
+			<div class="dashboard-footer-spacer"></div>
+			
+			<!-- Footer / End -->
 
 		</div>
 	</div>
+	<!-- Dashboard Content / End -->
+
 </div>
+<!-- Dashboard Container / End -->
+
+</div>
+<!-- Wrapper / End -->
+
+
+<!-- Apply for a job popup
+================================================== -->
+
+
+
+
 <!-- Apply for a job popup / End -->
 
 
@@ -308,13 +312,24 @@
 
 <script type="text/javascript">
 	
+	function test(hire_from,hire_to,gig_id)
+	{
+		$("#gig_id").val(gig_id);
+		$("#hire_from").val(hire_from);
+		$("#hire_to").val(hire_to);
+		$("#review_model").modal('show');
+	
+	}
        	 function review()
 	 {  
-	 	var client_id = $("#client_id").val();
+		// alert($("#gig_id").val());
+	 	var client_id = $('#hire_from').val();
+		 var freelancer_id = $('#hire_to').val();
 	 	var rating = $("input[name='rating']:checked").val();
-	 		var freelancer_id = $("#freelancer_id").val();
-	 			var job_id = $("#job_id").val();
-				 //alert(client_id+" "+rating+" "+freelancer_id+" "+job_id);
+	 		//var freelancer_id = hire_to;
+	 	var job_id = $("#gig_id").val();
+				 
+				
 
 	 	var comment = $("#comment").val();
 	 	 var formData= new FormData();
@@ -557,5 +572,5 @@ $('#snackbar-user-status label').click(function() {
 
 </body>
 
-<!-- Mirrored from www.vasterad.com/themes/hireo/dashboard-messages.html by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 09 Mar 2019 13:32:59 GMT -->
+
 </html>
