@@ -5,7 +5,7 @@ namespace App\Http\Middleware;
 use Closure;
 use Illuminate\Http\Request;
 
-class Admin
+class Gender
 {
     /**
      * Handle an incoming request.
@@ -17,11 +17,11 @@ class Admin
     public function handle(Request $request, Closure $next)
     {
         if (auth()->check()) {
-            if(auth()->user()->user_role == 'admin'){
+            if(auth()->user()->gender == 'female'){
                 return $next($request);
             }
         }
-        return redirect("/login")->with('message',"You don't have admin access.");
-
+        return redirect("browse-blog")->with('error',"This feature only for Female.");
+      
     }
 }

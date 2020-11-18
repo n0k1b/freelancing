@@ -17,6 +17,7 @@
             @if (count($categories)>0)
             @foreach ($categories as $item)
 			@if(auth()->check())
+			 @if(auth()->user()->gender =='female')
 			<div class="col-xl-3 col-md-6">
 				<!-- Photo Box -->
 				<a href="{{url('blog/'.$item->id)}}" class="photo-box small" data-background-image="{{url('images/'.$item->image)}}">
@@ -26,6 +27,17 @@
 					</div>
 				</a>
 			</div>
+			@else
+			<div class="col-xl-3 col-md-6">
+				<!-- Photo Box -->
+				<a href="javascript:;" onclick="gender_alert()" class="photo-box small" data-background-image="{{url('images/'.$item->image)}}">
+					<div class="photo-box-content">
+						<h3>{{$item->name}}</h3>
+						{{-- <span>125 post</span> --}}
+					</div>
+				</a>
+			</div>
+			@endif
 			@else
 			<div class="col-xl-3 col-md-6">
 				<!-- Photo Box -->
@@ -58,6 +70,18 @@
 
 		swal({
   title: "Your have to login to see blog post",
+
+  icon: "error",
+
+
+})
+	}
+
+	function gender_alert()
+	{
+
+		swal({
+  title: "This Section is only for female",
 
   icon: "error",
 
