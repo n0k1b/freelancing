@@ -248,8 +248,21 @@
 	var gig_category = $("#gig_category").val();
 	var gig_description = $("#gig_description").val();
 	var duration = $("#duration").val();
-   if(gig_title && city && base_price_min && base_price_max && gig_category && gig_description && gig_description && duration)
+   if(gig_title && city && base_price_min && base_price_max && gig_category && gig_description && duration)
    {
+
+	   if(base_price_min<=0)
+	   {
+			alert("Base price should be greater than 0");
+	   }
+	   else if(duration<=0)
+	   {
+		   alert('Duration should be greater than 0')
+	   }
+	   else{
+
+
+	   
 	   
 	var formData= new FormData();
     formData.append('gig_title',gig_title);
@@ -289,6 +302,7 @@
       },
 
     });
+   }
    }
    else
    {
