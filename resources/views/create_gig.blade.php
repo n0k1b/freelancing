@@ -94,6 +94,7 @@
 											<div class="input-with-icon">
 												<div id="autocomplete-container">
 													<input id="autocomplete-input" class="with-border city" type="text" placeholder="Type Address">
+													
 												</div>
 												<i class="icon-material-outline-location-on"></i>
 											</div>
@@ -247,9 +248,10 @@
 	var gig_category = $("#gig_category").val();
 	var gig_description = $("#gig_description").val();
 	var duration = $("#duration").val();
-
-
-     var formData= new FormData();
+   if(gig_title && city && base_price_min && base_price_max && gig_category && gig_description && gig_description && duration)
+   {
+	   
+	var formData= new FormData();
     formData.append('gig_title',gig_title);
     formData.append("city",city);
     formData.append("base_price_min",base_price_min);
@@ -287,6 +289,14 @@
       },
 
     });
+   }
+   else
+   {
+	   alert('Please fill up the all field')
+   }
+	
+
+
   	}
 
   </script>
